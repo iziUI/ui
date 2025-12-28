@@ -1,0 +1,21 @@
+{
+  "name": "@iziui/core",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "author": "leonardo.goncalves <leogoncalves.contato@gmail.com>",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    },
+    "./*": {
+      "import": "./src/*/index.ts",
+      "require": "./src/*/index.ts"
+    }
+  },
+  "packageManager": "yarn@3.2.1",
+  "dependencies": {
+    "csstype": "^3.2.3"
+  }
+}
