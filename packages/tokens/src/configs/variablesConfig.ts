@@ -1,0 +1,93 @@
+import StyleDictionary from 'style-dictionary';
+import type { Config } from 'style-dictionary/types';
+
+import { applyFormatters } from '../formatters';
+import { applyTransformers } from '../transformers';
+import jsFormatter from '../formatters/plugins/jsFormatter';
+import cssFormatter from '../formatters/plugins/cssFormatter';
+import scssFormatter from '../formatters/plugins/scssFormatter';
+import scssMainFormatter from '../formatters/plugins/scssMainFormatter';
+import scssMixinsFormatter from '../formatters/plugins/scssMixinsFormatter';
+import removeFirstPathTransformer from '../transformers/plugins/removeFirstPathTransformer';
+
+const getConfig = (): Config => {
+  return {
+    source: [
+      'src/_base/*.json',
+    ],
+    platforms: {
+      'web/css': {
+        transformGroup: 'css-custom',
+        buildPath: 'dist/web/',
+        prefix: 'izi--',
+        files: [
+          {
+            destination: 'variables.css',
+            format: 'css/variables-custom'
+          }
+        ]
+      },
+      'web/scss': {
+        transformGroup: 'css-custom',
+        buildPath: 'dist/web/scss',
+        prefix: 'izi--',
+        files: [
+          {
+            destination: 'variables.scss',
+            format: 'scss/variables-custom',
+            options: { outputReferences: true }
+          },
+          {
+            destination: 'mixins.scss',
+            format: 'scss/custom-mixins',
+          },
+          {
+            destination: 'main.scss',
+            format: 'scss/custom-main',
+          },
+        ]
+      },
+      'web/js': {
+        transformGroup: 'js',
+        buildPath: 'dist/web/js',
+        files: [
+          {
+            destination: 'index.js',
+            format: 'javascript/variables-custom',
+            options: { showFileHeader: false },
+          },
+        ],
+      }
+    }
+  };
+};
+
+export default async function configVariables() {
+  const config = getConfig();
+
+  const styleDictionary = new StyleDictionary(config);
+
+  const transformers = await applyTransformers(styleDictionary, [
+    removeFirstPathTransformer
+  ]);
+
+  await applyFormatters(styleDictionary, [
+    cssFormatter,
+    jsFormatter,
+    scssFormatter,
+    scssFormatter,
+    scssMixinsFormatter,
+    scssMainFormatter,
+  ]);
+
+  styleDictionary.registerTransformGroup({
+    name: 'css-custom',
+    transforms: [
+      'attribute/cti',
+      'color/hex',
+      ...transformers
+    ],
+  });
+
+  styleDictionary.buildAllPlatforms();
+}

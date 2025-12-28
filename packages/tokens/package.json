@@ -1,0 +1,25 @@
+{
+  "name": "@iziui/tokens",
+  "main": "dist/web/index.js",
+  "exports": {
+    "./web/js": {
+      "import": "./dist/web/js/index.js",
+      "require": "./dist/web/js/index.js",
+      "types": "./dist/web/js/index.d.ts"
+    },
+    "./web/*": {
+      "import": "./dist/web/*",
+      "require": "./dist/web/*"
+    }
+  },
+  "scripts": {
+    "build": "tsx src/index.ts && tsc -p tsconfig.build.json"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.1.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "latest"
+  },
+  "packageManager": "yarn@3.2.1"
+}

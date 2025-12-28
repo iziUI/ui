@@ -1,0 +1,13 @@
+{
+  "grid": {
+    "gap": {
+      "value": 0
+    },
+    "columns": {
+      "value": 12
+    },
+    "rows": {
+      "value": 1
+    }
+  }
+}

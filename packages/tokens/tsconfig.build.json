@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src/consts",
+    "outDir": "./dist/web/js",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+  },
+  "include": ["src/consts/**/*"]
+}
