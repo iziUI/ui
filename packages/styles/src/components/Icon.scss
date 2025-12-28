@@ -1,0 +1,17 @@
+@use "sass:map";
+
+.#{$prefix}-icon {
+  transition: all $animation;
+
+  &--small {
+    font-size: map.get($icon-sizes, small);
+  }
+
+  &--medium {
+    font-size: map.get($icon-sizes, medium);
+  }
+
+  &--large {
+    font-size: map.get($icon-sizes, large);
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@iziui/styles",
+  "version": "1.0.0",
+  "main": "src/index.scss",
+  "style": "src/index.scss",
+  "exports": {
+    ".": {
+      "import": "./src/index.scss",
+      "require": "./src/index.scss"
+    },
+    "./*": {
+      "import": "./src/*",
+      "require": "./src/*"
+    }
+  },
+  "scripts": {
+    "build": "sass src/index.scss dist/index.css --style=compressed"
+  },
+  "devDependencies": {
+    "sass": "^1.97.1",
+    "vite": "^7.3.0"
+  },
+  "packageManager": "yarn@3.2.1"
+}
