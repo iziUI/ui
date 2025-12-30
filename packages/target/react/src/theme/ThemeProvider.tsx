@@ -1,7 +1,7 @@
 import { createContext, useEffect, useMemo, useState, type PropsWithChildren } from 'react';
 
-import type { Mode, ThemeBuilded } from '@iziui/core/theme';
-import { applyTheme, createTheme, themeDefaultLight } from '@iziui/core/theme';
+import type { ThemeBuilded } from '@iziui/core/theme';
+import { createTheme, applyTheme, themeDefaultLight } from '@iziui/core/theme';
 
 export interface ThemeContextConfig {
   theme: ThemeBuilded;

@@ -12,7 +12,11 @@
         "src/*"
       ]
     },
-    "types": ["jest", "node", "@testing-library/jest-dom"],
+    "types": [
+      "jest",
+      "node",
+      "@testing-library/jest-dom"
+    ],
     "strict": true,
     "sourceMap": true,
     "declaration": true,
@@ -24,7 +28,7 @@
     "resolveJsonModule": true,
     "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src"
