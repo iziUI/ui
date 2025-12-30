@@ -14,8 +14,19 @@
       "require": "./src/*/index.ts"
     }
   },
-  "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "test": "NODE_NO_WARNINGS=1 jest"
+  },
   "dependencies": {
-    "csstype": "^3.2.3"
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "babel-jest": "^30.2.0",
+    "csstype": "^3.2.3",
+    "jest": "^30.2.0"
+  },
+  "packageManager": "yarn@3.2.1",
+  "devDependencies": {
+    "baseline-browser-mapping": "latest",
+    "ts-jest": "^29.4.6"
   }
 }
