@@ -12,7 +12,7 @@ const icon = 'rocket';
 export const docs: StoryObj<typeof Icon> = {
   render: () => {
     return (
-      <a href="https://iconscout.com/unicons/free-line-icons">Documentação</a>
+      <a href="https://iconscout.com/unicons/free-line-icons">Documentation</a>
     );
   }
 };

@@ -1,8 +1,6 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 
-import { useDarkMode } from 'storybook-dark-mode';
-
-import { StoryFn, Decorator, Parameters } from '@storybook/react';
+import { StoryFn, Decorator } from '@storybook/react';
 
 import { createTheme, themeDefaultDark, themeDefaultLight } from '@iziui/core/theme';
 
@@ -37,19 +35,12 @@ function WrappedComponent({ shouldDarken, children }: PropsWithChildren<{ should
 
 export const decorators: Decorator[] = [
   (Story: StoryFn) => {
-    const isDarkMode = useDarkMode();
     return (
       <ThemeProvider theme={createTheme()}>
-        <WrappedComponent shouldDarken={isDarkMode}>
+        <WrappedComponent shouldDarken={false}>
           <Story />
         </WrappedComponent>
       </ThemeProvider>
     );
   },
 ];
-
-export const parameters: Parameters = {
-  darkMode: {
-    stylePreview: true
-  }
-};
