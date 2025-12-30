@@ -47,7 +47,7 @@
         }
       }
 
-      .ui-button__icon {
+      .#{$prefix}-button__icon {
         color: var(--#{$color}-contrast);
         font-size: 16px !important;
 
@@ -60,7 +60,7 @@
         }
       }
 
-      .ui-button__loading {
+      .#{$prefix}-button__loading {
         color: var(--#{$color}-contrast) !important;
 
         &--small {
@@ -86,7 +86,7 @@
           border: 1px solid transparent;
         }
 
-        .ui-button__icon {
+        .#{$prefix}-button__icon {
           color: var(--#{$color}) !important;
           font-size: 16px !important;
 
@@ -108,7 +108,7 @@
           background-color: var(--#{$color}-opacity);
         }
 
-        .ui-button__icon {
+        .#{$prefix}-button__icon {
           color: var(--#{$color}) !important;
           font-size: 16px !important;
 
