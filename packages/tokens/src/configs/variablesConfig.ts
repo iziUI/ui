@@ -4,7 +4,6 @@ import type { Config } from 'style-dictionary/types';
 import { applyFormatters } from '../formatters';
 import { applyTransformers } from '../transformers';
 import jsFormatter from '../formatters/plugins/jsFormatter';
-import cssFormatter from '../formatters/plugins/cssFormatter';
 import scssFormatter from '../formatters/plugins/scssFormatter';
 import scssMainFormatter from '../formatters/plugins/scssMainFormatter';
 import scssMixinsFormatter from '../formatters/plugins/scssMixinsFormatter';
@@ -72,7 +71,6 @@ export default async function configVariables() {
   ]);
 
   await applyFormatters(styleDictionary, [
-    cssFormatter,
     jsFormatter,
     scssFormatter,
     scssFormatter,
