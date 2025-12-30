@@ -17,7 +17,7 @@
   },
   "include": [
     "src/**/*.ts"
-, "../core/src/theme/colors.ts"  ],
+  ],
   "exclude": [
     "node_modules",
     "dist",
