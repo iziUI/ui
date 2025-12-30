@@ -1,5 +1,3 @@
-import type { Properties } from 'csstype';
-
 import type { PaletteBuilded } from '../theme';
 
 export type CustomOptions = Partial<
@@ -14,6 +12,6 @@ type ColorOptions = {
   backgroundColor: (palette: PaletteBuilded) => string;
 }
 
-export type Sx<T> = T & Properties & {
+export type Sx<T> = T & {
   sx?: CustomOptions;
 } 
