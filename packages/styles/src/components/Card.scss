@@ -1,0 +1,23 @@
+.#{$prefix}-card {
+  position: relative;
+  border-radius: var(--radius);
+  border: 1px solid var(--divider);
+  background-color: var(--background-default);
+  transition: all $animation;
+  overflow: hidden;
+
+  &--clickable {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: $box-shadow-regular;
+      border-color: var(--primary-light);
+    }
+  }
+
+  &__content {
+    padding: 16px;
+    background-color: red;
+    border-radius: var(--radius);
+  }
+}

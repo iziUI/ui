@@ -1,5 +1,4 @@
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { resolve } from 'path';
 
 import type { StorybookConfig } from '@storybook/react-vite';
 
@@ -35,7 +34,6 @@ const config: StorybookConfig = {
         scss: {
           additionalData: `
             @use "@iziui/tokens/web/scss/main.scss" as *;
-            @use "@iziui/styles/index.scss" as *;
           `,
         },
       },
@@ -44,7 +42,7 @@ const config: StorybookConfig = {
     // Improve monorepo package resolution
     config.resolve = {
       ...config.resolve,
-      preserveSymlinks: true,
+      preserveSymlinks: true
     };
 
     return config;

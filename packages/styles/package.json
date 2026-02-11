@@ -2,11 +2,11 @@
   "name": "@iziui/styles",
   "version": "1.0.0",
   "main": "src/index.scss",
-  "style": "src/index.scss",
+  "sass": "./src/index.scss",
+  "style": "./src/index.scss",
   "exports": {
     ".": {
-      "import": "./src/index.scss",
-      "require": "./src/index.scss"
+      "default": "./src/index.scss"
     },
     "./*": {
       "import": "./src/*",

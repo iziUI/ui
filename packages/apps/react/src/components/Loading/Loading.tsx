@@ -8,7 +8,7 @@ import { convertPathToColor, joinClass } from '@iziui/core/utils';
 import createComponent from '../../core/createComponent';
 import { useTheme } from '../../theme';
 
-import '@iziui/styles/components/Loading.scss';
+// import '@iziui/styles/components/Loading.scss';
 
 export interface LoadingProps extends HTMLAttributes<HTMLSpanElement> {
   color?: MappedColors;

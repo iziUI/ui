@@ -1,5 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
+import { Card, CardContent } from '@/components/Card';
+
 import Stack from './Stack';
 
 const meta: Meta<typeof Stack> = {
@@ -7,16 +9,24 @@ const meta: Meta<typeof Stack> = {
   component: Stack,
 };
 
+function Item() {
+  return (
+    <Card>
+      <CardContent>
+        Item
+      </CardContent>
+    </Card>
+  );
+}
+
 export const OrientationRow: StoryObj<typeof Stack> = {
   render: () => {
     return (
-      <>
-        <Stack flexDirection="row">
-          <p>1</p>
-          <p>2</p>
-          <p>3</p>
-        </Stack>
-      </>
+      <Stack flexDirection="row">
+        <Item />
+        <Item />
+        <Item />
+      </Stack>
     );
   }
 };
@@ -24,13 +34,11 @@ export const OrientationRow: StoryObj<typeof Stack> = {
 export const OrientationColumn: StoryObj<typeof Stack> = {
   render: () => {
     return (
-      <>
-        <Stack flexDirection="column">
-          <span>1</span>
-          <span>2</span>
-          <span>3</span>
-        </Stack>
-      </>
+      <Stack flexDirection="column">
+        <Item />
+        <Item />
+        <Item />
+      </Stack>
     );
   }
 };

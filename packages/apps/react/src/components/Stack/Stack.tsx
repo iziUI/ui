@@ -5,7 +5,7 @@ import { joinClass } from '@iziui/core/utils';
 
 import createComponent from '@/core/createComponent';
 
-import '@iziui/styles/components/Stack.scss';
+// import '@iziui/styles/components/Stack.scss';
 
 export interface StackProps extends HTMLAttributes<HTMLElement> {
   tag?: React.ElementType;

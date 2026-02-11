@@ -8,7 +8,7 @@ import { convertPathToColor, joinClass } from '@iziui/core/utils';
 import createComponent from '../../core/createComponent';
 import { useTheme } from '../../theme';
 
-import '@iziui/styles/components/Icon.scss';
+// import '@iziui/styles/components/Icon.scss';
 
 export interface IconProps extends HTMLAttributes<HTMLElement> { name: string; size?: Size; color?: MappedColors; }
 function Icon({ name, size = 'medium', color = 'primary.main', ...props }: IconProps) {
