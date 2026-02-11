@@ -7,7 +7,7 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 import Ripple from '../Ripple';
 import createComponent from '../../core/createComponent';
 
-// import '@iziui/styles/components/Card.scss';
+import '@iziui/styles/components/Card.scss';
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> { onClick?: (e?: any) => void; }
 

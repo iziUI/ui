@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, type MouseEvent } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
-// import '@iziui/styles/components/Ripple.scss';
+import '@iziui/styles/components/Ripple.scss';
 
 export default function Ripple() {
   const [ripples, setRipples] = useState<Array<{ x: number, y: number, size: number }>>([]);

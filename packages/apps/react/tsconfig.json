@@ -35,6 +35,8 @@
   ],
   "exclude": [
     "dist",
+    ".jest",
+    ".storybook",
     "node_modules",
     "*.stories.tsx",
     "**/__mocks__"

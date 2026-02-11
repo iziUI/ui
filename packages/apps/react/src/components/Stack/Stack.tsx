@@ -1,16 +1,17 @@
 import type { HTMLAttributes, CSSProperties } from 'react';
 import { forwardRef } from 'react';
 
+import { prefix } from '@iziui/tokens/web/js';
+
 import { joinClass } from '@iziui/core/utils';
 
 import createComponent from '@/core/createComponent';
 
-// import '@iziui/styles/components/Stack.scss';
+import '@iziui/styles/components/Stack.scss';
 
 export interface StackProps extends HTMLAttributes<HTMLElement> {
   tag?: React.ElementType;
   gap?: number;
-  fullwidth?: boolean;
   flexDirection?: CSSProperties['flexDirection'];
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];
@@ -34,7 +35,7 @@ const Stack = forwardRef<HTMLElement, StackProps>(
     ref
   ) {
     const stackClasses = joinClass(
-      'iziui-stack',
+      `${prefix}-stack`,
       props.className
     );
 

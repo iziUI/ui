@@ -12,8 +12,9 @@ function extract(module: { [key: string]: Plugin }) {
 }
 
 export default function createComponent<P>(WrappedComponent: ComponentType<P>) {
-  const EnhancedComponent: FC<Sx<P>> = ({ sx, ...props }) => {
+  WrappedComponent.displayName = WrappedComponent.name;
 
+  const EnhancedComponent: FC<Sx<P>> = ({ sx, fullWidth, ...props }) => {
     const { theme } = useTheme();
 
     const options = sx && createOptions({ theme, sx },
@@ -26,6 +27,7 @@ export default function createComponent<P>(WrappedComponent: ComponentType<P>) {
         style={{
           ...props['style'],
           ...options,
+          ...(fullWidth ? { width: '100%' } : {}),
         }}
       />
     );

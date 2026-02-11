@@ -10,7 +10,7 @@ import type { LoadingProps } from '../Loading';
 import Ripple from '../Ripple';
 import createComponent from '../../core/createComponent';
 
-// import '@iziui/styles/components/Button.scss';
+import '@iziui/styles/components/Button.scss';
 
 export interface ButtonProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   size?: Size;

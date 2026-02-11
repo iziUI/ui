@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { Card, CardContent } from '@/components/Card';
 
@@ -11,7 +11,7 @@ const meta: Meta<typeof Stack> = {
 
 function Item() {
   return (
-    <Card>
+    <Card fullWidth>
       <CardContent>
         Item
       </CardContent>
