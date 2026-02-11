@@ -1,30 +1,18 @@
-import { join, dirname } from 'path';
-import { createRequire } from 'module';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { resolve } from 'path';
 
 import type { StorybookConfig } from '@storybook/react-vite';
 
-const require = createRequire(import.meta.url);
-
-function getAbsolutePath(value: string) {
-  return dirname(require.resolve(join(value, 'package.json')));
-}
-
-/**
- * This function is used to resolve the absolute path of a package.
- * It is needed in projects that use Yarn PnP or are set up within a monorepo.
- */
 const config: StorybookConfig = {
   stories: [
-    '../src/**/*.stories.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)'
   ],
   addons: [
-    getAbsolutePath('@storybook/addon-onboarding'),
-    getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-essentials'),
-    getAbsolutePath('@chromatic-com/storybook'),
-    getAbsolutePath('@storybook/addon-interactions'),
+    '@storybook/addon-onboarding',
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@chromatic-com/storybook',
+    '@storybook/addon-interactions',
   ],
   typescript: {
     reactDocgen: false,
@@ -33,10 +21,10 @@ const config: StorybookConfig = {
     }
   },
   framework: {
-    name: getAbsolutePath('@storybook/react-vite'),
+    name: '@storybook/react-vite',
     options: {},
   },
-  viteFinal: (config) => {
+  viteFinal: async (config) => {
     config.plugins = [
       ...(config.plugins || []),
       tsconfigPaths(),
@@ -51,6 +39,12 @@ const config: StorybookConfig = {
           `,
         },
       },
+    };
+
+    // Improve monorepo package resolution
+    config.resolve = {
+      ...config.resolve,
+      preserveSymlinks: true,
     };
 
     return config;
