@@ -7,7 +7,7 @@ import { joinClass } from '@iziui/core/utils';
 
 import type { IconProps } from '../Icon';
 import type { LoadingProps } from '../Loading';
-import Ripple from '../../components/Ripple';
+import Ripple from '../Ripple';
 import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/Button.scss';

@@ -7,7 +7,7 @@
   "license": "MIT",
   "workspaces": [
     "packages/*",
-    "packages/target/*"
+    "packages/apps/*"
   ],
   "scripts": {
     "lint": "yarn workspaces foreach -ptv run lint",

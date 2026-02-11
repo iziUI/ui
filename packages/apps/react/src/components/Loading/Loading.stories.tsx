@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import Stack from '@/components/Stack';
-
+import Stack from '../Stack';
 import Loading from './Loading';
 
 const meta: Meta<typeof Loading> = {
