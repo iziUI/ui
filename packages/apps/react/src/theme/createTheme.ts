@@ -1,0 +1,1 @@
+export { createTheme } from '@iziui/core/theme';

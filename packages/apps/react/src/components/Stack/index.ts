@@ -1,1 +1,1 @@
-export { default, type StackProps, type Orientation, type Distance } from './Stack';
+export { default, type StackProps } from './Stack';
