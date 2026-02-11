@@ -9,7 +9,7 @@ type Data = {
   theme: ThemeBuilded;
 }
 
-export default function createOptions({ sx, theme }: Data, ...plugins: Plugin[]) {
+export default function createOptions({ sx, theme }: Data, ...plugins: Plugin[]): Properties {
   return plugins.reduce<Properties>((acc, plugin) => {
     acc = { ...acc, ...plugin(theme, sx) };
 
