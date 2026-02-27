@@ -15,17 +15,6 @@ const getConfig = (): Config => {
       'src/_base/*.json',
     ],
     platforms: {
-      'web/css': {
-        transformGroup: 'css-custom',
-        buildPath: 'dist/web/',
-        prefix: 'izi--',
-        files: [
-          {
-            destination: 'variables.css',
-            format: 'css/variables-custom'
-          }
-        ]
-      },
       'web/scss': {
         transformGroup: 'css-custom',
         buildPath: 'dist/web/scss',
