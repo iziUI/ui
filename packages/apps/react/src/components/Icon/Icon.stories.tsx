@@ -5,11 +5,12 @@ import Icon from './Icon';
 const meta: Meta<typeof Icon> = {
   title: 'components/Icon',
   component: Icon,
+  tags: ['autodocs'],
 };
 
 const icon = 'rocket';
 
-export const docs: StoryObj<typeof Icon> = {
+export const externalLib: StoryObj<typeof Icon> = {
   render: () => {
     return (
       <a href="https://iconscout.com/unicons/free-line-icons">Documentation</a>

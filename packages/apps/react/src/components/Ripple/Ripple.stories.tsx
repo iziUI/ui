@@ -7,6 +7,7 @@ import Ripple from './Ripple';
 const meta: Meta<typeof Ripple> = {
   title: 'components/Ripple',
   component: Ripple,
+  tags: ['autodocs'],
 };
 
 export const SameGrid: StoryObj<typeof Ripple> = {

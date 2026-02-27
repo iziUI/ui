@@ -6,6 +6,7 @@ import Loading from './Loading';
 const meta: Meta<typeof Loading> = {
   title: 'components/Loading',
   component: Loading,
+  tags: ['autodocs'],
 };
 
 export const Colors: StoryObj<typeof Loading> = {

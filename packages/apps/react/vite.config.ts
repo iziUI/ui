@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, PluginOption } from 'vite';
 import dts from 'vite-plugin-dts';
 import path from 'node:path';
 import { globSync } from 'glob';
@@ -24,6 +24,34 @@ function makeRollupInput() {
   return files.map((f) => path.resolve(process.cwd(), f));
 }
 
+function bundleSingleCss(): PluginOption {
+  return {
+    name: 'bundle-single-css',
+    generateBundle(_: any, bundle: any) {
+      const cssFiles = Object.keys(bundle).filter((file) => file.endsWith('.css'));
+      if (cssFiles.length === 0) return;
+
+      // concatena na ordem que o rollup gerou
+      let css = '';
+      for (const file of cssFiles) {
+        const chunk = bundle[file];
+        if (chunk?.type === 'asset' && typeof chunk.source === 'string') {
+          css += `\n/* ${file} */\n` + chunk.source;
+        }
+        // remove os css individuais do bundle final
+        delete bundle[file];
+      }
+
+      // emite um único arquivo
+      bundle['style.css'] = {
+        type: 'asset',
+        fileName: 'style.css',
+        source: css,
+      };
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     react(),
@@ -33,6 +61,7 @@ export default defineConfig({
       outDir: 'dist',
       insertTypesEntry: false,
     }),
+    bundleSingleCss(),
   ],
   resolve: {
     alias: {
@@ -55,7 +84,12 @@ export default defineConfig({
 
     rollupOptions: {
       preserveEntrySignatures: 'strict',
-      external: ['react', 'react-dom'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'react/jsx-dev-runtime',
+      ],
       input: makeRollupInput(),
       output: [
         {

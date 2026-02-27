@@ -6,6 +6,7 @@ import CardContent from './CardContent';
 const meta: Meta<typeof Card> = {
   title: 'components/Card',
   component: Card,
+  tags: ['autodocs'],
 };
 
 export const WithOutContent: StoryObj<typeof Card> = {

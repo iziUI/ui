@@ -7,6 +7,7 @@ import Stack from './Stack';
 const meta: Meta<typeof Stack> = {
   title: 'components/Stack',
   component: Stack,
+  tags: ['autodocs'],
 };
 
 function Item() {

@@ -57,18 +57,8 @@ clean-modules:
 	rm -Rf ./node_modules
 	rm -Rf yarn.lock
 	$(call delete_dependencies,toolkit)
-	$(call delete_dependencies,ui)
-	$(call delete_dependencies,common)
-	$(call delete_dependencies,services)
-	$(call delete_dependencies,app/sso)
-	$(call delete_dependencies,app/backoffice)
-	$(call delete_dependencies,app/admin)
-	$(call delete_dependencies,app/store)
-	$(call delete_dependencies,app/lp)
-	$(call delete_dependencies,app/extension)
+	$(call delete_dependencies,tokens)
+	$(call delete_dependencies,styles)
+	$(call delete_dependencies,core)
+	$(call delete_dependencies,apps/react)
 	@printf "${SUCCESS_TEXT}>>>> dependencies deleted successfully ${RESET_TEXT}\n";
-
-build-dependencies:
-	make run toolkit build
-	make run services build
-	make run ui build
