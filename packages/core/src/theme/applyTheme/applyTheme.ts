@@ -9,9 +9,14 @@ function setColor(name: string, color: Color) {
 }
 
 export function applyTheme(theme: ThemeBuilded) {
+  console.log('AAAAA');
   if (typeof window === 'undefined') { return; }
 
-  const { palette, shape, spacing } = theme;
+  const { palette, shape, spacing, font } = theme;
+
+  // await font.load();
+
+  document.fonts.add(font);
 
   // COLORS
   setColor('info', palette.info);
@@ -23,6 +28,11 @@ export function applyTheme(theme: ThemeBuilded) {
 
   // GREY
   setColor('grey', palette.grey);
+
+  console.log('>>> family', font.family);
+
+  // TYPOGRAPHY
+  document.documentElement.style.setProperty('--typography', font.family);
 
   // TEXT
   document.documentElement.style.setProperty('--text-primary', palette.text?.primary);

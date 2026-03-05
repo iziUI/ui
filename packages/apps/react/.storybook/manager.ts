@@ -1,6 +1,6 @@
 import { addons } from '@storybook/manager-api';
 
-import iziuiTheme from './iziUIThemeT';
+import iziuiTheme from './iziUITheme';
 
 addons.setConfig({
   theme: iziuiTheme,

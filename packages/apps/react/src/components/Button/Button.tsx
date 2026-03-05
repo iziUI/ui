@@ -15,7 +15,6 @@ import '@iziui/styles/components/Button.scss';
 export interface ButtonProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   size?: Size;
   color?: Colors;
-  noHover?: boolean;
   fullWidth?: boolean;
   endIcon?: React.JSX.Element;
   startIcon?: React.JSX.Element;
@@ -28,7 +27,6 @@ function Button({
   variant = 'contained',
   fullWidth,
   startIcon,
-  noHover = false,
   endIcon,
   loading,
   children,
@@ -39,7 +37,6 @@ function Button({
     `${prefix}-button--${size}`,
     `${prefix}-button--${color}`,
     `${prefix}-button--${color}--${variant}`,
-    noHover && `${prefix}-button--noHover`,
     fullWidth && `${prefix}-button--fullWidth`,
     props.className
   );

@@ -1,4 +1,4 @@
-import FormControl from './FormControl';
+import type FormControl from './FormControl';
 
 export type AbstractControl<
   T extends Record<string, unknown>,

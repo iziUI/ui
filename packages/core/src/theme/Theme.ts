@@ -52,20 +52,20 @@ export interface PaletteBuilded extends Pick<Palette, 'mode' | 'text' | 'backgro
     secondary: Color;
 }
 
-export interface ThemeOptions {
+export interface ThemeOptions extends Omit<Partial<Theme>, 'palette'> {
     palette?: Partial<Palette>;
-    spacing?: Spacing;
-    shape?: Shape;
 }
 
 export interface Theme {
     shape: Shape;
     palette: Palette;
     spacing: Spacing;
+    font: ConstructorParameters<typeof FontFace>;
 }
 
 export interface ThemeBuilded {
     shape: Shape;
+    font: FontFace;
     spacing: Spacing;
     palette: PaletteBuilded;
 }

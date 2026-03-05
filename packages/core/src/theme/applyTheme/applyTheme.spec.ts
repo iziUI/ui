@@ -1,5 +1,5 @@
+import type { Color, ThemeBuilded } from '../Theme';
 import { applyTheme } from './applyTheme';
-import type { ThemeBuilded, Color } from '../../Theme';
 
 describe('applyTheme', () => {
   let originalWindow: typeof window | undefined;
@@ -84,6 +84,11 @@ describe('applyTheme', () => {
       radius: 4,
     },
     spacing: 8,
+    font: new FontFace(
+      'Poppins',
+      // eslint-disable-next-line
+      'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap'
+    )
   };
 
   describe('when window is defined', () => {

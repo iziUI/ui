@@ -25,7 +25,12 @@ export const themeDefaultLight: Theme = {
     divider: 'rgba(0, 0, 0, 0.12)'
   },
   spacing: defaultSpacing,
-  shape: defaultShape
+  shape: defaultShape,
+  font: [
+    'Poppins',
+    // eslint-disable-next-line
+    'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap',
+  ]
 };
 
 export const themeDefaultDark: Theme = {
@@ -50,5 +55,10 @@ export const themeDefaultDark: Theme = {
     divider: 'rgba(255, 255, 255, 0.12)'
   },
   spacing: defaultSpacing,
-  shape: defaultShape
+  shape: defaultShape,
+  font: [
+    'Poppins',
+    // eslint-disable-next-line
+    'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap',
+  ]
 };

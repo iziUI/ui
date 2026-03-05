@@ -22,7 +22,10 @@ export default function ThemeProvider({ theme, children }: ThemeProviderProps) {
     updateTheme: (newTheme: ThemeBuilded) => updateTheme(newTheme),
   }), [theme, _theme]);
 
-  useEffect(() => { applyTheme(_theme); }, [_theme]);
+  useEffect(() => {
+    console.log('AAAAAA');
+    applyTheme(_theme);
+  }, [_theme]);
 
   const updateTheme = (newTheme: ThemeBuilded) => { setTheme(newTheme); };
 
