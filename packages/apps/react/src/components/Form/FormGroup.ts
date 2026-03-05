@@ -5,7 +5,7 @@ type Hydrate<T extends Record<string, unknown>> = (data: FormGroup<T>) => void;
 type SetValues<F> = Partial<F> | ((values: F) => Partial<F>);
 
 export type Validator<T extends Record<string, unknown>> = {
-  [K in keyof T]: (data: FormGroup<T>) => string;
+  [K in keyof T]: (data: FormGroup<T>) => string | void;
 }
 
 export interface Handle<T extends Record<string, unknown>> {
@@ -54,12 +54,13 @@ export default class FormGroup<T extends Record<string, unknown>> {
       this.controls[key].value = partial[key] as T[keyof T];
     }
 
-    if (!this.handle.change) { return; }
-
     this.validate();
 
-    this.handle.change(this);
     this.hydrate(this);
+
+    if (!this.handle.change) { return; }
+
+    this.handle.change(this);
   }
 
   private eachControl(fn: <K extends keyof T>(control: FormControl<T[K]>, key?: K) => any) {
@@ -86,9 +87,9 @@ export default class FormGroup<T extends Record<string, unknown>> {
       const controlError = this.controls[key].validate();
       const validatorError = fn(this);
 
-      console.log('>>>', { controlError, validatorError });
+      this.controls[key].error = controlError || validatorError || '';
 
-      this.controls[key].error = controlError || validatorError;
+      console.log();
     });
 
     this.isValid = !this.errors.length;

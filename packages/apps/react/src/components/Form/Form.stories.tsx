@@ -2,12 +2,13 @@ import type { ChangeEvent } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
+import logger from '@iziui/toolkit/logger';
+
 import Form from './Form';
 import useForm from './useForm';
 import useControl from './useControl';
 import Control from './Control';
 import Button from '../Button';
-import Stack from '../Stack';
 import Input from '../Input';
 
 type FormData = {
@@ -20,30 +21,29 @@ const meta: Meta<typeof Form> = {
   tags: ['autodocs'],
 };
 
+function InputUseControl() {
+  const { control, update } = useControl<FormData>('name');
+
+  return (
+    <Input
+      onInput={(e: any) => update(e.target.value)}
+      value={control.value}
+      error={control.isInvalid}
+      helperText={control.error}
+    />
+  );
+}
+
 export const _useForm: StoryObj<typeof Form> = {
   render: () => {
     const formGroup = useForm<FormData>({
       form: {
-        name: { defaultValue: 'leozinho', type: 'email', required: true }
+        name: { defaultValue: 'leozinho', type: 'email' }
       },
       handle: {
-        change: (form) => {
-          console.log('>>> handle', form.values);
-        },
         submit: (form) => {
-          console.log('>>> submit', form);
+          logger.log('>>> submit', form);
         },
-      },
-      validator: {
-        name: (form) => {
-          const { name } = form.values;
-
-          const lengthIsValid = name.length >= 18;
-
-          if (lengthIsValid) { return ''; }
-
-          return 'Deve ter no mínimo 18 caracteres';
-        }
       }
     });
 
@@ -55,16 +55,13 @@ export const _useForm: StoryObj<typeof Form> = {
 
     return (
       <Form formGroup={formGroup} debug>
-        <Stack>
-          <Input
-            width={200}
-            onInput={(e: any) => handleInput(e)}
-            value={formGroup.controls.name.value}
-            error={formGroup.controls.name.isInvalid}
-            helperText={formGroup.controls.name.error}
-          />
-          <Button>Submit</Button>
-        </Stack>
+        <Input
+          onInput={(e: any) => handleInput(e)}
+          value={formGroup.controls.name.value}
+          error={formGroup.controls.name.isInvalid}
+          helperText={formGroup.controls.name.error}
+        />
+        <Button>Submit</Button>
       </Form>
     );
   }
@@ -74,30 +71,28 @@ export const _control: StoryObj<typeof Form> = {
   render: () => {
     const formGroup = useForm<FormData>({
       form: {
-        name: { defaultValue: '', type: 'text', required: true }
+        name: { defaultValue: '', type: 'text' }
       },
       handle: {
         submit: (form) => {
-          // console.log('>>> submit', form);
+          logger.log('>>> submit', form.values);
         },
       },
     });
 
     return (
       <Form formGroup={formGroup} debug>
-        <Stack>
-          <Control
-            controlName="name"
-            field={(control) => (
-              <Input
-                value={control.value}
-                error={control.isInvalid}
-                helperText={control.error}
-              />
-            )}
-          />
-          <Button>Submit</Button>
-        </Stack>
+        <Control
+          controlName="name"
+          field={(control) => (
+            <Input
+              value={control.value}
+              error={control.isInvalid}
+              helperText={control.error}
+            />
+          )}
+        />
+        <Button>Submit</Button>
       </Form>
     );
   }
@@ -107,30 +102,66 @@ export const _useControl: StoryObj<typeof Form> = {
   render: () => {
     const formGroup = useForm<FormData>({
       form: {
-        name: { defaultValue: '', type: 'text', required: true }
+        name: { defaultValue: 'teste', type: 'text' }
       },
       handle: {
         submit: (form) => {
-          // console.log('>>> submit', form);
+          logger.log('>>> submit', form);
         },
       },
     });
 
     return (
       <Form formGroup={formGroup} debug>
-        <Stack>
-          <Control
-            controlName="name"
-            field={(control) => (
-              <Input
-                value={control.value}
-                error={control.isInvalid}
-                helperText={control.error}
-              />
-            )}
-          />
-          <Button>Submit</Button>
-        </Stack>
+        <InputUseControl />
+        <Button>Submit</Button>
+      </Form>
+    );
+  }
+};
+
+export const _validator: StoryObj<typeof Form> = {
+  render: () => {
+    const formGroup = useForm<FormData>({
+      form: {
+        name: {
+          type: 'text',
+          defaultValue: 'teste',
+          validators: [
+            (v) => !v.value && 'Nome é obrigatório',
+            (v) => v.value.split(' ').length < 2 && 'Deve ter dois nomes'
+          ]
+        }
+      },
+      handle: {
+        submit: (form) => {
+          logger.log('>>> submit', form);
+        },
+      },
+      validator: {
+        name: ({ values }) => {
+          const { name } = values;
+
+          const DEFAULT_NAME = 'leo goncalves';
+
+          if (name !== DEFAULT_NAME) { return `O nome deve ser ${DEFAULT_NAME}`; }
+        }
+      }
+    });
+
+    return (
+      <Form formGroup={formGroup} debug>
+        <Control
+          controlName="name"
+          field={(control) => (
+            <Input
+              value={control.value}
+              error={control.isInvalid}
+              helperText={control.error}
+            />
+          )}
+        />
+        <Button>Submit</Button>
       </Form>
     );
   }

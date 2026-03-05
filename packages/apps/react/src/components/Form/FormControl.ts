@@ -1,36 +1,33 @@
-import { isEmpty, isValidEmail } from '@iziui/toolkit/validators';
-
 type Type = 'text' | 'email';
+type Validator<C> = (control: FormControl<C>) => string | false | void;
 
 type Data<T> = {
   defaultValue: T;
-  required?: boolean;
   type?: Type;
-  errorMessage?: string;
+  validators?: Validator<T>[];
 }
 
 export type Constructor<V> = ConstructorParameters<typeof FormControl<V>>[number];
 
-export default class FormControl<V> implements Omit<Data<V>, 'errorMessage'> {
+export default class FormControl<V> implements Pick<Data<V>, 'type'> {
+  private _value!: V;
+  private defaultValue: V;
+  private validators: Validator<V>[] = [];
+
   public type: Type;
-  public _value!: V;
-  public defaultValue: V;
   public error = '';
   public dirty = false;
-  public required: boolean;
-  private errorMessage!: string;
 
   constructor({
     defaultValue,
-    required = false,
     type = 'text',
-    errorMessage = 'Campo inválido',
+    validators,
   }: Data<V>) {
     this.type = type;
-    this.required = required;
-    this.value = defaultValue;
+    this._value = defaultValue;
     this.defaultValue = defaultValue;
-    this.errorMessage = errorMessage;
+
+    if (validators) { this.validators = validators; }
   }
 
   get value(): V { return this._value; }
@@ -48,22 +45,11 @@ export default class FormControl<V> implements Omit<Data<V>, 'errorMessage'> {
   }
 
   public validate() {
-    const data: Partial<{ [x in Type]: boolean } & { required: boolean }> = {};
+    const errors = this.validators
+      .map(v => v(this))
+      .filter(Boolean);
 
-    data.required = this.required && isEmpty(this.value);
-
-    if (this.value) {
-      data.email = this.type === 'email' && !isValidEmail(this.value as string);
-    }
-
-    const hasError = Object.keys(data).some(key => data[key]);
-
-    if (!hasError) {
-      this.error = '';
-      return '';
-    }
-
-    this.error = this.errorMessage;
+    this.error = errors[0] || '';
 
     return this.error;
   }

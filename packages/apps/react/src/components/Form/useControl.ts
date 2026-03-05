@@ -8,9 +8,6 @@ export default function useControl<
   const control = formGroup.controls[controlName];
 
   const update = (value: T[K]) => {
-    console.log('>>> update', value);
-    control.value = value;
-
     formGroup.setValues((data) => {
       data[controlName] = value;
 
