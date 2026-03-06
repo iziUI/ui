@@ -3,6 +3,8 @@ import { createContext, useEffect, useMemo, useState, type PropsWithChildren } f
 import type { ThemeBuilded } from '@iziui/core/theme';
 import { createTheme, applyTheme, themeDefaultLight } from '@iziui/core/theme';
 
+import '@iziui/styles/base/_base.scss';
+
 export interface ThemeContextConfig {
   theme: ThemeBuilded;
   updateTheme: (theme: ThemeBuilded) => void;
@@ -22,10 +24,7 @@ export default function ThemeProvider({ theme, children }: ThemeProviderProps) {
     updateTheme: (newTheme: ThemeBuilded) => updateTheme(newTheme),
   }), [theme, _theme]);
 
-  useEffect(() => {
-    console.log('AAAAAA');
-    applyTheme(_theme);
-  }, [_theme]);
+  useEffect(() => { applyTheme(_theme); }, [_theme]);
 
   const updateTheme = (newTheme: ThemeBuilded) => { setTheme(newTheme); };
 

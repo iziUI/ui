@@ -4,7 +4,7 @@ export default definePlugin((theme, { p, pb, pl, pr, pt, px, py }) => {
   const { spacing } = theme;
 
   const calculatePadding = (pd?: number) => {
-    return !!pd || pd === 0 ? String(pd * spacing) : '';
+    return !!pd || pd === 0 ? `${String(pd * spacing)}px` : '';
   };
 
   const hasP = calculatePadding(p);

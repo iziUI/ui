@@ -13,9 +13,6 @@
       "require": "./src/*"
     }
   },
-  "scripts": {
-    "build": "sass src/index.scss dist/index.css --style=compressed"
-  },
   "devDependencies": {
     "sass": "^1.97.1",
     "vite": "^7.3.0"

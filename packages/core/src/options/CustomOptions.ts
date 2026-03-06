@@ -1,15 +1,19 @@
 import type { Properties } from 'csstype';
 
-import type { PaletteBuilded } from '../theme';
+import type { PaletteBuilded, Shape } from '../theme';
 
 export type CustomOptions = Partial<
   & ColorOptions
   & ShapeOptions
+  & SpacingOptions
 >;
 
 type Spacing = 'p' | 'py' | 'px' | 'pt' | 'pb' | 'pl' | 'pr' | 'm' | 'my' | 'mx' | 'mt' | 'mb' | 'ml' | 'mr';
+type SpacingOptions = { [S in Spacing]: number; }
 
-type ShapeOptions = { [S in Spacing]: number; }
+type ShapeOptions = {
+  borderRadius: (shape: Shape) => number;
+};
 
 type ColorOptions = {
   color: (palette: PaletteBuilded) => string;

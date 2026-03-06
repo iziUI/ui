@@ -37,9 +37,8 @@ export interface Palette {
 }
 
 export type Spacing = number;
-export type Shape = {
-    radius: number;
-}
+export type Shape = { radius: number; }
+export type Typography = { family: string; url?: string; }
 
 export interface PaletteBuilded extends Pick<Palette, 'mode' | 'text' | 'background' | 'divider'> {
     mode: Mode;
@@ -52,20 +51,16 @@ export interface PaletteBuilded extends Pick<Palette, 'mode' | 'text' | 'backgro
     secondary: Color;
 }
 
-export interface ThemeOptions extends Omit<Partial<Theme>, 'palette'> {
-    palette?: Partial<Palette>;
-}
-
 export interface Theme {
     shape: Shape;
     palette: Palette;
     spacing: Spacing;
-    font: ConstructorParameters<typeof FontFace>;
+    typography: Typography;
 }
 
-export interface ThemeBuilded {
-    shape: Shape;
-    font: FontFace;
-    spacing: Spacing;
+export interface ThemeOptions extends Omit<Partial<Theme>, 'palette'> {
+    palette?: Partial<Palette>;
+}
+export interface ThemeBuilded extends Omit<Theme, 'palette'> {
     palette: PaletteBuilded;
 }

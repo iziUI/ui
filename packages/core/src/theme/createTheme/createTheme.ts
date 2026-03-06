@@ -15,7 +15,6 @@ const SUPPORT_KEYS = [
 type SupportKey = (typeof SUPPORT_KEYS)[number];
 
 export function createTheme(theme?: ThemeOptions): ThemeBuilded {
-  console.log('CREATING');
   const mode = theme?.palette?.mode ?? 'light';
   const ref = mode === 'dark' ? themeDefaultDark : themeDefaultLight;
 
@@ -39,6 +38,6 @@ export function createTheme(theme?: ThemeOptions): ThemeBuilded {
     },
     shape: theme?.shape ?? ref.shape,
     spacing: theme?.spacing ?? ref.spacing,
-    font: new FontFace(...(theme?.font ?? ref.font))
+    typography: theme?.typography ?? ref.typography,
   };
 }

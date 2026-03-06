@@ -39,14 +39,8 @@ const config: StorybookConfig = {
       },
     };
 
-    // Improve monorepo package resolution
-    config.resolve = {
-      ...config.resolve,
-      preserveSymlinks: true
-    };
-
     return config;
-  },
+  }
 };
 
 export default config;

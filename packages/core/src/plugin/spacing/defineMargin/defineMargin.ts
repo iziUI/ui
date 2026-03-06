@@ -4,7 +4,7 @@ export default definePlugin((theme, { m, mb, ml, mr, mt, mx, my }) => {
   const { spacing } = theme;
 
   const calculateMargin = (mg?: number) => {
-    return !!mg || mg === 0 ? String(mg * spacing) : '';
+    return !!mg || mg === 0 ? `${String(mg * spacing)}px` : '';
   };
 
   const hasM = calculateMargin(m);

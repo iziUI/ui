@@ -3,7 +3,7 @@ import type { ComponentType, FC } from 'react';
 import type { Sx } from '@iziui/core/options';
 import type { Plugin } from '@iziui/core/plugin';
 import createOptions from '@iziui/core/options';
-import * as colorsPlugin from '@iziui/core/plugin';
+import * as plugins from '@iziui/core/plugin';
 
 import { useTheme } from '@/theme';
 
@@ -18,7 +18,7 @@ export default function createComponent<P>(WrappedComponent: ComponentType<P>) {
     const { theme } = useTheme();
 
     const options = sx && createOptions({ theme, sx },
-      ...extract(colorsPlugin),
+      ...extract(plugins),
     );
 
     return (

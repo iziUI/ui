@@ -8,15 +8,20 @@ function setColor(name: string, color: Color) {
   document.documentElement.style.setProperty(`--${name}-opacity`, color.opacity);
 }
 
+function ensureStylesheet(href: string) {
+  if (document.querySelector(`link[href="${href}"]`)) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  document.head.appendChild(link);
+}
+
 export function applyTheme(theme: ThemeBuilded) {
-  console.log('AAAAA');
   if (typeof window === 'undefined') { return; }
 
-  const { palette, shape, spacing, font } = theme;
+  const { palette, shape, spacing, typography } = theme;
 
-  // await font.load();
-
-  document.fonts.add(font);
+  if (typography.url) { ensureStylesheet(typography.url); }
 
   // COLORS
   setColor('info', palette.info);
@@ -29,10 +34,8 @@ export function applyTheme(theme: ThemeBuilded) {
   // GREY
   setColor('grey', palette.grey);
 
-  console.log('>>> family', font.family);
-
   // TYPOGRAPHY
-  document.documentElement.style.setProperty('--typography', font.family);
+  document.documentElement.style.setProperty('--typography', typography.family);
 
   // TEXT
   document.documentElement.style.setProperty('--text-primary', palette.text?.primary);
