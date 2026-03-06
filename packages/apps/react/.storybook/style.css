@@ -5,3 +5,25 @@
 body {
   /* background-color: var(--background-default); */
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button,
+label,
+span,
+th,
+tr,
+td,
+dl,
+dt,
+ul,
+li,
+ol {
+  margin: 0 !important;
+}

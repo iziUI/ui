@@ -1,0 +1,13 @@
+.doc {
+  h4 {
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  &-import {
+    .docblock-source {
+      margin: 0;
+      width: 100%;
+    }
+  }
+}

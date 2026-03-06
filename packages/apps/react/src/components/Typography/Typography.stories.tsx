@@ -7,6 +7,11 @@ import Typography from './Typography';
 const meta: Meta<typeof Typography> = {
   title: 'components/Typography',
   component: Typography,
+  parameters: {
+    docs: {
+      description: 'Componente para gerenciamento de formulários com controles, validações e submit.',
+    },
+  }
 };
 
 export const size: StoryObj<typeof Typography> = {

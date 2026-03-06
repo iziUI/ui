@@ -7,6 +7,7 @@ import { DocsContainer } from '@storybook/blocks';
 import { createTheme } from '@iziui/core/theme';
 
 import ThemeProvider from '../src/theme/ThemeProvider';
+import Doc from './Doc';
 
 import './style.css';
 
@@ -25,11 +26,14 @@ const preview: Preview = {
   parameters: {
     docs: {
       theme: themes.light,
+      page: () => (
+        <ThemeProvider theme={createTheme()}>
+          <Doc />
+        </ThemeProvider>
+      ),
       container: ({ children, context }) => (
         <DocsContainer context={context}>
-          <ThemeProvider theme={createTheme()}>
-            {children}
-          </ThemeProvider>
+          {children}
         </DocsContainer>
       ),
     },

@@ -4,8 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import logger from '@iziui/toolkit/logger';
 
-import Doc from '@/_docs/Doc';
-
 import Form from './Form';
 import useForm from './useForm';
 import useControl from './useControl';
@@ -18,19 +16,12 @@ type FormData = {
 }
 
 const meta: Meta<typeof Form> = {
-  title: 'components/Form',
+  title: 'Lab/Form',
   component: Form,
   parameters: {
     docs: {
-      page: (context) => (
-        <Doc
-          context={context}
-          path="fake path"
-          description="fake description"
-          title="fake title"
-        />
-      )
-    }
+      description: 'Componente para gerenciamento de formulários com controles, validações e submit.',
+    },
   }
 };
 
