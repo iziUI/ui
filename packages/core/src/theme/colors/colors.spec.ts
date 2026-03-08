@@ -6,7 +6,7 @@ const makeColor = (prefix: string): Color => ({
   dark: `#${prefix}-dark`,
   light: `#${prefix}-light`,
   opacity: `#${prefix}-opacity`,
-  contrastText: `#${prefix}-contrast`,
+  contrast: `#${prefix}-contrast`,
 });
 
 const makePalette = (): PaletteBuilded => ({
@@ -61,7 +61,7 @@ describe('COLORS', () => {
     expect(COLORS(palette)).toHaveLength(18);
   });
 
-  it('should ignore opacity and contrastText variations', () => {
+  it('should ignore opacity and contrast variations', () => {
     const palette = makePalette();
 
     const result = COLORS(palette);

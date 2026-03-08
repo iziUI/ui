@@ -5,7 +5,7 @@ import { prefix } from '@iziui/tokens/web/js';
 import type { Colors, Size } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils';
 
-import type { IconProps } from '../Icon';
+import type { IconProps } from '../../display/Icon';
 import type { LoadingProps } from '../Loading';
 import Ripple from '../Ripple';
 import createComponent from '../../core/createComponent';
@@ -15,7 +15,6 @@ import '@iziui/styles/components/Button.scss';
 export interface ButtonProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   size?: Size;
   color?: Colors;
-  fullWidth?: boolean;
   endIcon?: React.JSX.Element;
   startIcon?: React.JSX.Element;
   loading?: React.JSX.Element | boolean;
@@ -25,7 +24,6 @@ function Button({
   size = 'medium',
   color = 'primary',
   variant = 'contained',
-  fullWidth,
   startIcon,
   endIcon,
   loading,
@@ -37,13 +35,12 @@ function Button({
     `${prefix}-button--${size}`,
     `${prefix}-button--${color}`,
     `${prefix}-button--${color}--${variant}`,
-    fullWidth && `${prefix}-button--fullWidth`,
     props.className
   );
 
   const renderIcon = (icon: React.JSX.Element, direction: 'left' | 'right') => {
     return cloneElement<IconProps>(icon, {
-      color: `${color}.contrastText`,
+      color: `${color}.contrast`,
       className: joinClass(icon.props.className, `${prefix}-button__icon`, `${prefix}-button__icon--${direction}`)
     });
   };

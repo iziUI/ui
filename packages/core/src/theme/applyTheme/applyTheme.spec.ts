@@ -20,7 +20,7 @@ describe('applyTheme', () => {
     dark: '#115293',
     light: '#4791db',
     opacity: 'rgba(25, 118, 210, 0.5)',
-    contrastText: '#ffffff',
+    contrast: '#ffffff',
   };
 
   const mockTheme: ThemeBuilded = {
@@ -32,42 +32,42 @@ describe('applyTheme', () => {
         dark: '#9a0036',
         light: '#e33371',
         opacity: 'rgba(220, 0, 78, 0.5)',
-        contrastText: '#ffffff',
+        contrast: '#ffffff',
       },
       error: {
         main: '#f44336',
         dark: '#d32f2f',
         light: '#e57373',
         opacity: 'rgba(244, 67, 54, 0.5)',
-        contrastText: '#ffffff',
+        contrast: '#ffffff',
       },
       warning: {
         main: '#ff9800',
         dark: '#f57c00',
         light: '#ffb74d',
         opacity: 'rgba(255, 152, 0, 0.5)',
-        contrastText: '#000000',
+        contrast: '#000000',
       },
       success: {
         main: '#4caf50',
         dark: '#388e3c',
         light: '#81c784',
         opacity: 'rgba(76, 175, 80, 0.5)',
-        contrastText: '#ffffff',
+        contrast: '#ffffff',
       },
       info: {
         main: '#2196f3',
         dark: '#1976d2',
         light: '#64b5f6',
         opacity: 'rgba(33, 150, 243, 0.5)',
-        contrastText: '#ffffff',
+        contrast: '#ffffff',
       },
       grey: {
         main: '#9e9e9e',
         dark: '#616161',
         light: '#e0e0e0',
         opacity: 'rgba(158, 158, 158, 0.5)',
-        contrastText: '#000000',
+        contrast: '#000000',
       },
       text: {
         primary: 'rgba(0, 0, 0, 0.87)',
@@ -100,7 +100,7 @@ describe('applyTheme', () => {
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith('--primary-dark', mockColor.dark);
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--primary-contrast',
-        mockColor.contrastText,
+        mockColor.contrast,
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith('--primary-opacity', mockColor.opacity);
     });
@@ -122,7 +122,7 @@ describe('applyTheme', () => {
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--secondary-contrast',
-        mockTheme.palette.secondary.contrastText,
+        mockTheme.palette.secondary.contrast,
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--secondary-opacity',
@@ -148,7 +148,7 @@ describe('applyTheme', () => {
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--info-contrast',
-        mockTheme.palette.info.contrastText,
+        mockTheme.palette.info.contrast,
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--info-opacity',
@@ -170,7 +170,7 @@ describe('applyTheme', () => {
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--error-contrast',
-        mockTheme.palette.error.contrastText,
+        mockTheme.palette.error.contrast,
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--error-opacity',
@@ -192,7 +192,7 @@ describe('applyTheme', () => {
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--warning-contrast',
-        mockTheme.palette.warning.contrastText,
+        mockTheme.palette.warning.contrast,
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--warning-opacity',
@@ -214,7 +214,7 @@ describe('applyTheme', () => {
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--success-contrast',
-        mockTheme.palette.success.contrastText,
+        mockTheme.palette.success.contrast,
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--success-opacity',
@@ -239,7 +239,7 @@ describe('applyTheme', () => {
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--grey-contrast',
-        mockTheme.palette.grey.contrastText,
+        mockTheme.palette.grey.contrast,
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
         '--grey-opacity',

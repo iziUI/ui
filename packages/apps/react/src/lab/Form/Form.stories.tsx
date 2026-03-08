@@ -8,8 +8,8 @@ import Form from './Form';
 import useForm from './useForm';
 import useControl from './useControl';
 import Control from './Control';
-import Button from '../Button';
-import Input from '../Input';
+import Input from '../../fields/Input';
+import Button from '../../components/Button';
 
 type FormData = {
   name: string;

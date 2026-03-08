@@ -2,21 +2,26 @@ import { useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
-import Stack from '@/components/Stack';
-import IconComponent from '@/components/Icon';
+import Stack from '@/layout/Stack';
+import IconComponent from '@/display/Icon';
 import ButtonIcon from '@/components/ButtonIcon';
 
 import Input, { type InputType } from './Input';
 
 const meta: Meta<typeof Input> = {
-  title: 'components/Fields/Input',
+  title: 'fields/Input',
   component: Input,
+  parameters: {
+    docs: {
+      description: 'Os inputs permitem que os usuários insiram e editem texto.'
+    }
+  }
 };
 
 export const InputTypes: StoryObj<typeof Input> = {
   render: () => {
     return (
-      <Stack sx={{ ml: 4, mt: 4 }}>
+      <Stack>
         <Input placeholder="Text" />
         <Input placeholder="Password" type="password" />
         <Input placeholder="Number" type="number" />

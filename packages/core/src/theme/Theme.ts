@@ -12,7 +12,7 @@ export interface Color {
     dark: string;
     light: string;
     opacity: string;
-    contrastText: string;
+    contrast: string;
 }
 
 export interface Palette {

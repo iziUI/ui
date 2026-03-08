@@ -4,9 +4,8 @@ import { prefix } from '@iziui/tokens/web/js';
 
 import { joinClass } from '@iziui/core/utils/joinClass';
 
+import type { ButtonIconProps } from '@/components/ButtonIcon';
 import createComponent from '@/core';
-
-import type { ButtonIconProps } from '../ButtonIcon';
 
 import '@iziui/styles/components/Input.scss';
 

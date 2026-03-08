@@ -1,12 +1,18 @@
 .doc {
   h4 {
-    color: var(--text-secondary);
-    font-weight: 400;
+    color: var(--text-secondary) !important;
+    font-weight: 400 !important;
   }
 
   &-import {
     .docblock-source {
       margin: 0;
+      width: 100%;
+    }
+  }
+
+  &-props {
+    &>div {
       width: 100%;
     }
   }

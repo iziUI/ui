@@ -6,7 +6,7 @@ import type { MappedColors, Size } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils/joinClass';
 import { convertPathToColor } from '@iziui/core/utils/convertPathToColor';
 
-import type { IconProps } from '@/components/Icon';
+import type { IconProps } from '@/display/Icon';
 import { useTheme } from '@/theme';
 import Ripple from '@/components/Ripple';
 import createComponent from '@/core/createComponent';

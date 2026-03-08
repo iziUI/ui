@@ -4,7 +4,7 @@ function setColor(name: string, color: Color) {
   document.documentElement.style.setProperty(`--${name}`, color.main);
   document.documentElement.style.setProperty(`--${name}-light`, color.light);
   document.documentElement.style.setProperty(`--${name}-dark`, color.dark);
-  document.documentElement.style.setProperty(`--${name}-contrast`, color.contrastText);
+  document.documentElement.style.setProperty(`--${name}-contrast`, color.contrast);
   document.documentElement.style.setProperty(`--${name}-opacity`, color.opacity);
 }
 

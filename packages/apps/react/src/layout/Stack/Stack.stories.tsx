@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/Card';
 import Stack from './Stack';
 
 const meta: Meta<typeof Stack> = {
-  title: 'components/Stack',
+  title: 'layout/Stack',
   component: Stack,
   tags: ['autodocs'],
 };

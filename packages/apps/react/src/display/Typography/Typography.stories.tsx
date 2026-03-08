@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import Stack from '@/components/Stack';
+import Stack from '@/layout/Stack';
 
 import Typography from './Typography';
 
 const meta: Meta<typeof Typography> = {
-  title: 'components/Typography',
+  title: 'display/Typography',
   component: Typography,
   parameters: {
     docs: {

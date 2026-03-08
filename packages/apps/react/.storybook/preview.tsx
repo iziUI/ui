@@ -25,7 +25,6 @@ const preview: Preview = {
   tags: ['autodocs'],
   parameters: {
     docs: {
-      theme: themes.light,
       page: () => (
         <ThemeProvider theme={createTheme()}>
           <Doc />

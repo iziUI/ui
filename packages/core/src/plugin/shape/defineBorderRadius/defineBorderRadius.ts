@@ -6,6 +6,6 @@ export default definePlugin((theme, { borderRadius }) => {
   if (!borderRadius) { return {}; }
 
   return {
-    borderRadius: `${shape.radius}px`
+    borderRadius: `${shape.radius * borderRadius}px`
   };
 });

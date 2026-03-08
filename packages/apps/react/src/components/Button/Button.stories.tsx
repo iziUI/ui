@@ -1,15 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Icon from '../Icon';
-import Stack from '../Stack';
+import { colors } from '@iziui/tokens/web/js';
+
+import Icon from '../../display/Icon';
+import Stack from '../../layout/Stack';
 import LoadingComponent from '../Loading';
 import Button from './Button';
-
-const meta: Meta<typeof Button> = {
-  title: 'components/Button',
-  component: Button,
-  tags: ['autodocs'],
-};
 
 export const Colors: StoryObj<typeof Button> = {
   render: () => {
@@ -23,7 +19,7 @@ export const Colors: StoryObj<typeof Button> = {
         <Button color="error">Error</Button>
       </Stack>
     );
-  }
+  },
 };
 
 export const Variants: StoryObj<typeof Button> = {
@@ -35,26 +31,22 @@ export const Variants: StoryObj<typeof Button> = {
         <Button variant="text">Text</Button>
       </Stack>
     );
-  }
+  },
 };
 
-export const WithIcon: StoryObj<typeof Button> = {
+export const WithIcons: StoryObj<typeof Button> = {
   render: () => {
     return (
       <Stack flexDirection="row">
-        <Button startIcon={<Icon name="star" />}>
-          Contained
-        </Button>
+        <Button startIcon={<Icon name="star" />}>Contained</Button>
 
-        <Button endIcon={<Icon name="star" />}>
-          Contained
-        </Button>
+        <Button endIcon={<Icon name="star" />}>Contained</Button>
       </Stack>
     );
-  }
+  },
 };
 
-export const Size: StoryObj<typeof Button> = {
+export const Sizes: StoryObj<typeof Button> = {
   render: () => {
     return (
       <>
@@ -63,15 +55,17 @@ export const Size: StoryObj<typeof Button> = {
         <Button size="large">Large</Button>
       </>
     );
-  }
+  },
 };
 
 export const States: StoryObj<typeof Button> = {
   render: () => {
     return (
-      <Button disabled startIcon={<Icon name="star" />}>Disabled</Button>
+      <Button disabled startIcon={<Icon name="star" />}>
+        Disabled
+      </Button>
     );
-  }
+  },
 };
 
 export const Loading: StoryObj<typeof Button> = {
@@ -81,15 +75,107 @@ export const Loading: StoryObj<typeof Button> = {
         <Button size="small" loading={<LoadingComponent />}>
           loading text
         </Button>
-        <Button loading={<LoadingComponent />}>
-          loading text
-        </Button>
+        <Button loading={<LoadingComponent />}>loading text</Button>
         <Button size="large" loading={<LoadingComponent />}>
           loading text
         </Button>
       </>
     );
-  }
+  },
+};
+
+export const Playground: StoryObj<typeof Button> = {
+  tags: ['!dev'],
+};
+
+const meta: Meta<typeof Button> = {
+  title: 'components/Button',
+  component: Button,
+  parameters: {
+    layout: 'centered',
+    docs: {
+      ref: Playground,
+      description:
+        'Buttons permitem que os usuários realizem ações, confirmem escolhas e iniciem fluxos dentro da interface.',
+    },
+  },
+  args: {
+    children: 'Button',
+    size: 'medium',
+    color: 'primary',
+    variant: 'contained',
+    disabled: false,
+  },
+  argTypes: {
+    size: {
+      control: 'select',
+      type: 'string',
+      options: ['small', 'medium', 'large'],
+      description: 'Tamanho do componente',
+      table: {
+        type: { summary: 'small | medium | large' },
+        defaultValue: { summary: 'medium' },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      type: 'boolean',
+      description: 'Se `true`, o componente está desativado.',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    color: {
+      control: 'select',
+      type: 'string',
+      options: colors,
+      description:
+        'A cor do componente. Suporta cores de tema padrão e personalizadas.',
+      table: {
+        defaultValue: { summary: 'primary' },
+      },
+    },
+    variant: {
+      control: 'select',
+      type: 'string',
+      options: ['contained', 'outlined', 'text'],
+      description: 'A variante a ser usada.',
+      table: {
+        type: { summary: 'contained | outlined | text' },
+        defaultValue: { summary: 'contained' },
+      },
+    },
+    startIcon: {
+      control: false,
+      type: 'symbol',
+      description: 'Elemento colocado antes do children.',
+      table: {
+        type: { summary: 'ReactElement' },
+      },
+    },
+    endIcon: {
+      control: false,
+      type: 'symbol',
+      description: 'Elemento colocado depois do children.',
+      table: {
+        type: { summary: 'ReactElement' },
+      },
+    },
+    loading: {
+      control: false,
+      description:
+        'Se verdadeiro, o indicador de carregamento fica visível e o botão fica desativado.',
+      table: {
+        type: { summary: 'boolean | ReactElement' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    children: {
+      control: 'text',
+      type: 'symbol',
+      description: 'Conteúdo do componente',
+    },
+  },
 };
 
 export default meta;

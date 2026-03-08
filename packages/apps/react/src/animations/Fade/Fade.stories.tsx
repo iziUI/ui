@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Stack from '@/components/Stack';
+import Stack from '@/layout/Stack';
 import Button from '@/components/Button';
-import Typography from '@/components/Typography';
+import Typography from '@/display/Typography';
 
 import Fade from './Fade';
 
@@ -19,13 +19,15 @@ function Box() {
       width: '100px',
       height: '100px',
       borderRadius: '10px',
-      backgroundColor: '#e80537',
+      backgroundColor: 'var(--primary)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
     }}
     >
-      <Typography>Content here</Typography>
+      <Typography textAlign="center" color="primary.contrast">
+        Content here
+      </Typography>
     </div>
   );
 }

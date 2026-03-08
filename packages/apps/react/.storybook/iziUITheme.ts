@@ -7,7 +7,7 @@ export default create({
   brandImage: 'https://i.imgur.com/xSfyHt8.png',
   brandTarget: '_self',
 
-  //
+  // Color
   colorPrimary: '#72e4fc',
   colorSecondary: '#6c37f4',
 

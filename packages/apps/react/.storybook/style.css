@@ -1,11 +1,3 @@
-.sb-show-main.sb-main-padded {
-  /* padding: 0; */
-}
-
-body {
-  /* background-color: var(--background-default); */
-}
-
 h1,
 h2,
 h3,
@@ -26,4 +18,276 @@ ul,
 li,
 ol {
   margin: 0 !important;
+}
+
+/* ============================================
+   SYNTAX HIGHLIGHTING - Prism Theme Custom
+   ============================================ */
+
+/* Keywords: import, from, function, return, const, let, export */
+.token.keyword,
+.token.control,
+.token.directive,
+.token.unit,
+.token.module {
+  color: #CD328C !important;
+  /* Rosa - keywords */
+}
+
+/* Tags HTML/JSX: <Accordion>, <span>, <div> */
+.token.tag {
+  color: #CD328C !important;
+  /* Rosa - tags */
+}
+
+/* Strings - textos de import como '@caju-beneficios' */
+.token.string {
+  color: #207920 !important;
+  /* Verde - strings de import */
+}
+
+/* Valores de atributos/props - como ="accordion-1" */
+.token.attr-value {
+  color: #E80537 !important;
+  /* Vermelho - valores de props */
+}
+
+/* Componentes React (maiúscula) e Tipos - components/jsx */
+.token.class-name,
+.token.maybe-class-name {
+  color: #004F99 !important;
+  /* Azul - componentes */
+}
+
+/* Funções */
+.token.function {
+  color: #004F99 !important;
+  /* Azul - funções */
+}
+
+/* Atributos/Props - como heading, className */
+.token.attr-name,
+.token.property {
+  color: #207920 !important;
+  /* Verde - atributos/props */
+}
+
+/* Números e booleanos */
+.token.boolean,
+.token.number,
+.token.constant {
+  color: #004F99 !important;
+  /* Azul - valores literais */
+}
+
+/* Símbolos especiais */
+.token.symbol {
+  color: #4D4D4D !important;
+  /* Cinza - símbolos */
+}
+
+/* Operadores */
+.token.operator {
+  color: #4D4D4D !important;
+  /* Cinza - operadores */
+}
+
+/* Pontuação (parênteses, chaves, vírgulas) - textos gerais */
+.token.punctuation {
+  color: #4D4D4D !important;
+  /* Cinza - pontuação */
+}
+
+/* Comentários */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #999999 !important;
+  /* Cinza claro - comentários */
+  font-style: italic !important;
+}
+
+/* ============================================
+   CANVAS BACKGROUND
+   ============================================ */
+
+/* Background branco para o Canvas */
+.docs-story,
+.docs-story>div:first-child,
+.sb-show-main {
+  background-color: #F0F0F0 !important;
+  box-shadow: none !important;
+}
+
+/* Remove sombras de todos elementos de docs - EXCETO inputs/form controls */
+.docs-story:not(input):not(textarea):not(select):not(button),
+.docs-story>div,
+.docblock-source,
+.docblock-source pre,
+.docblock-source code,
+.sb-addon-panel,
+canvas,
+[class*="canvas"]:not(input):not(textarea):not(select),
+[class*="Canvas"]:not(input):not(textarea):not(select),
+[class*="story"]:not(input):not(textarea):not(select),
+[class*="Story"]:not(input):not(textarea):not(select),
+[class^="css-"]:not(input):not(textarea):not(select):not(button),
+.css-1uizr3i:not(input):not(textarea):not(select) {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+/* Remove sombras da tabela mas PRESERVA inputs */
+.docblock-argstable {
+  box-shadow: none !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.docblock-argstable>*:not(input):not(textarea):not(select):not(button) {
+  box-shadow: none !important;
+}
+
+/* ============================================
+   CODE BLOCKS - Source Component
+   ============================================ */
+.prismjs,
+.docblock-source .prismjs,
+code[class*="language-"],
+pre[class*="language-"],
+.castanha--doc-import code[class*="language-"],
+.castanha--doc-import pre[class*="language-"] {
+  background: #FCFCFC !important;
+  color: #1a1a1a !important;
+  font-family: 'Roboto Mono', 'Consolas', 'Monaco', monospace !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  box-shadow: none !important;
+}
+
+/* Bloco de código na seção Import */
+.docblock-source {
+  background: #fafafa !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+}
+
+.docblock-source pre {
+  background: #fafafa !important;
+  margin: 0 !important;
+  padding: 16px !important;
+  box-shadow: none !important;
+}
+
+/* Botão copy code */
+.docblock-source button {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* ============================================
+   LAYOUT DOCS
+   ============================================ */
+
+.sbdocs {
+  width: 100%;
+  margin: 0 !important;
+}
+
+/* Centraliza todo o conteúdo da documentação */
+.sbdocs-wrapper,
+.sbdocs-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+/* ============================================
+   TABELA DE PROPS
+   ============================================ */
+
+/* Container externo - apenas esse tem border-radius */
+.docblock-argstable {
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  font-family: 'Roboto', sans-serif !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.docblock-argstable table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.docblock-argstable thead {
+  background-color: #f5f5f5 !important;
+}
+
+.docblock-argstable th {
+  padding: 12px 16px !important;
+  font-weight: 600 !important;
+  color: #1a1a1a !important;
+  border-bottom: none !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.docblock-argstable td {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* Força Roboto em todos os elementos da tabela incluindo inputs */
+.docblock-argstable *,
+.docblock-argstable input,
+.docblock-argstable textarea,
+.docblock-argstable select,
+.docblock-argstable button {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* Remove TODOS os border-radius internos */
+.docblock-argstable *,
+.docblock-argstable th,
+.docblock-argstable td,
+.docblock-argstable tbody,
+.docblock-argstable thead,
+.docblock-argstable tr,
+.docblock-argstable-body,
+.docblock-argstable-head,
+.docblock-argstable-category {
+  border-radius: 0 !important;
+}
+
+/* Remove bordas laterais e internas desnecessárias */
+.docblock-argstable th,
+.docblock-argstable td {
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+}
+
+/* Remove borda da última linha */
+.docblock-argstable tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Hover nas linhas */
+.docblock-argstable tbody tr:hover {
+  background-color: #fafafa !important;
+}
+
+/* Remove bordas extras de seções/categorias */
+.docblock-argstable-body,
+.docblock-argstable-category {
+  border: none !important;
 }

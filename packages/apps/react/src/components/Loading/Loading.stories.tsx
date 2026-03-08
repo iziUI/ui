@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Stack from '../Stack';
+import Stack from '../../layout/Stack';
 import Loading from './Loading';
 
 const meta: Meta<typeof Loading> = {

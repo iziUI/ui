@@ -57,7 +57,7 @@ describe('generateSupportColors', () => {
       dark: '#0033cc',
       light: '#5c84ff',
       opacity: '#3366ff33',
-      contrastText: '#ffffff',
+      contrast: '#ffffff',
     });
   });
 });

@@ -1,6 +1,6 @@
 import type { Properties } from 'csstype';
 
-import type { PaletteBuilded, Shape } from '../theme';
+import type { PaletteBuilded } from '../theme';
 
 export type CustomOptions = Partial<
   & ColorOptions
@@ -12,7 +12,7 @@ type Spacing = 'p' | 'py' | 'px' | 'pt' | 'pb' | 'pl' | 'pr' | 'm' | 'my' | 'mx'
 type SpacingOptions = { [S in Spacing]: number; }
 
 type ShapeOptions = {
-  borderRadius: (shape: Shape) => number;
+  borderRadius: number;
 };
 
 type ColorOptions = {

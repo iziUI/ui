@@ -1,4 +1,4 @@
-import type { PropsWithChildren, HTMLAttributes, JSX } from 'react';
+import type { PropsWithChildren, HTMLAttributes, JSX, CSSProperties } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
@@ -23,7 +23,7 @@ export type Variant =
   | 'body1'
   | 'body2';
 
-const MAP: { [x: string]: keyof JSX.IntrinsicElements } = {
+const MAP: { [x: string]: React.ElementType } = {
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',
@@ -39,6 +39,7 @@ const MAP: { [x: string]: keyof JSX.IntrinsicElements } = {
 interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLParagraphElement>> {
   variant?: Variant;
   color?: MappedColors;
+  textAlign?: CSSProperties['textAlign'];
   weight?: 'bold' | 'normal' | 'light';
 }
 function Typography({
@@ -46,11 +47,12 @@ function Typography({
   variant = 'body1',
   color = 'text.primary',
   weight,
+  textAlign,
   ...props
 }: TypographyProps) {
   const { theme: { palette } } = useTheme();
 
-  const CustomTag = MAP[variant] as any;
+  const CustomTag = MAP[variant];
 
   const cls = joinClass(
     `${prefix}-typography`,
@@ -62,7 +64,15 @@ function Typography({
   const c = convertPathToColor(color, palette);
 
   return (
-    <CustomTag  {...props} className={cls} style={{ color: c, ...props.style }}>
+    <CustomTag
+      {...props}
+      className={cls}
+      style={{
+        color: c,
+        textAlign,
+        ...props.style
+      }}
+    >
       {children}
     </CustomTag>
   );

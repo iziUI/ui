@@ -19,6 +19,6 @@ export function generateSupportColors(hex: string): Color {
     dark: darkerColor,
     light: lighterColor,
     opacity: opacityColor,
-    contrastText: contrastColor
+    contrast: contrastColor
   };
 }

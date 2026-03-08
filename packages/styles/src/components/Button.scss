@@ -23,11 +23,6 @@
     min-height: 41px;
   }
 
-  &--fullWidth {
-    display: block;
-    width: 100%;
-  }
-
   @each $color in $colors {
     &--#{$color} {
       color: var(--#{$color}-contrast);
