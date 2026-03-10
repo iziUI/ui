@@ -2,9 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { colors } from '@iziui/tokens/web/js';
 
+import Loading from '@/feedbacks/Loading';
+
 import Icon from '../../display/Icon';
 import Stack from '../../layout/Stack';
-import LoadingComponent from '../Loading';
 import Button from './Button';
 
 export const Colors: StoryObj<typeof Button> = {
@@ -58,7 +59,7 @@ export const Sizes: StoryObj<typeof Button> = {
   },
 };
 
-export const States: StoryObj<typeof Button> = {
+export const Disabled: StoryObj<typeof Button> = {
   render: () => {
     return (
       <Button disabled startIcon={<Icon name="star" />}>
@@ -68,15 +69,15 @@ export const States: StoryObj<typeof Button> = {
   },
 };
 
-export const Loading: StoryObj<typeof Button> = {
+export const _Loading: StoryObj<typeof Button> = {
   render: () => {
     return (
       <>
-        <Button size="small" loading={<LoadingComponent />}>
+        <Button size="small" loading={<Loading />}>
           loading text
         </Button>
-        <Button loading={<LoadingComponent />}>loading text</Button>
-        <Button size="large" loading={<LoadingComponent />}>
+        <Button loading={<Loading />}>loading text</Button>
+        <Button size="large" loading={<Loading />}>
           loading text
         </Button>
       </>
@@ -100,7 +101,7 @@ const meta: Meta<typeof Button> = {
     },
   },
   args: {
-    children: 'Button',
+    children: 'Some text here',
     size: 'medium',
     color: 'primary',
     variant: 'contained',

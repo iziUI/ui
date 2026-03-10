@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
-import { MappedColors } from '@iziui/core/theme';
+import { Colors } from '@iziui/core/theme';
 import { convertPathToColor, joinClass } from '@iziui/core/utils';
 
 import createComponent from '../../core/createComponent';
@@ -11,13 +11,13 @@ import { useTheme } from '../../theme';
 import '@iziui/styles/components/Loading.scss';
 
 export interface LoadingProps extends HTMLAttributes<HTMLSpanElement> {
-  color?: MappedColors;
+  color?: Colors;
   size?: number | string;
 }
-function Loading({ color = 'primary.main', size = '1.5rem', ...props }: LoadingProps) {
+function Loading({ color = 'primary', size = '1.5rem', ...props }: LoadingProps) {
   const { theme: { palette } } = useTheme();
 
-  const c = convertPathToColor(color, palette);
+  const c = convertPathToColor(`${color}.main`, palette);
 
   const className = joinClass(`${prefix}-loading`, props.className);
 

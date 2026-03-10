@@ -1,0 +1,93 @@
+import { cloneElement, type HtmlHTMLAttributes } from 'react';
+
+import { prefix } from '@iziui/tokens/web/js';
+
+import type { Colors } from '@iziui/core/theme';
+import { joinClass } from '@iziui/core/utils/joinClass';
+
+import Stack from '@/layout/Stack';
+import Typography from '@/display/Typography';
+import ButtonIcon from '@/components/ButtonIcon';
+import createComponent from '@/core/createComponent';
+import Icon, { type IconProps } from '@/display/Icon';
+import { useTheme } from '@/theme';
+
+import '@iziui/styles/components/Alert.scss';
+
+export interface AlertProps extends HtmlHTMLAttributes<HTMLDivElement> {
+  color?: Colors;
+  icon?: React.JSX.Element;
+  children: React.ReactNode;
+  onClose?: () => void;
+}
+function Alert({
+  children,
+  icon,
+  color = 'primary',
+  onClose,
+  ...props
+}: AlertProps) {
+  const { theme } = useTheme();
+
+  const themeRef = theme.palette.mode === 'dark' ? 'light' : 'dark';
+
+  const className = joinClass(
+    `${prefix}-alert`,
+    `${prefix}-alert--${color}`,
+    props.className
+  );
+
+  const renderMessage = () => {
+    if (typeof children === 'string') {
+      return (
+        <Typography variant="body1" style={{ color: 'currentcolor' }}>
+          {children}
+        </Typography>
+      );
+    }
+
+    return children;
+  };
+
+  const renderIcon = (icon: React.JSX.Element) => {
+    return cloneElement<IconProps>(icon, {
+      color: `${color}.dark`
+    });
+  };
+
+  return (
+    <Stack
+      fullWidth
+      gap={0}
+      flexDirection="row"
+      alignItems="center"
+      justifyContent="center"
+      className={className}
+    >
+      <Stack
+        fullWidth
+        gap={8}
+        flexDirection="row"
+        alignItems="center"
+        className={`${prefix}-alert__content`}
+      >
+        {icon && renderIcon(icon)}
+        {renderMessage()}
+      </Stack>
+      {
+        onClose && (
+          <div>
+            <ButtonIcon
+              color={`${color}.${themeRef}`}
+              className={`${prefix}-alert__button`}
+              onClick={onClose}
+            >
+              <Icon name="times" />
+            </ButtonIcon>
+          </div>)
+      }
+    </Stack>
+  );
+}
+
+export default createComponent(Alert);

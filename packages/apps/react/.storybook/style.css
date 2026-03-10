@@ -1,25 +1,3 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-button,
-label,
-span,
-th,
-tr,
-td,
-dl,
-dt,
-ul,
-li,
-ol {
-  margin: 0 !important;
-}
-
 /* ============================================
    SYNTAX HIGHLIGHTING - Prism Theme Custom
    ============================================ */
@@ -106,6 +84,14 @@ ol {
   color: #999999 !important;
   /* Cinza claro - comentários */
   font-style: italic !important;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+.sbdocs-title {
+  margin: 0 !important;
 }
 
 /* ============================================

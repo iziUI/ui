@@ -7,7 +7,7 @@ import Stack from '@/layout/Stack';
 
 import Chip from './Chip';
 
-export const template: StoryObj<typeof Chip> = {
+export const variants: StoryObj<typeof Chip> = {
   render: () => {
     return (
       <Stack flexDirection="row">
@@ -19,7 +19,7 @@ export const template: StoryObj<typeof Chip> = {
 };
 
 export const _colors: StoryObj<typeof Chip> = {
-  render: (args) => {
+  render: () => {
     return (
       <Stack>
         <Stack flexDirection="row">

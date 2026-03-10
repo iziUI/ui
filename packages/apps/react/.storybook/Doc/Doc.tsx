@@ -19,9 +19,6 @@ export default function Doc() {
 
   const [category, name] = title.split('/');
 
-  console.log('>>> docs', docs.ref.parameters.docs.source);
-  console.log('>>> parameters', parameters);
-
   const MAP: { [X in string]: ChipProps['color'] } = {
     animations: 'success',
     components: 'warning',
@@ -51,6 +48,7 @@ export default function Doc() {
         </Stack>
         <h4>{docs.description}</h4>
         {docs.ref && <Canvas of={docs.ref} />}
+        {docs.alert}
       </Stack>
 
       <Stack className="doc-import">
@@ -58,36 +56,40 @@ export default function Doc() {
         <Source code={code} language="tsx" />
       </Stack>
 
-      <Stack className="doc-props">
-        <h3>Props</h3>
-        <Controls of={docs.ref} />
-      </Stack>
+      {
+        docs.ref && (
+          <Stack className="doc-props">
+            <h3>Props</h3>
+            <Controls of={docs.ref} />
+          </Stack>
+        )
+      }
 
       <Stack>
         <h3>Ajuda & Suporte</h3>
         <Grid xl={4}>
           <GridItem>
             <CardInfo
-              onClick={goSlack}
               icon="slack"
               title="Canal de suporte"
               description="Dúvidas? Fale conosco pelo canal de suporte dentro do nosso Slack."
+              onClick={goSlack}
             />
           </GridItem>
           <GridItem>
             <CardInfo
-              onClick={goDonate}
-              icon="credit-card"
-              title="Doação"
-              description="Contriua para a evolução desse projeto."
-            />
-          </GridItem>
-          <GridItem>
-            <CardInfo
-              onClick={goNews}
-              icon="fire"
+              icon="github"
               title="Novidades"
               description="Fique por dentro de tudo que há de novo."
+              onClick={goNews}
+            />
+          </GridItem>
+          <GridItem>
+            <CardInfo
+              icon="paypal"
+              title="Doação"
+              description="Contriua para a evolução desse projeto."
+              onClick={goDonate}
             />
           </GridItem>
         </Grid>

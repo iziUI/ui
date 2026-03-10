@@ -1,1 +1,1 @@
-export { default as Bounce, type BounceProps } from "./Bounce";
+export { default, type BounceProps } from './Bounce';

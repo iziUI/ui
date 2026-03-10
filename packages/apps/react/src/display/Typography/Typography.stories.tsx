@@ -1,18 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Stack from '@/layout/Stack';
 
 import Typography from './Typography';
-
-const meta: Meta<typeof Typography> = {
-  title: 'display/Typography',
-  component: Typography,
-  parameters: {
-    docs: {
-      description: 'Componente para gerenciamento de formulários com controles, validações e submit.',
-    },
-  }
-};
 
 export const size: StoryObj<typeof Typography> = {
   render: () => {
@@ -63,6 +53,41 @@ export const colors: StoryObj<typeof Typography> = {
         <Typography style={{ margin: 0 }} variant="h5" color="text.disabled">text.disabled</Typography>
       </Stack>
     );
+  }
+};
+
+export const Playground: StoryObj<typeof Typography> = {
+  tags: ['!dev'],
+};
+
+const meta: Meta<typeof Typography> = {
+  title: 'display/Typography',
+  component: Typography,
+  parameters: {
+    layout: 'centered',
+    docs: {
+      ref: Playground,
+      description: 'Use typography to present your design and content as clearly and efficiently as possible.',
+    },
+  },
+  args: {
+    variant: 'body1',
+    weight: 'bold',
+    textAlign: 'left',
+    color: 'text.primary',
+    children: 'Some text here'
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      type: 'string',
+      options: ['small', 'medium', 'large'],
+      description: 'Tamanho do componente',
+      table: {
+        type: { summary: 'small | medium | large' },
+        defaultValue: { summary: 'medium' },
+      },
+    }
   }
 };
 

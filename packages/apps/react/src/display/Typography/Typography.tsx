@@ -1,4 +1,4 @@
-import type { PropsWithChildren, HTMLAttributes, JSX, CSSProperties } from 'react';
+import type { PropsWithChildren, HTMLAttributes, CSSProperties } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
@@ -10,6 +10,19 @@ import { useTheme } from '@/theme';
 import createComponent from '@/core/createComponent';
 
 import '@iziui/styles/components/Typography.scss';
+
+const variant = [
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'subtitle1',
+  'subtitle2',
+  'body1',
+  'body2',
+];
 
 export type Variant =
   | 'h1'

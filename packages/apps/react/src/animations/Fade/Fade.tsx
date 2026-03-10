@@ -4,7 +4,7 @@ import { wait } from '@iziui/toolkit/promise';
 
 type Style = React.HTMLAttributes<HTMLDivElement>['style'];
 
-interface FadeProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FadeProps extends React.HTMLAttributes<HTMLDivElement> {
   enter: boolean;
   delay?: number;
   timeout?: number;

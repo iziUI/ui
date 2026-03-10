@@ -25,7 +25,7 @@ function Icon({ name, size = 'medium', color = 'primary.main', ...props }: IconP
   const c = convertPathToColor(color, palette);
 
   return (
-    <i {...props} className={clss} style={{ color: c, ...props.style }}></i>
+    <i {...props} className={clss} style={{ color: props.style?.color || c, ...props.style }}></i>
   );
 }
 

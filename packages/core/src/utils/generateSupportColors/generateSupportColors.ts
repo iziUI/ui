@@ -11,7 +11,7 @@ export function generateSupportColors(hex: string): Color {
 
   const contrastColor = getContrastColor(hex);
   const lighterColor = adjustLightness(hsl.h, hsl.s, hsl.l, variation);
-  const darkerColor = adjustLightness(hsl.h, hsl.s, hsl.l, -variation);
+  const darkerColor = adjustLightness(hsl.h, hsl.s, hsl.l, -variation * 1.7);
   const opacityColor = getOpacityColor(hex, variation / 100);
 
   return {

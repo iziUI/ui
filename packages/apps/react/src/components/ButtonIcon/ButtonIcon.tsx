@@ -2,7 +2,7 @@ import { cloneElement, type ButtonHTMLAttributes, type PropsWithChildren, type R
 
 import { prefix } from '@iziui/tokens/web/js';
 
-import type { MappedColors, Size } from '@iziui/core/theme';
+import type { Colors, Size } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils/joinClass';
 import { convertPathToColor } from '@iziui/core/utils/convertPathToColor';
 
@@ -14,26 +14,31 @@ import createComponent from '@/core/createComponent';
 import '@iziui/styles/components/ButtonIcon.scss';
 
 export interface ButtonIconProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
-  color?: MappedColors;
+  color?: Colors;
   size?: Size;
   children: ReactElement<IconProps>;
 };
-function ButtonIcon({ children, size = 'medium', color = 'primary.main', ...props }: ButtonIconProps) {
+function ButtonIcon({ children, size = 'medium', color = 'primary', ...props }: ButtonIconProps) {
   const { theme: { palette } } = useTheme();
 
   const classess = joinClass(
     `${prefix}-button-icon`,
-    color && `${prefix}-button-icon--${color.split('.')[0]}`,
+    size && `${prefix}-button-icon--${size}`,
+    color && `${prefix}-button-icon--${color}`,
     props.className
   );
 
   const c = convertPathToColor(color, palette);
 
   const renderIcon = (icon: ReactElement<IconProps>) => {
-    return cloneElement(icon, {
-      color: color || icon.props.color,
+    const aa: IconProps = {
       size,
-    });
+      ...icon.props,
+      style: { color: 'currentColor' }
+    };
+
+    console.log('>>> aa', aa);
+    return cloneElement(icon, aa);
   };
 
   return (

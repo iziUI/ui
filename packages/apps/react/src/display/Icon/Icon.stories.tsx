@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { colors } from '@iziui/tokens/web/js';
 
 import Stack from '@/layout/Stack';
+import Alert from '@/feedbacks/Alert';
 
 import Icon from './Icon';
 
@@ -57,9 +58,22 @@ const meta: Meta<typeof Icon> = {
   component: Icon,
   parameters: {
     docs: {
-      ref: ExternalLib,
-      description:
-        'Orientações e sugestões para usar ícones.',
+      description: 'Orientações e sugestões para usar ícones.',
+      alert: (
+        <Alert
+          color="warning"
+          icon={<Icon name="info-circle" />}
+        >
+          <p style={{ margin: 0, color: 'currentColor' }}>
+            Os ícones disponíveis neste componente são baseados na biblioteca {' '}
+            <a href="https://iconscout.com/unicons/free-line-icons" target="_blank" rel="noopener noreferrer">
+              Unicons Free Line Icons
+            </a>.
+            <br />
+            Consulte a biblioteca para visualizar os nomes, variações e opções disponíveis antes de utilizar um ícone.
+          </p>
+        </Alert>
+      )
     },
   },
   argTypes: {

@@ -15,7 +15,7 @@ function Card({ children, onClick, ...props }: CardProps) {
   const cls = joinClass(`${prefix}-card`, onClick && `${prefix}-card--clickable`, props.className);
 
   return (
-    <div {...props} className={cls} onMouseDown={onClick}>
+    <div {...props} className={cls} onMouseUp={onClick}>
       {children}
       {onClick && <Ripple />}
     </div>

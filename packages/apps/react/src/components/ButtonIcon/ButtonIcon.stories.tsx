@@ -1,20 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { colors } from '@iziui/tokens/web/js';
+
 import Icon from '@/display/Icon';
 import Stack from '@/layout/Stack';
 
 import ButtonIcon from './ButtonIcon';
 
-const meta: Meta<typeof ButtonIcon> = {
-  title: 'components/ButtonIcon',
-  component: ButtonIcon,
-  tags: ['autodocs'],
-};
-
-export const Template: StoryObj<typeof ButtonIcon> = {
+export const Disabled: StoryObj<typeof ButtonIcon> = {
   render: () => {
     return (
-      <ButtonIcon>
+      <ButtonIcon disabled>
         <Icon name="star" />
       </ButtonIcon>
     );
@@ -28,17 +24,74 @@ export const Colors: StoryObj<typeof ButtonIcon> = {
         <ButtonIcon>
           <Icon name="star" />
         </ButtonIcon>
-        <ButtonIcon color="secondary.main">
+        <ButtonIcon color="secondary">
           <Icon name="star" />
         </ButtonIcon>
-        <ButtonIcon color="info.main">
+        <ButtonIcon color="info">
           <Icon name="star" />
         </ButtonIcon>
-        <ButtonIcon color="error.main">
+        <ButtonIcon color="error">
           <Icon name="star" />
         </ButtonIcon>
       </Stack>
     );
+  }
+};
+
+export const Playground: StoryObj<typeof ButtonIcon> = {
+  tags: ['!dev'],
+};
+
+const meta: Meta<typeof ButtonIcon> = {
+  title: 'components/ButtonIcon',
+  component: ButtonIcon,
+  parameters: {
+    layout: 'centered',
+    docs: {
+      ref: Playground,
+      description:
+        'Buttons permitem que os usuários realizem ações, confirmem escolhas e iniciem fluxos dentro da interface.',
+    },
+  },
+  args: {
+    children: <Icon name="heart" />,
+    size: 'medium',
+    disabled: false,
+  },
+  argTypes: {
+    size: {
+      control: 'select',
+      type: 'string',
+      options: ['small', 'medium', 'large'],
+      description: 'Tamanho do componente',
+      table: {
+        type: { summary: 'small | medium | large' },
+        defaultValue: { summary: 'medium' },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      type: 'boolean',
+      description: 'Se `true`, o componente está desativado.',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    color: {
+      control: 'select',
+      type: 'string',
+      options: colors,
+      description:
+        'A cor do componente. Suporta cores de tema padrão e personalizadas.',
+      table: {
+        defaultValue: { summary: 'primary' },
+      },
+    },
+    children: {
+      control: false,
+      type: 'symbol',
+      description: 'Conteúdo do componente',
+    },
   }
 };
 

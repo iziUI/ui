@@ -23,6 +23,12 @@ export default class FormGroup<T extends Record<string, unknown>> {
     public validator?: Validator<T>,
   ) { }
 
+  /**
+ * Atualiza o estado interno do componente.
+ * @private
+ * @description Este método é usado internamente pela biblioteca.
+ *              Para atualizar valores externamente, use {@link setValues}.
+*/
   get hydrate() { return this._hydrate; }
   set hydrate(fn: (values: FormGroup<T>) => any) { this._hydrate = fn; }
 

@@ -11,7 +11,7 @@ export const themeDefaultLight: Theme = {
     warning: '#FF9457',
     success: '#36e79b',
     primary: '#6c37f4',
-    secondary: '#AFF20D',
+    secondary: '#FB7185', //C026D3 // F97316 // FB7185 // F59E0B
     grey: '#F4F4F4',
     text: {
       primary: 'rgb(31, 41, 55)',

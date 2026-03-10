@@ -1,0 +1,26 @@
+.#{$prefix}-alert {
+  min-height: 48px;
+  width: max-content;
+  border-radius: var(--radius);
+
+  @each $color in $colors {
+    &--#{$color} {
+      box-shadow: $box-shadow-small;
+      background-color: var(--#{$color}-light);
+      color: var(--#{$color}-dark);
+
+      overflow: hidden;
+      box-shadow: none;
+      backdrop-filter: blur(4px);
+      background-color: var(--#{$color}-opacity);
+    }
+  }
+
+  &__content {
+    padding: 8px 16px;
+  }
+
+  &__button {
+    margin-right: 16px;
+  }
+}

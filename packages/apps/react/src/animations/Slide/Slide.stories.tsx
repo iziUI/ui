@@ -1,14 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Stack from '@/layout/Stack';
 import Typography from '@/display/Typography';
+import Button from '@/components/Button';
+import Icon from '@/display/Icon';
 
-import Slide from './Slide';
-
-const meta: Meta<typeof Slide> = {
-  title: 'animations/Slide',
-  component: Slide,
-};
+import Slide, { type SlideProps } from './Slide';
 
 function Box() {
   return (
@@ -23,7 +22,7 @@ function Box() {
     }}
     >
       <Typography textAlign="center" color="primary.contrast">
-        Content here
+        Slide
       </Typography>
     </div>
   );
@@ -86,6 +85,53 @@ export const Directions: StoryObj<typeof Slide> = {
         </div>
       </Stack>
     );
+  }
+};
+
+export const Playground: StoryObj<typeof Slide> = {
+  tags: ['!dev']
+};
+
+const meta: Meta<typeof Slide> = {
+  title: 'animations/Slide',
+  component: (args: SlideProps) => {
+    const [animate, setAnimate] = useState(args.enter);
+
+    const handleClick = () => { setAnimate(prev => !prev); };
+
+    return (
+      <Stack alignItems="center">
+        <div style={{ minHeight: 100 }}>
+          <Slide enter={animate} delay={200}>
+            <Box />
+          </Slide>
+        </div>
+
+        <Button
+          fullWidth
+          variant="outlined"
+          color="secondary"
+          onClick={handleClick}
+          startIcon={<Icon name="play" />}
+        >
+          Animate
+        </Button>
+      </Stack >
+    );
+  },
+  parameters: {
+    layout: 'centered',
+    docs: {
+      ref: Playground,
+      description: `
+        Fornece animações leves baseadas em transformação (CSS transform), 
+        permitindo aplicar efeitos de deslizamento em elementos da interface. Pode ser utilizado para introduzir ou 
+        remover conteúdos de forma suave, indicando mudanças de estado ou transições entre seções da interfa
+      `
+    }
+  },
+  args: {
+    enter: true,
   }
 };
 

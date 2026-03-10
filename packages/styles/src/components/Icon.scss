@@ -2,6 +2,7 @@
 
 .#{$prefix}-icon {
   transition: all $animation;
+  color: currentColor;
 
   &--small {
     font-size: map.get($icon-sizes, small);

@@ -5,7 +5,7 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 
 import type { GridItemBaseProps } from './interface';
 
-import './Grid.scss';
+import '@iziui/styles/components/Grid.scss';
 
 export interface GridItemProps extends GridItemBaseProps {
   children: React.ReactNode;

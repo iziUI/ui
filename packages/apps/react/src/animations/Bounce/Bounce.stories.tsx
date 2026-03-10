@@ -1,15 +1,13 @@
+import { useEffect, useState } from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Stack from '@/layout/Stack';
 import Typography from '@/display/Typography';
+import Button from '@/components/Button';
+import Icon from '@/display/Icon';
 
-import Bounce from './Bounce';
-
-const meta: Meta<typeof Bounce> = {
-  title: 'animations/Bounce',
-  component: Bounce,
-  tags: ['autodocs'],
-};
+import Bounce, { type BounceProps } from './Bounce';
 
 function Box() {
   return (
@@ -25,7 +23,7 @@ function Box() {
       }}
     >
       <Typography textAlign="center" color="primary.contrast">
-        Content here
+        Bounce
       </Typography>
     </div>
   );
@@ -114,6 +112,55 @@ export const Directions: StoryObj<typeof Bounce> = {
       </Stack>
     );
   },
+};
+
+export const Playground: StoryObj<typeof Bounce> = {
+  tags: ['!dev'],
+};
+
+const meta: Meta<typeof Bounce> = {
+  title: 'animations/Bounce',
+  component: (args: BounceProps) => {
+    const [animate, setAnimate] = useState(args.enter);
+
+    useEffect(() => {
+      if (animate) { return; }
+
+      setAnimate(true);
+    }, [animate]);
+
+    const handleClick = () => { setAnimate(false); };
+
+    return (
+      <Stack alignItems="center">
+        <Bounce enter={animate} direction="right" delay={200}>
+          <Box />
+        </Bounce>
+
+        <Button
+          fullWidth
+          variant="outlined"
+          color="secondary"
+          onClick={handleClick}
+          startIcon={<Icon name="play" />}
+        >
+          Animate
+        </Button>
+      </Stack >
+    );
+  },
+  parameters: {
+    layout: 'centered',
+    docs: {
+      ref: Playground,
+      description: `Fornece animações leves baseadas em transformação (CSS transform), permitindo aplicar efeitos 
+      de deslocamento e retorno em elementos da interface. Ele pode ser usado para indicar interações,
+      feedback visual ou transições sutis em componentes.`,
+    },
+  },
+  args: {
+    enter: true,
+  }
 };
 
 export default meta;

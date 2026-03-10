@@ -1,17 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Stack from '@/layout/Stack';
 import Button from '@/components/Button';
+import Icon from '@/display/Icon';
 import Typography from '@/display/Typography';
 
-import Fade from './Fade';
-
-const meta: Meta<typeof Fade> = {
-  title: 'animations/Fade',
-  component: Fade,
-};
+import Fade, { type FadeProps } from './Fade';
 
 function Box() {
   return (
@@ -26,7 +22,7 @@ function Box() {
     }}
     >
       <Typography textAlign="center" color="primary.contrast">
-        Content here
+        Fade
       </Typography>
     </div>
   );
@@ -46,7 +42,7 @@ export const Default: StoryObj<typeof Fade> = {
 
 export const List: StoryObj<typeof Fade> = {
   render: () => {
-    const list = Array.from({ length: 10 }, (_, index) => index);
+    const list = Array.from({ length: 5 }, (_, index) => index);
     return (
       <Stack flexDirection="row">
         {list.map((item, index) => (
@@ -66,15 +62,62 @@ export const Controlled: StoryObj<typeof Fade> = {
     const [show, setShow] = useState(false);
 
     return (
-      <Stack>
-        <Button onClick={() => setShow(prev => !prev)}>Toggle visibility</Button>
-        <Fade enter={show}>
-          <div>
+      <Stack alignItems="center">
+        <div style={{ minHeight: 100 }}>
+          <Fade enter={show}>
             <Box />
-          </div>
-        </Fade>
+          </Fade>
+        </div>
+        <Button onClick={() => setShow(prev => !prev)}>Toggle visibility</Button>
       </Stack>
     );
+  }
+};
+
+export const Playground: StoryObj<typeof Fade> = {
+  tags: ['!dev']
+};
+
+const meta: Meta<typeof Fade> = {
+  title: 'animations/Fade',
+  component: (args: FadeProps) => {
+    const [animate, setAnimate] = useState(args.enter);
+
+    const handleClick = () => { setAnimate(prev => !prev); };
+
+    return (
+      <Stack alignItems="center">
+        <div style={{ minHeight: 100 }}>
+          <Fade enter={animate} delay={200}>
+            <Box />
+          </Fade>
+        </div>
+
+        <Button
+          fullWidth
+          variant="outlined"
+          color="secondary"
+          onClick={handleClick}
+          startIcon={<Icon name="play" />}
+        >
+          Animate
+        </Button>
+      </Stack >
+    );
+  },
+  parameters: {
+    layout: 'centered',
+    docs: {
+      ref: Playground,
+      description: `
+        Fornece animações leves baseadas em transformação (CSS transform), permitindo aplicar efeitos 
+        de deslocamento e retorno em elementos da interface. Ele pode ser usado para indicar interações,
+        feedback visual ou transições sutis em componentes.
+      `,
+    },
+  },
+  args: {
+    enter: true,
   }
 };
 
