@@ -6,10 +6,10 @@ import type { Colors, Size } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils/joinClass';
 
 import type { IconProps } from '@/display/Icon';
-import Ripple from '@/components/Ripple';
+import Ripple from '@/actions/Ripple';
 import createComponent from '@/core/createComponent';
 
-import './Chip.scss';
+import '@iziui/styles/components/Chip.scss';
 
 export interface ChipProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
   label: string;

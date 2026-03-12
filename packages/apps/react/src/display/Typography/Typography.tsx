@@ -11,7 +11,7 @@ import createComponent from '@/core/createComponent';
 
 import '@iziui/styles/components/Typography.scss';
 
-const variant = [
+export const variants = [
   'h1',
   'h2',
   'h3',
@@ -22,19 +22,9 @@ const variant = [
   'subtitle2',
   'body1',
   'body2',
-];
+] as const;
 
-export type Variant =
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'subtitle1'
-  | 'subtitle2'
-  | 'body1'
-  | 'body2';
+export type Variant = typeof variants[number];
 
 const MAP: { [x: string]: React.ElementType } = {
   h1: 'h1',

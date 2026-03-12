@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { colors } from '@iziui/tokens/web/js';
 
+import Chip from '@/display/Chip';
+import Icon from '@/display/Icon';
+
 import Stack from '../../layout/Stack';
 import Loading, { type LoadingProps } from './Loading';
 
@@ -45,6 +48,13 @@ const meta: Meta<typeof Loading> = {
       description:
         `Loading indicators commonly known as spinners, ]
         express an unspecified wait time or display the length of a process.`,
+      tag: (
+        <Chip
+          label="Feedback"
+          color="success"
+          icon={<Icon name="feedback" />}
+        />
+      )
     },
   },
   args: {

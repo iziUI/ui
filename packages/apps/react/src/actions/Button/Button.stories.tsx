@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { colors } from '@iziui/tokens/web/js';
 
-import Loading from '@/feedbacks/Loading';
+import Loading from '@/feedback/Loading';
+import Chip from '@/display/Chip';
 
 import Icon from '../../display/Icon';
 import Stack from '../../layout/Stack';
@@ -90,7 +91,7 @@ export const Playground: StoryObj<typeof Button> = {
 };
 
 const meta: Meta<typeof Button> = {
-  title: 'components/Button',
+  title: 'actions/Button',
   component: Button,
   parameters: {
     layout: 'centered',
@@ -98,6 +99,13 @@ const meta: Meta<typeof Button> = {
       ref: Playground,
       description:
         'Buttons permitem que os usuários realizem ações, confirmem escolhas e iniciem fluxos dentro da interface.',
+      tag: (
+        <Chip
+          label="Actions"
+          icon={<Icon name="crosshair-alt" />}
+          color="error"
+        />
+      ),
     },
   },
   args: {

@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Stack from '@/layout/Stack';
-import Button from '@/components/Button';
+import { generateSupportColors } from '@iziui/core/utils/generateSupportColors';
+
 import Icon from '@/display/Icon';
+import Chip from '@/display/Chip';
+import Stack from '@/layout/Stack';
+import Button from '@/actions/Button';
 import Typography from '@/display/Typography';
 
 import Fade, { type FadeProps } from './Fade';
@@ -27,18 +30,6 @@ function Box() {
     </div>
   );
 }
-
-export const Default: StoryObj<typeof Fade> = {
-  render: () => {
-    return (
-      <Fade enter>
-        <div>
-          <Box />
-        </div>
-      </Fade>
-    );
-  }
-};
 
 export const List: StoryObj<typeof Fade> = {
   render: () => {
@@ -78,6 +69,8 @@ export const Playground: StoryObj<typeof Fade> = {
   tags: ['!dev']
 };
 
+const { opacity, dark } = generateSupportColors('#8d00da');
+
 const meta: Meta<typeof Fade> = {
   title: 'animations/Fade',
   component: (args: FadeProps) => {
@@ -114,6 +107,17 @@ const meta: Meta<typeof Fade> = {
         de deslocamento e retorno em elementos da interface. Ele pode ser usado para indicar interações,
         feedback visual ou transições sutis em componentes.
       `,
+      tag: (
+        <Chip
+          label="Animation"
+          icon={<Icon name="brush-alt" />}
+          style={{
+            color: dark,
+            background: opacity,
+            borderColor: 'transparent'
+          }}
+        />
+      ),
     },
   },
   args: {

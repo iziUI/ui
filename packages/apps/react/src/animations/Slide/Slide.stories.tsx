@@ -2,10 +2,13 @@ import { useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Stack from '@/layout/Stack';
-import Typography from '@/display/Typography';
-import Button from '@/components/Button';
+import { generateSupportColors } from '@iziui/core/utils/generateSupportColors';
+
 import Icon from '@/display/Icon';
+import Chip from '@/display/Chip';
+import Stack from '@/layout/Stack';
+import Button from '@/actions/Button';
+import Typography from '@/display/Typography';
 
 import Slide, { type SlideProps } from './Slide';
 
@@ -27,18 +30,6 @@ function Box() {
     </div>
   );
 }
-
-export const Default: StoryObj<typeof Slide> = {
-  render: () => {
-    return (
-      <Slide enter>
-        <div>
-          <Box />
-        </div>
-      </Slide>
-    );
-  }
-};
 
 export const List: StoryObj<typeof Slide> = {
   render: () => {
@@ -92,6 +83,8 @@ export const Playground: StoryObj<typeof Slide> = {
   tags: ['!dev']
 };
 
+const { opacity, dark } = generateSupportColors('#8d00da');
+
 const meta: Meta<typeof Slide> = {
   title: 'animations/Slide',
   component: (args: SlideProps) => {
@@ -127,7 +120,18 @@ const meta: Meta<typeof Slide> = {
         Fornece animações leves baseadas em transformação (CSS transform), 
         permitindo aplicar efeitos de deslizamento em elementos da interface. Pode ser utilizado para introduzir ou 
         remover conteúdos de forma suave, indicando mudanças de estado ou transições entre seções da interfa
-      `
+      `,
+      tag: (
+        <Chip
+          label="Animation"
+          icon={<Icon name="brush-alt" />}
+          style={{
+            color: dark,
+            background: opacity,
+            borderColor: 'transparent'
+          }}
+        />
+      ),
     }
   },
   args: {

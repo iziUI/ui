@@ -2,10 +2,11 @@ import React from 'react';
 
 import { Source, Title, Controls, useOf, Canvas } from '@storybook/blocks';
 
-import Chip, { type ChipProps } from '../../src/display/Chip';
-import Stack from '../../src/layout/Stack';
-import { Grid, GridItem } from '../../src/layout/Grid';
 import CardInfo from './CardInfo';
+import Icon from '../../src/display/Icon';
+import Stack from '../../src/layout/Stack';
+import Chip, { type ChipProps } from '../../src/display/Chip';
+import { Grid, GridItem } from '../../src/layout/Grid';
 
 import './Doc.scss';
 
@@ -39,12 +40,7 @@ export default function Doc() {
       <Stack gap={8}>
         <Stack flexDirection="row" alignItems="center">
           <Title />
-          <Chip
-            size="small"
-            color={MAP[category]}
-            label={category}
-            style={{ textTransform: 'capitalize' }}
-          />
+          {docs.tag}
         </Stack>
         <h4>{docs.description}</h4>
         {docs.ref && <Canvas of={docs.ref} />}

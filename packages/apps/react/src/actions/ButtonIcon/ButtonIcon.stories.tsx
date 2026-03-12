@@ -4,6 +4,7 @@ import { colors } from '@iziui/tokens/web/js';
 
 import Icon from '@/display/Icon';
 import Stack from '@/layout/Stack';
+import Chip from '@/display/Chip';
 
 import ButtonIcon from './ButtonIcon';
 
@@ -43,7 +44,7 @@ export const Playground: StoryObj<typeof ButtonIcon> = {
 };
 
 const meta: Meta<typeof ButtonIcon> = {
-  title: 'components/ButtonIcon',
+  title: 'actions/ButtonIcon',
   component: ButtonIcon,
   parameters: {
     layout: 'centered',
@@ -51,6 +52,13 @@ const meta: Meta<typeof ButtonIcon> = {
       ref: Playground,
       description:
         'Buttons permitem que os usuários realizem ações, confirmem escolhas e iniciem fluxos dentro da interface.',
+      tag: (
+        <Chip
+          label="Actions"
+          icon={<Icon name="crosshair-alt" />}
+          color="error"
+        />
+      ),
     },
   },
   args: {

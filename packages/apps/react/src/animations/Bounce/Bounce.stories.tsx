@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Stack from '@/layout/Stack';
-import Typography from '@/display/Typography';
-import Button from '@/components/Button';
+import { generateSupportColors } from '@iziui/core/utils/generateSupportColors';
+
 import Icon from '@/display/Icon';
+import Chip from '@/display/Chip';
+import Stack from '@/layout/Stack';
+import Button from '@/actions/Button';
+import Typography from '@/display/Typography';
 
 import Bounce, { type BounceProps } from './Bounce';
 
@@ -28,16 +31,6 @@ function Box() {
     </div>
   );
 }
-
-export const Default: StoryObj<typeof Bounce> = {
-  render: () => {
-    return (
-      <Bounce enter>
-        <Box />
-      </Bounce>
-    );
-  },
-};
 
 export const List: StoryObj<typeof Bounce> = {
   render: () => {
@@ -118,6 +111,8 @@ export const Playground: StoryObj<typeof Bounce> = {
   tags: ['!dev'],
 };
 
+const { opacity, dark } = generateSupportColors('#8d00da');
+
 const meta: Meta<typeof Bounce> = {
   title: 'animations/Bounce',
   component: (args: BounceProps) => {
@@ -153,9 +148,23 @@ const meta: Meta<typeof Bounce> = {
     layout: 'centered',
     docs: {
       ref: Playground,
-      description: `Fornece animações leves baseadas em transformação (CSS transform), permitindo aplicar efeitos 
-      de deslocamento e retorno em elementos da interface. Ele pode ser usado para indicar interações,
-      feedback visual ou transições sutis em componentes.`,
+      description: `
+        Fornece animações leves baseadas em transformação (CSS transform), permitindo aplicar efeitos 
+        de deslocamento e retorno em elementos da interface. Ele pode ser usado para indicar interações,
+        feedback visual ou transições sutis em componentes.
+      `,
+      tag: (
+        <Chip
+          label="Animation"
+          icon={<Icon name="brush-alt" />}
+          variant="outlined"
+          style={{
+            color: dark,
+            background: opacity,
+            borderColor: 'transparent'
+          }}
+        />
+      ),
     },
   },
   args: {

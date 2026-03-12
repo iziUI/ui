@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { mappedColors } from '@iziui/core/theme';
+
 import Stack from '@/layout/Stack';
 
-import Typography from './Typography';
+import Typography, { variants } from './Typography';
 
 export const size: StoryObj<typeof Typography> = {
   render: () => {
@@ -25,7 +27,7 @@ export const size: StoryObj<typeof Typography> = {
   }
 };
 
-export const colors: StoryObj<typeof Typography> = {
+export const _colors: StoryObj<typeof Typography> = {
   render: () => {
     return (
       <Stack flexDirection="column">
@@ -72,7 +74,7 @@ const meta: Meta<typeof Typography> = {
   },
   args: {
     variant: 'body1',
-    weight: 'bold',
+    weight: 'normal',
     textAlign: 'left',
     color: 'text.primary',
     children: 'Some text here'
@@ -80,14 +82,45 @@ const meta: Meta<typeof Typography> = {
   argTypes: {
     variant: {
       control: 'select',
-      type: 'string',
-      options: ['small', 'medium', 'large'],
+      options: variants,
       description: 'Tamanho do componente',
       table: {
-        type: { summary: 'small | medium | large' },
+        type: { summary: 'h1 | h2 | h3 | h4 | h5 | h6 | subtitle1 | subtitle2 | body1 | body2' },
         defaultValue: { summary: 'medium' },
       },
-    }
+    },
+    color: {
+      control: 'select',
+      options: mappedColors,
+      description: 'Cor do texto',
+      table: {
+        type: { summary: mappedColors.join(' | ') },
+        defaultValue: { summary: 'text.primary' },
+      },
+    },
+    weight: {
+      control: 'select',
+      options: ['bold', 'normal', 'light'],
+      description: 'Peso da fonte',
+      table: {
+        type: { summary: 'bold | normal | light' },
+        defaultValue: { summary: 'medium' },
+      },
+    },
+    textAlign: {
+      control: 'select',
+      options: ['center', 'left', 'right'],
+      description: 'Peso da fonte',
+      table: {
+        type: { summary: 'CSSProperties[\'textAlign\']' },
+        defaultValue: { summary: 'left' },
+      },
+    },
+    children: {
+      control: 'text',
+      type: 'symbol',
+      description: 'Conteúdo do componente',
+    },
   }
 };
 

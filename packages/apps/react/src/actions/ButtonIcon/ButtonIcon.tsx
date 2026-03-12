@@ -8,7 +8,7 @@ import { convertPathToColor } from '@iziui/core/utils/convertPathToColor';
 
 import type { IconProps } from '@/display/Icon';
 import { useTheme } from '@/theme';
-import Ripple from '@/components/Ripple';
+import Ripple from '@/actions/Ripple';
 import createComponent from '@/core/createComponent';
 
 import '@iziui/styles/components/ButtonIcon.scss';
@@ -31,21 +31,18 @@ function ButtonIcon({ children, size = 'medium', color = 'primary', ...props }: 
   const c = convertPathToColor(color, palette);
 
   const renderIcon = (icon: ReactElement<IconProps>) => {
-    const aa: IconProps = {
+    return cloneElement(icon, {
       size,
       ...icon.props,
       style: { color: 'currentColor' }
-    };
-
-    console.log('>>> aa', aa);
-    return cloneElement(icon, aa);
+    });
   };
 
   return (
     <button
       {...props}
       className={classess}
-      style={{ ...props.style, color: c }}
+      style={{ color: c, ...props.style, }}
     >
       {renderIcon(children)}
       <Ripple />

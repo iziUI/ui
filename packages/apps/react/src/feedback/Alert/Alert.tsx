@@ -7,10 +7,9 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 
 import Stack from '@/layout/Stack';
 import Typography from '@/display/Typography';
-import ButtonIcon from '@/components/ButtonIcon';
+import ButtonIcon from '@/actions/ButtonIcon';
 import createComponent from '@/core/createComponent';
 import Icon, { type IconProps } from '@/display/Icon';
-import { useTheme } from '@/theme';
 
 import '@iziui/styles/components/Alert.scss';
 
@@ -20,6 +19,7 @@ export interface AlertProps extends HtmlHTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   onClose?: () => void;
 }
+
 function Alert({
   children,
   icon,
@@ -27,14 +27,15 @@ function Alert({
   onClose,
   ...props
 }: AlertProps) {
-  const { theme } = useTheme();
-
-  const themeRef = theme.palette.mode === 'dark' ? 'light' : 'dark';
-
   const className = joinClass(
     `${prefix}-alert`,
     `${prefix}-alert--${color}`,
     props.className
+  );
+
+  const classNameAction = joinClass(
+    `${prefix}-alert__button`,
+    `${prefix}-alert__button--${color}`,
   );
 
   const renderMessage = () => {
@@ -78,9 +79,10 @@ function Alert({
         onClose && (
           <div>
             <ButtonIcon
-              color={`${color}.${themeRef}`}
-              className={`${prefix}-alert__button`}
+              className={classNameAction}
               onClick={onClose}
+              color={color}
+              style={{ color: 'currentColor' }}
             >
               <Icon name="times" />
             </ButtonIcon>

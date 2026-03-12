@@ -6,7 +6,6 @@
   @each $color in $colors {
     &--#{$color} {
       box-shadow: $box-shadow-small;
-      background-color: var(--#{$color}-light);
       color: var(--#{$color}-dark);
 
       overflow: hidden;

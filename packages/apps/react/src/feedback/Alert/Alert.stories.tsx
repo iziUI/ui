@@ -4,6 +4,7 @@ import { colors } from '@iziui/tokens/web/js';
 
 import Icon from '@/display/Icon';
 import Stack from '@/layout/Stack';
+import Chip from '@/display/Chip';
 
 import Alert from './Alert';
 
@@ -82,6 +83,13 @@ const meta: Meta<typeof Alert> = {
       ref: Playground,
       description:
         'Alerts display brief messages for the user without interrupting their use of the app.',
+      tag: (
+        <Chip
+          label="Feedback"
+          color="success"
+          icon={<Icon name="feedback" />}
+        />
+      )
     },
   },
   args: {

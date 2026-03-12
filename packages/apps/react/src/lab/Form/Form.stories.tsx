@@ -4,12 +4,15 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import logger from '@iziui/toolkit/logger';
 
+import Input from '@/fields/Input';
+import Button from '@/actions/Button';
+import Chip from '@/display/Chip';
+import Icon from '@/display/Icon';
+
 import Form from './Form';
+import Control from './Control';
 import useForm from './useForm';
 import useControl from './useControl';
-import Control from './Control';
-import Input from '../../fields/Input';
-import Button from '../../components/Button';
 
 type FormData = {
   name: string;
@@ -21,6 +24,13 @@ const meta: Meta<typeof Form> = {
   parameters: {
     docs: {
       description: 'Componente para gerenciamento de formulários com controles, validações e submit.',
+      tag: (
+        <Chip
+          label="Lab"
+          color="secondary"
+          icon={<Icon name="flask" />}
+        />
+      )
     },
   }
 };

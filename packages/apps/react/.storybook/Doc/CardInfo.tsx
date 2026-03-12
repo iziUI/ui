@@ -3,7 +3,7 @@ import React from 'react';
 import Stack from '../../src/layout/Stack';
 import Icon from '../../src/display/Icon';
 import Typography from '../../src/display/Typography';
-import { Card, CardContent } from '../../src/components/Card';
+import { Card, CardContent } from '../../src/display/Card';
 
 interface CardInfoProps {
   icon: string;

@@ -4,7 +4,7 @@ import { prefix } from '@iziui/tokens/web/js';
 
 import { joinClass } from '@iziui/core/utils/joinClass';
 
-import Ripple from '../Ripple';
+import Ripple from '../../actions/Ripple';
 import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/Card.scss';

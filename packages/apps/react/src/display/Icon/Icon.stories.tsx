@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { colors } from '@iziui/tokens/web/js';
 
 import Stack from '@/layout/Stack';
-import Alert from '@/feedbacks/Alert';
+import Alert from '@/feedback/Alert';
 
 import Icon from './Icon';
 
@@ -29,9 +29,9 @@ export const size: StoryObj<typeof Icon> = {
   render: () => {
     return (
       <Stack flexDirection="row">
-        <Icon name={icon} size="small" />
+        <Icon name={icon} size={16} />
         <Icon name={icon} />
-        <Icon name={icon} size="large" />
+        <Icon name={icon} size={32} />
       </Stack>
     );
   }

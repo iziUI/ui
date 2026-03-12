@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
-import type { MappedColors, Size } from '@iziui/core/theme';
+import type { MappedColors } from '@iziui/core/theme';
 import { convertPathToColor, joinClass } from '@iziui/core/utils';
 
 import createComponent from '../../core/createComponent';
@@ -10,13 +10,17 @@ import { useTheme } from '../../theme';
 
 import '@iziui/styles/components/Icon.scss';
 
-export interface IconProps extends HTMLAttributes<HTMLElement> { name: string; size?: Size; color?: MappedColors; }
-function Icon({ name, size = 'medium', color = 'primary.main', ...props }: IconProps) {
+export interface IconProps extends HTMLAttributes<HTMLElement> {
+  name: string;
+  size?: number;
+  color?: MappedColors;
+}
+
+function Icon({ name, size = 24, color = 'primary.main', ...props }: IconProps) {
   const { theme: { palette } } = useTheme();
 
   const clss = joinClass(
     `${prefix}-icon`,
-    `${prefix}-icon--${size}`,
     'uil',
     `uil-${name}`,
     props.className
@@ -25,7 +29,7 @@ function Icon({ name, size = 'medium', color = 'primary.main', ...props }: IconP
   const c = convertPathToColor(color, palette);
 
   return (
-    <i {...props} className={clss} style={{ color: props.style?.color || c, ...props.style }}></i>
+    <i {...props} className={clss} style={{ color: props.style?.color || c, fontSize: size, ...props.style }}></i>
   );
 }
 

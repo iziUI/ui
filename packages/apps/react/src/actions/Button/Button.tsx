@@ -5,7 +5,7 @@ import { prefix } from '@iziui/tokens/web/js';
 import type { Colors, Size } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils';
 
-import type { LoadingProps } from '@/feedbacks/Loading';
+import type { LoadingProps } from '@/feedback/Loading';
 
 import type { IconProps } from '../../display/Icon';
 import Ripple from '../Ripple';

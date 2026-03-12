@@ -131,6 +131,13 @@ const meta: Meta<typeof Chip> = {
     docs: {
       ref: Playground,
       description: 'Os chips são elementos compactos que representam uma entrada, um atributo ou uma ação.',
+      tag: (
+        <Chip
+          label="Display"
+          icon={<Icon name="monitor" />}
+          color="error"
+        />
+      )
     }
   },
   args: {

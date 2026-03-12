@@ -4,7 +4,7 @@ import { prefix } from '@iziui/tokens/web/js';
 
 import { joinClass } from '@iziui/core/utils/joinClass';
 
-import type { ButtonIconProps } from '@/components/ButtonIcon';
+import type { ButtonIconProps } from '@/actions/ButtonIcon';
 import createComponent from '@/core';
 
 import '@iziui/styles/components/Input.scss';
@@ -59,7 +59,7 @@ function Input({
     return cloneElement(icon, {
       disabled,
       type: 'button',
-      color: 'text.secondary',
+      color: 'secondary',
       size: 'small',
       className: joinClass(
         icon.props.className,

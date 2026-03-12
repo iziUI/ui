@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
+import Icon from '@/display/Icon';
+import Chip from '@/display/Chip';
 import Stack from '@/layout/Stack';
-import IconComponent from '@/display/Icon';
-import ButtonIcon from '@/components/ButtonIcon';
+import ButtonIcon from '@/actions/ButtonIcon';
 
 import Input, { type InputType } from './Input';
 
@@ -13,7 +14,14 @@ const meta: Meta<typeof Input> = {
   component: Input,
   parameters: {
     docs: {
-      description: 'Os inputs permitem que os usuários insiram e editem texto.'
+      description: 'Os inputs permitem que os usuários insiram e editem texto.',
+      tag: (
+        <Chip
+          label="Layout"
+          color="info"
+          icon={<Icon name="keyboard" />}
+        />
+      ),
     }
   }
 };
@@ -31,7 +39,7 @@ export const InputTypes: StoryObj<typeof Input> = {
   }
 };
 
-export const Icon: StoryObj<typeof Input> = {
+export const _Icon: StoryObj<typeof Input> = {
   render: () => {
     const [visible, setVisible] = useState<'show' | 'hide'>('show');
 
@@ -46,12 +54,12 @@ export const Icon: StoryObj<typeof Input> = {
       <Stack flexDirection="column">
         <Input type={data.type as InputType} endIcon={
           <ButtonIcon onClick={() => setVisible(prev => prev === 'hide' ? 'show' : 'hide')}>
-            <IconComponent name={data.icon} />
+            <Icon name={data.icon} />
           </ButtonIcon>
         } />
         <Input type="text" startIcon={
           <ButtonIcon>
-            <IconComponent name="search" />
+            <Icon name="search" />
           </ButtonIcon>
         } />
       </Stack>
@@ -89,7 +97,7 @@ export const State: StoryObj<typeof Input> = {
       <Stack>
         <Input placeholder="disabled" disabled startIcon={
           <ButtonIcon>
-            <IconComponent name="search" />
+            <Icon name="search" />
           </ButtonIcon>
         } />
         <Input placeholder="Read only" readOnly />
