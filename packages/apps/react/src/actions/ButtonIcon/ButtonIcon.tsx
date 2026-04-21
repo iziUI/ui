@@ -15,15 +15,16 @@ import '@iziui/styles/components/ButtonIcon.scss';
 
 export interface ButtonIconProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   color?: Colors;
-  size?: Size;
+  size?: number;
   children: ReactElement<IconProps>;
 };
-function ButtonIcon({ children, size = 'medium', color = 'primary', ...props }: ButtonIconProps) {
+function ButtonIcon({ children, size = 40, color = 'primary', ...props }: ButtonIconProps) {
   const { theme: { palette } } = useTheme();
+
+  const [width, height] = [size, size];
 
   const classess = joinClass(
     `${prefix}-button-icon`,
-    size && `${prefix}-button-icon--${size}`,
     color && `${prefix}-button-icon--${color}`,
     props.className
   );
@@ -32,7 +33,7 @@ function ButtonIcon({ children, size = 'medium', color = 'primary', ...props }: 
 
   const renderIcon = (icon: ReactElement<IconProps>) => {
     return cloneElement(icon, {
-      size,
+      size: width / 1.5,
       ...icon.props,
       style: { color: 'currentColor' }
     });
@@ -42,7 +43,7 @@ function ButtonIcon({ children, size = 'medium', color = 'primary', ...props }: 
     <button
       {...props}
       className={classess}
-      style={{ color: c, ...props.style, }}
+      style={{ color: c, ...props.style, width, height }}
     >
       {renderIcon(children)}
       <Ripple />

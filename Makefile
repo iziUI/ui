@@ -43,10 +43,9 @@ run:
 # ----------------------------------------------- #
 
 setup:
-	make clean-builds
-	make clean-dependencies
+	make clean-modules
 	yarn install
-	make build-dependencies
+	make run tokens build
 
 define delete_dependencies
 	@echo delete_dependencies $(1)

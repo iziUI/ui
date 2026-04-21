@@ -60,7 +60,11 @@ function Input({
       disabled,
       type: 'button',
       color: 'secondary',
-      size: 'small',
+      size: 30,
+      style: {
+        ...icon.props.style,
+
+      },
       className: joinClass(
         icon.props.className,
         `${prefix}-input__icon`,

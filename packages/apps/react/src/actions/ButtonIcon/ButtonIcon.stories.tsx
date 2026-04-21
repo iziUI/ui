@@ -63,7 +63,7 @@ const meta: Meta<typeof ButtonIcon> = {
   },
   args: {
     children: <Icon name="heart" />,
-    size: 'medium',
+    size: 40,
     disabled: false,
   },
   argTypes: {
