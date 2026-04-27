@@ -46,7 +46,7 @@ describe('generateSupportColors', () => {
 
     expect(adjustLightness).toHaveBeenCalledTimes(2);
     expect(adjustLightness).toHaveBeenNthCalledWith(1, 220, 100, 60, 20);
-    expect(adjustLightness).toHaveBeenNthCalledWith(2, 220, 100, 60, -20);
+    expect(adjustLightness).toHaveBeenNthCalledWith(2, 220, 100, 60, -34);
 
     expect(getOpacityColor).toHaveBeenCalledWith(baseHex, 0.2);
     expect(getContrastColor).toHaveBeenCalledWith(baseHex);

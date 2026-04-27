@@ -321,13 +321,14 @@ describe('applyTheme', () => {
       applyTheme(mockTheme);
 
       // 7 colors * 5 properties each = 35
+      // 1 typography = 1
       // 3 text properties = 3
       // 2 background properties = 2
       // 1 divider = 1
       // 1 radius = 1
       // 1 spacing = 1
-      // Total = 43
-      expect(document.documentElement.style.setProperty).toHaveBeenCalledTimes(43);
+      // Total = 44
+      expect(document.documentElement.style.setProperty).toHaveBeenCalledTimes(44);
     });
   });
 
