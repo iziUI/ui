@@ -18,6 +18,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 --- 
 ## Setup
 
+### Environment rules
+
+- Before running any `yarn` command, you MUST load environment variables from `.env`.
+- The variable `NPM_TOKEN` must always be defined from `.env` before running yarn commands.
+- If `.env` exists, export variables using:
+
+```bash
+export $(grep -v '^#' .env | xargs)
+```
+
+- If NPM_TOKEN is missing, STOP and warn the user.
+- Never run yarn without NPM_TOKEN properly set.
+
 For more information, check .claude/skills/setup/SKILL.MD
 
 ### NPM_TOKEN
