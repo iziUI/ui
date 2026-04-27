@@ -16,6 +16,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Do not add new dependencies without justification.
 
 --- 
+## Setup
+
+For more information, check .claude/skills/setup/SKILL.MD
+
+### NPM_TOKEN
+
+If any command fails due to a missing or invalid `NPM_TOKEN`, ask the user to add the token to the project `.env` file so Claude can read it from there.
+
+Expected format:
+
+```bash
+NPM_TOKEN=<your-token-here>
 
 ## Commands
 
@@ -109,6 +121,13 @@ Vite builds with `preserveModules` — the output mirrors source structure. Outp
 - Stories live alongside source: `src/**/*.stories.@(js|jsx|ts|tsx)`
 - SCSS preprocessor pre-imports tokens (`@iziui/tokens/web/scss/main.scss`)
 - Custom theme in `.storybook/iziUITheme.ts`
+
+### Tests
+
+- Always use Makefile to run install and package scripts.
+- Use `make run <project> <command>` to run workspace commands or open project to use `yarn test`.
+- Tests use Jest and React Testing Library.
+- Prefer testing behavior over implementation details.
 
 ---
 
