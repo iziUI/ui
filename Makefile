@@ -2,6 +2,9 @@ RUN:=yarn
 
 NAME:=iziui
 
+-include .env
+export NPM_TOKEN
+
 # STYLE BOX #
 ERROR_BOX=\x1b[41m
 SUCCESS_BOX=\x1b[42m
@@ -42,9 +45,12 @@ run:
 
 # ----------------------------------------------- #
 
+install:
+	$(RUN)
+
 setup:
 	make clean-modules
-	yarn install
+	$(RUN) install
 	make run tokens build
 
 define delete_dependencies
