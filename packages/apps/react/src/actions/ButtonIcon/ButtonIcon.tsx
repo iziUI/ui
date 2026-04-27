@@ -2,7 +2,7 @@ import { cloneElement, type ButtonHTMLAttributes, type PropsWithChildren, type R
 
 import { prefix } from '@iziui/tokens/web/js';
 
-import type { Colors, Size } from '@iziui/core/theme';
+import type { Colors } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils/joinClass';
 import { convertPathToColor } from '@iziui/core/utils/convertPathToColor';
 
