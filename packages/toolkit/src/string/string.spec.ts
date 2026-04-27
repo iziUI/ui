@@ -1,25 +1,71 @@
-import { getInitials } from './string';
+import { capitalize, getInitials, sanitize, slug } from './string';
 
 describe('String', () => {
+  describe('sanitize', () => {
+    it('lowercases and trims the value', () => {
+      expect(sanitize('  Hello World  ')).toBe('hello world');
+    });
+
+    it('removes accents', () => {
+      expect(sanitize('café')).toBe('cafe');
+    });
+
+    it('removes special characters', () => {
+      expect(sanitize('hello! world?')).toBe('hello world');
+    });
+  });
+
   describe('getInitials', () => {
-    it('should return initials for a simple name', () => {
+    it('returns initials for a simple name', () => {
       expect(getInitials('John Doe')).toBe('JD');
     });
 
-    it('should return initials for a name with multiple words', () => {
+    it('uses first and last word for multi-word names', () => {
       expect(getInitials('Jane Mary Doe')).toBe('JD');
     });
 
-    it('should return the same letter twice for a single-word name', () => {
+    it('uses first two letters for a single-word name', () => {
       expect(getInitials('Leozinho')).toBe('LE');
     });
 
-    it('should ignore extra spaces at the beginning and end', () => {
+    it('ignores leading and trailing spaces', () => {
       expect(getInitials('  Alan Turing  ')).toBe('AT');
     });
 
-    it('should handle names with special characters and lowercase letters', () => {
+    it('handles accented characters', () => {
       expect(getInitials('álvaro de la Torre')).toBe('AT');
+    });
+  });
+
+  describe('slug', () => {
+    it('converts a phrase to a kebab-case slug', () => {
+      expect(slug('Hello World')).toBe('hello-world');
+    });
+
+    it('removes accents', () => {
+      expect(slug('Olá Mundo')).toBe('ola-mundo');
+    });
+
+    it('returns empty string for empty input', () => {
+      expect(slug('')).toBe('');
+    });
+
+    it('collapses multiple spaces into a single dash', () => {
+      expect(slug('Hello   World')).toBe('hello-world');
+    });
+  });
+
+  describe('capitalize', () => {
+    it('uppercases the first character', () => {
+      expect(capitalize('hello')).toBe('Hello');
+    });
+
+    it('does not alter characters after the first', () => {
+      expect(capitalize('hELLO')).toBe('HELLO');
+    });
+
+    it('returns empty string for empty input', () => {
+      expect(capitalize('')).toBe('');
     });
   });
 });
