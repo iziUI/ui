@@ -6,7 +6,7 @@ import Chip from '@/display/Chip';
 import Icon from '@/display/Icon';
 
 import Stack from '../../layout/Stack';
-import Loading, { type LoadingProps } from './Loading';
+import Loading from './Loading';
 
 export const Colors: StoryObj<typeof Loading> = {
   render: () => {

@@ -24,7 +24,7 @@ export default [
       'indent': ['error', 2, { 'SwitchCase': 1 }],
       'semi': ['error', 'always'],
       'quotes': ['error', 'single'],
-      '@typescript-eslint/no-unused-vars': ['warn'],
+      '@typescript-eslint/no-unused-vars': ['error'],
       '@typescript-eslint/no-explicit-any': ['off'],
       'no-multiple-empty-lines': ['error', { 'max': 1 }],
       'keyword-spacing': ['error', { 'before': true, 'after': true }],
