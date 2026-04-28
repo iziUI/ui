@@ -218,7 +218,9 @@ const meta: Meta<typeof Drawer> = {
     layout: 'centered',
     docs: {
       ref: Playground,
-      description: 'TODO: Drawer description',
+      description:
+        'Drawer é um painel deslizante que exibe conteúdo adicional sobre a interface, ' +
+        'ideal para menus laterais, filtros e formulários contextuais.',
       tag: (
         <Chip
           label="Navigation"
@@ -226,6 +228,62 @@ const meta: Meta<typeof Drawer> = {
           color="info"
         />
       ),
+    },
+  },
+  args: {
+    open: true,
+    direction: 'right',
+  },
+  argTypes: {
+    open: {
+      control: 'boolean',
+      type: 'boolean',
+      description: 'Se `true`, o drawer está aberto e visível.',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    direction: {
+      control: 'select',
+      type: 'string',
+      options: ['right', 'left', 'bottom'],
+      description: 'Direção de onde o drawer desliza para entrar na tela.',
+      table: {
+        type: { summary: 'right | left | bottom' },
+        defaultValue: { summary: 'right' },
+      },
+    },
+    body: {
+      control: false,
+      type: 'symbol',
+      description: 'Conteúdo principal do drawer. Geralmente envolto em `DrawerContent`.',
+      table: {
+        type: { summary: 'ReactElement' },
+      },
+    },
+    header: {
+      control: false,
+      type: 'symbol',
+      description: 'Elemento de cabeçalho opcional. Geralmente envolto em `DrawerHeader`.',
+      table: {
+        type: { summary: 'ReactElement' },
+      },
+    },
+    footer: {
+      control: false,
+      type: 'symbol',
+      description: 'Elemento de rodapé opcional. Geralmente envolto em `DrawerFooter`.',
+      table: {
+        type: { summary: 'ReactElement' },
+      },
+    },
+    onClose: {
+      control: false,
+      type: 'symbol',
+      description: 'Callback chamado ao clicar no overlay ou acionar o fechamento do drawer.',
+      table: {
+        type: { summary: '() => void' },
+      },
     },
   },
 };
