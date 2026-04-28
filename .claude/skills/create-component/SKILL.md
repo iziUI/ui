@@ -17,6 +17,7 @@ description: Scaffold a new component with styles, story, test, and barrel expor
 - If the component already exists, report it instead of overwriting files
 - Use the same relative import conventions as neighboring components in the same category
 - Before generating imports, inspect an existing component from the target category and mirror its import style
+- Do not create logical components, only the basic structure.
 
 ## Expected output
 - Generate only the base scaffold
