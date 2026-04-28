@@ -1,0 +1,17 @@
+.#{$prefix}-checkbox-group {
+  .#{$prefix}-checkbox {
+    @each $color in $colors {
+      &--#{$color} {
+
+        &--checked,
+        &:hover {
+          background-color: var(--#{$color}-opacity);
+        }
+
+        &:active {
+          background-color: var(--#{$color}-light);
+        }
+      }
+    }
+  }
+}
