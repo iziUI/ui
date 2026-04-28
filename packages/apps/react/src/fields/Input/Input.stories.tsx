@@ -9,23 +9,6 @@ import ButtonIcon from '@/actions/ButtonIcon';
 
 import Input, { type InputType } from './Input';
 
-const meta: Meta<typeof Input> = {
-  title: 'fields/Input',
-  component: Input,
-  parameters: {
-    docs: {
-      description: 'Os inputs permitem que os usuários insiram e editem texto.',
-      tag: (
-        <Chip
-          label="Layout"
-          color="info"
-          icon={<Icon name="keyboard" />}
-        />
-      ),
-    }
-  }
-};
-
 export const InputTypes: StoryObj<typeof Input> = {
   render: () => {
     return (
@@ -104,6 +87,121 @@ export const State: StoryObj<typeof Input> = {
       </Stack>
     );
   }
+};
+
+export const Playground: StoryObj<typeof Input> = {
+  tags: ['!dev'],
+};
+
+const meta: Meta<typeof Input> = {
+  title: 'fields/Input',
+  component: Input,
+  parameters: {
+    docs: {
+      ref: Playground,
+      description: 'Input permite que os usuários insiram e editem texto ou dados em formulários e interfaces.',
+      tag: (
+        <Chip
+          label="Layout"
+          color="info"
+          icon={<Icon name="keyboard" />}
+        />
+      ),
+    }
+  },
+  args: {
+    placeholder: 'Digite aqui...',
+    type: 'text',
+    label: 'Label',
+    disabled: false,
+    error: false,
+    helperText: '',
+  },
+  argTypes: {
+    type: {
+      control: 'select',
+      type: 'string',
+      options: ['text', 'password', 'number', 'date', 'month', 'tel'],
+      description: 'Tipo do campo de entrada.',
+      table: {
+        type: { summary: 'text | password | number | date | month | tel' },
+        defaultValue: { summary: 'text' },
+      },
+    },
+    error: {
+      control: 'boolean',
+      type: 'boolean',
+      description: 'Se `true`, exibe o campo em estado de erro.',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    label: {
+      control: 'text',
+      type: 'string',
+      description: 'Rótulo exibido acima do campo.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    helperText: {
+      control: 'text',
+      type: 'string',
+      description: 'Texto auxiliar exibido abaixo do campo, geralmente para mensagens de validação.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    width: {
+      control: 'text',
+      type: 'string',
+      description: 'Largura do campo. Aceita qualquer valor CSS válido.',
+      table: {
+        type: { summary: 'CSSProperties[\'width\']' },
+        defaultValue: { summary: '100%' },
+      },
+    },
+    startIcon: {
+      control: false,
+      type: 'symbol',
+      description: 'Elemento exibido no início do campo.',
+      table: {
+        type: { summary: 'ReactElement | boolean' },
+      },
+    },
+    endIcon: {
+      control: false,
+      type: 'symbol',
+      description: 'Elemento exibido no final do campo.',
+      table: {
+        type: { summary: 'ReactElement | boolean' },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      type: 'boolean',
+      description: 'Se `true`, o campo fica desativado.',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    placeholder: {
+      control: 'text',
+      type: 'string',
+      description: 'Texto exibido quando o campo está vazio.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    readOnly: {
+      control: 'boolean',
+      type: 'boolean',
+      description: 'Se `true`, o campo é somente leitura.',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+  },
 };
 
 export default meta;

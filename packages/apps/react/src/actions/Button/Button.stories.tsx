@@ -98,7 +98,7 @@ const meta: Meta<typeof Button> = {
     docs: {
       ref: Playground,
       description:
-        'Buttons permitem que os usuários realizem ações, confirmem escolhas e iniciem fluxos dentro da interface.',
+        'Buttons allow users to perform actions, confirm choices, and initiate flows within the interface.',
       tag: (
         <Chip
           label="Actions"
@@ -120,7 +120,7 @@ const meta: Meta<typeof Button> = {
       control: 'select',
       type: 'string',
       options: ['small', 'medium', 'large'],
-      description: 'Tamanho do componente',
+      description: 'Component size',
       table: {
         type: { summary: 'small | medium | large' },
         defaultValue: { summary: 'medium' },
@@ -129,7 +129,7 @@ const meta: Meta<typeof Button> = {
     disabled: {
       control: 'boolean',
       type: 'boolean',
-      description: 'Se `true`, o componente está desativado.',
+      description: 'If `true`, the component is disabled.',
       table: {
         defaultValue: { summary: 'false' },
       },
@@ -139,7 +139,7 @@ const meta: Meta<typeof Button> = {
       type: 'string',
       options: colors,
       description:
-        'A cor do componente. Suporta cores de tema padrão e personalizadas.',
+        'The components color. Supports standard and custom theme colors.',
       table: {
         defaultValue: { summary: 'primary' },
       },
@@ -148,7 +148,7 @@ const meta: Meta<typeof Button> = {
       control: 'select',
       type: 'string',
       options: ['contained', 'outlined', 'text'],
-      description: 'A variante a ser usada.',
+      description: 'The variant to be used.',
       table: {
         type: { summary: 'contained | outlined | text' },
         defaultValue: { summary: 'contained' },
@@ -157,7 +157,7 @@ const meta: Meta<typeof Button> = {
     startIcon: {
       control: false,
       type: 'symbol',
-      description: 'Elemento colocado antes do children.',
+      description: 'Element placed before the children.',
       table: {
         type: { summary: 'ReactElement' },
       },
@@ -165,7 +165,7 @@ const meta: Meta<typeof Button> = {
     endIcon: {
       control: false,
       type: 'symbol',
-      description: 'Elemento colocado depois do children.',
+      description: 'Element placed after children.',
       table: {
         type: { summary: 'ReactElement' },
       },
@@ -173,7 +173,7 @@ const meta: Meta<typeof Button> = {
     loading: {
       control: false,
       description:
-        'Se verdadeiro, o indicador de carregamento fica visível e o botão fica desativado.',
+        'If true, the charging indicator becomes visible and the button is disabled.',
       table: {
         type: { summary: 'boolean | ReactElement' },
         defaultValue: { summary: 'false' },
@@ -182,7 +182,7 @@ const meta: Meta<typeof Button> = {
     children: {
       control: 'text',
       type: 'symbol',
-      description: 'Conteúdo do componente',
+      description: 'Component content',
     },
   },
 };
