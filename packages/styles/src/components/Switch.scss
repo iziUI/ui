@@ -1,0 +1,86 @@
+@use "sass:map";
+
+.#{$prefix}-switch {
+  position: relative;
+
+  &__label {
+    font-size: map.get($font_sizes, small);
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 5px;
+
+    &--error {
+      color: var(--error);
+    }
+  }
+
+  &__checkbox {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    position: absolute;
+
+    &:active+.#{$prefix}-switch__box .#{$prefix}-switch__button {
+      width: 36px;
+    }
+
+    &:checked+.#{$prefix}-switch__box .#{$prefix}-switch__button {
+      left: 100%;
+      transform: translate(calc(-100% + 2px), -50%);
+    }
+
+    @each $color in $colors {
+      &--#{$color} {
+        &:checked+.#{$prefix}-switch__box {
+          background-color: var(--#{$color});
+        }
+      }
+    }
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: $box-shadow-small;
+
+    cursor: pointer;
+
+    width: 58px;
+    height: 24px;
+    background: var(--divider);
+    border-radius: 100px;
+    position: relative;
+    transition: background-color $animation;
+  }
+
+  &__button {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -2px;
+    width: 28px;
+    height: 28px;
+    border-radius: 45px;
+    transition: all $animation;
+    background: #fff;
+    box-shadow: $box-shadow-small;
+  }
+
+  &__helper-text {
+    opacity: 0;
+    transition: all $animation;
+    font-size: map.get($font_sizes, small);
+    transform: translateY(-10px);
+
+    &--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &--error {
+      color: var(--error);
+    }
+  }
+}
