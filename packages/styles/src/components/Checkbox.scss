@@ -1,0 +1,113 @@
+@use "sass:map";
+
+.#{$prefix}-checkbox {
+  width: 100%;
+  padding: $proportion-base;
+  border-radius: var(--radius);
+  color: var(--text-primary);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  cursor: pointer;
+  transition: all $animation;
+
+  @each $color in $colors {
+    &--#{$color} {
+      input[type=checkbox] {
+        border: 2px solid var(--#{$color});
+      }
+
+      input[type=checkbox]:checked {
+        background-color: var(--#{$color});
+      }
+
+      input[type=checkbox]:before {
+        border: solid var(--#{$color}-opacity);
+        opacity: 0;
+      }
+
+      &--checked {
+        input[type=checkbox]:before {
+          border: solid var(--#{$color}-contrast);
+          opacity: 1;
+          transform: rotate(45deg) translate(-50%, -50%) scale(1) !important;
+        }
+      }
+    }
+  }
+
+  &--disabled {
+    color: var(--text-disabled);
+    cursor: not-allowed;
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  input[type=checkbox] {
+    position: relative;
+    border-radius: var(--radius);
+    background: none;
+    cursor: pointer;
+    line-height: 0;
+    margin: 0 .6em 0 0;
+    outline: 0;
+    padding: 0 !important;
+    vertical-align: text-top;
+    height: 22px;
+    width: 22px;
+    -webkit-appearance: none;
+    transition: all $animation;
+    opacity: .5;
+  }
+
+  input[type=checkbox]:hover {
+    opacity: 1;
+  }
+
+  input[type=checkbox]:checked {
+    opacity: 1;
+  }
+
+  input[type=checkbox]:before {
+    content: '';
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    width: 4px;
+    height: 10px;
+    border-width: 0 2px 2px 0;
+    margin: -1px -1px 0 -1px;
+    transform: rotate(45deg) translate(-50%, -50%) scale(0);
+    z-index: 2;
+    transition: all $animation;
+  }
+
+  input[type=checkbox]:disabled {
+    background-color: var(--divider);
+    border: 2px solid var(--divider);
+    opacity: 1;
+  }
+
+  &__helper-text {
+    opacity: 0;
+    transition: all $animation;
+    font-size: map.get($font_sizes, small);
+    transform: translateY(-10px);
+    margin-left: 14.4px;
+
+    &--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &--error {
+      color: var(--error);
+    }
+  }
+}
