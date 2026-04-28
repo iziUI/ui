@@ -4,4 +4,5 @@ export * from './mask';
 export * from './normalize';
 export * from './promise';
 export * from './string';
+export * from './uuid';
 export * from './validators';
