@@ -102,6 +102,23 @@ export const WithIcon: StoryObj<typeof Menu> = {
   }
 };
 
+export const AutoClose: StoryObj<typeof Menu> = {
+  render: () => {
+    const [open, el, toggle] = useMenu();
+
+    return (
+      <Stack alignItems="center">
+        <Button onClick={toggle}>Toggle Menu</Button>
+        <Menu autoClose direction="center" anchorEl={el} open={open} onClose={toggle}>
+          <MenuButton label="Option 1" icon={<Icon name="user" />} />
+          <MenuButton label="Option 2" icon={<Icon name="user" />} />
+          <MenuButton label="Option 3" icon={<Icon name="user" />} />
+        </Menu>
+      </Stack>
+    );
+  }
+};
+
 export const CustomContent: StoryObj<typeof Menu> = {
   render: () => {
     const [open, el, toggle] = useMenu();

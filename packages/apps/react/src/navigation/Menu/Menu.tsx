@@ -122,10 +122,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
         onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
           debounce.delay(() => {
 
-            if (autoClose) {
-              onClose(e);
-              handleClose();
-            }
+            if (autoClose) { handleClose(); }
 
             if (child.props.onClick) { child.props.onClick(e); }
           }, 0);
