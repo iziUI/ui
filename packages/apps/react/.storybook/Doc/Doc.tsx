@@ -3,9 +3,7 @@ import React from 'react';
 import { Source, Title, Controls, useOf, Canvas } from '@storybook/blocks';
 
 import CardInfo from './CardInfo';
-import Icon from '../../src/display/Icon';
 import Stack from '../../src/layout/Stack';
-import Chip, { type ChipProps } from '../../src/display/Chip';
 import { Grid, GridItem } from '../../src/layout/Grid';
 
 import './Doc.scss';
@@ -13,21 +11,8 @@ import './Doc.scss';
 export default function Doc() {
   const { preparedMeta } = useOf('meta', ['meta']);
 
-  const { title } = preparedMeta;
-
   const parameters = preparedMeta.parameters ?? {};
   const docs = parameters.docs ?? {};
-
-  const [category, name] = title.split('/');
-
-  const MAP: { [X in string]: ChipProps['color'] } = {
-    animations: 'success',
-    components: 'warning',
-    display: 'info',
-    fields: 'secondary',
-    lab: 'error',
-    layout: 'default',
-  };
 
   const code = docs.import || `import ${name} from '@iziui/react/${name}';`;
 
