@@ -16,7 +16,7 @@ export const themeDefaultLight: Theme = {
     text: {
       primary: 'rgb(31, 41, 55)',
       secondary: 'rgb(75, 85, 99)',
-      disabled: 'rgb(209, 213, 219)'
+      disabled: 'rgb(172, 172, 172)'
     },
     background: {
       paper: '#f9f8f9',
