@@ -1,9 +1,6 @@
 import {
+  useRef,
   useMemo,
-  useState,
-  useEffect,
-  type InputEvent,
-  type ChangeEvent,
   type InputHTMLAttributes,
 } from 'react';
 
@@ -18,19 +15,20 @@ import Box from '@/layout/Box';
 import Icon from '@/display/Icon';
 import Stack from '@/layout/Stack';
 import { useTheme } from '@/theme';
-import { Menu, type MenuProps, useMenu } from '@/navigation/Menu';
+import { Menu, useMenu } from '@/navigation/Menu';
 
 import COLORS from './colors';
 import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/ColorPicker.scss';
 
-interface ColorPickerProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface ColorPickerProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> {
   label?: string;
+  value: string;
   error?: boolean;
   helperText?: string;
   fitContent?: boolean;
-  MenuProps?: Partial<MenuProps>;
+  autoClose?: boolean;
 }
 
 function ColorPicker({
@@ -39,11 +37,14 @@ function ColorPicker({
   helperText,
   fitContent,
   value = COLORS[0],
-  MenuProps,
+  autoClose,
+  onChange,
+  onInput,
   ...props
 }: ColorPickerProps) {
   const { theme: { palette } } = useTheme();
-  const [color, setColor] = useState<string>(value as string);
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const [open, el, toggle] = useMenu();
 
@@ -75,24 +76,17 @@ function ColorPicker({
     error && `${prefix}-color-picker__helper-text--error`,
   );
 
-  useEffect(() => {
-    if (props.onChange) {
-      props.onChange({ target: { value: color } } as unknown as ChangeEvent<HTMLInputElement>);
-    }
-    if (props.onInput) {
-      props.onInput({ target: { value: color } } as unknown as InputEvent<HTMLInputElement>);
-    }
-  }, [color]);
-
-  useEffect(() => { setColor(value as string); }, [value]);
-
   const iconClassName = (c: string) => joinClass(
     `${prefix}-color-picker__color__icon`,
-    color === c && `${prefix}-color-picker__color__icon--visible`,
+    value === c && `${prefix}-color-picker__color__icon--visible`,
   );
 
-  function handleColorChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setColor(e.target.value);
+  function handleColorChange(color: string) {
+    if (!inputRef.current) { return; }
+    // if (autoClose) { toggle(); }
+
+    inputRef.current.value = color;
+    inputRef.current.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   return (
@@ -100,16 +94,16 @@ function ColorPicker({
       {label && <label className={labelClss}>{label} {props.required && '*'}</label>}
       <button type="button" onClick={toggle} className={colorPickerClassName}>
         <div className={`${prefix}-color-picker__preview`}>
-          <div style={{ backgroundColor: color }} />
+          <div style={{ backgroundColor: value }} />
         </div>
         <div className={valueClassName}>
-          {color}
+          {value}
         </div>
-      </button >
+      </button>
       <span className={helperTextClss}>{helperText}</span>
       <Menu
         direction="left"
-        {...MenuProps}
+        autoClose={autoClose}
         open={open}
         anchorEl={el}
         width={fitContent ? 'fit-content' : ''}
@@ -128,13 +122,13 @@ function ColorPicker({
                   key={c}
                   type="button"
                   className={`${prefix}-color-picker__color`}
-                  onClick={() => setColor(c)}
+                  onClick={() => handleColorChange(c)}
                   style={{ backgroundColor: c }}
                 >
                   <Icon
                     name="check"
                     className={iconClassName(c)}
-                    style={{ color: getContrastColor(color) }}
+                    style={{ color: getContrastColor(value) }}
                   />
                 </button>
               ))
@@ -146,14 +140,16 @@ function ColorPicker({
             >
               <Icon
                 name="plus"
-                className={iconClassName(color)}
+                className={iconClassName(value)}
                 style={{ color: getContrastColor(palette.grey.main) }}
               />
               <input
+                ref={inputRef}
                 type="color"
                 id={`color-picker-${id}`}
-                value={color}
-                onChange={handleColorChange}
+                value={value}
+                onChange={onChange}
+                onInput={onInput}
               />
             </label>
           </Stack>

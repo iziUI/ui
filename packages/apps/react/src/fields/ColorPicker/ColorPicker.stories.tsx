@@ -1,16 +1,39 @@
+import { useState, type HtmlHTMLAttributes } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import Chip from '@/display/Chip';
 import Icon from '@/display/Icon';
 import Stack from '@/layout/Stack';
+import Box from '@/layout/Box';
 
-import ColorPicker from './ColorPicker';
+import ColorPicker, { type ColorPickerProps } from './ColorPicker';
+
+function ContainerBox({ ...props }: HtmlHTMLAttributes<HTMLDataElement>) {
+  return (
+    <Box
+      style={{
+        ...props.style,
+        height: 100,
+        width: '100%'
+      }}
+      sx={{ borderRadius: 2 }}
+    />
+  );
+}
 
 export const Default: StoryObj<typeof ColorPicker> = {
   render: () => {
+    const [value, setValue] = useState<string>('#6200EE');
     return (
       <Stack>
-        <ColorPicker label="Pick a color" value="#1abc9c" />
+        <ColorPicker
+          fullWidth
+          label="Pick a color"
+          value={value}
+          onInput={(e: any) => setValue(e.target.value)}
+        />
+        <ContainerBox style={{ background: value }} />
       </Stack>
     );
   },
@@ -18,37 +41,47 @@ export const Default: StoryObj<typeof ColorPicker> = {
 
 export const Validation: StoryObj<typeof ColorPicker> = {
   render: () => {
+    const [value, setValue] = useState<string>('#6200EE');
+
     return (
-      <ColorPicker label="Color" error helperText="Color is required" />
+      <ColorPicker
+        error
+        value={value}
+        label="Color"
+        helperText="Color is required"
+        onInput={(e: any) => setValue(e.target.value)}
+      />
     );
   },
 };
 
 export const State: StoryObj<typeof ColorPicker> = {
   render: () => {
+    const [value, setValue] = useState<string>('#6200EE');
     return (
       <Stack>
         <ColorPicker
-          label="Disabled"
-          value="#6200ee"
           disabled
+          label="Disabled"
+          value={value}
+          onInput={(e: any) => setValue(e.target.value)}
         />
       </Stack>
     );
   },
 };
 
-export const ExtendsMenuProps: StoryObj<typeof ColorPicker> = {
+export const AutoClose: StoryObj<typeof ColorPicker> = {
   render: () => {
+    const [value, setValue] = useState<string>('#6200EE');
     return (
       <Stack>
         <ColorPicker
           disabled
+          autoClose
           label="Disabled"
-          value="#6200ee"
-          MenuProps={{
-            direction: 'left'
-          }}
+          value={value}
+          onInput={(e: any) => setValue(e.target.value)}
         />
       </Stack>
     );
@@ -61,8 +94,20 @@ export const Playground: StoryObj<typeof ColorPicker> = {
 
 const meta: Meta<typeof ColorPicker> = {
   title: 'fields/ColorPicker',
-  component: ColorPicker,
+  component: (args: ColorPickerProps) => {
+    const [value, setValue] = useState<string>(args.value);
+    return (
+      <div style={{ minHeight: 350 }}>
+        <ColorPicker
+          {...args}
+          value={value}
+          onInput={(e: any) => setValue(e.target.value)}
+        />
+      </div>
+    );
+  },
   parameters: {
+    layout: 'centered',
     docs: {
       ref: Playground,
       description: 'ColorPicker permite que os usuários selecionem uma cor a partir de uma paleta.',
