@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Source, Title, Controls, useOf, Canvas } from '@storybook/blocks';
 
 import CardInfo from './CardInfo';
@@ -11,8 +9,12 @@ import './Doc.scss';
 export default function Doc() {
   const { preparedMeta } = useOf('meta', ['meta']);
 
+  const { title } = preparedMeta;
+
   const parameters = preparedMeta.parameters ?? {};
   const docs = parameters.docs ?? {};
+
+  const [, name] = title.split('/');
 
   const code = docs.import || `import ${name} from '@iziui/react/${name}';`;
 
@@ -28,8 +30,8 @@ export default function Doc() {
           {docs.tag}
         </Stack>
         <h4>{docs.description}</h4>
-        {docs.ref && <Canvas of={docs.ref} />}
         {docs.alert}
+        {docs.ref && <Canvas of={docs.ref} />}
       </Stack>
 
       <Stack className="doc-import">

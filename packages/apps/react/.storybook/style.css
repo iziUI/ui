@@ -98,6 +98,10 @@
    CANVAS BACKGROUND
    ============================================ */
 
+.docs-story>div:first-child {
+  overflow: hidden !important;
+}
+
 /* Background branco para o Canvas */
 .docs-story,
 .docs-story>div:first-child,
