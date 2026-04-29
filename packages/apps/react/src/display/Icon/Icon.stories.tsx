@@ -53,12 +53,29 @@ export const _colors: StoryObj<typeof Icon> = {
   }
 };
 
+export const Playground: StoryObj<typeof Icon> = {
+  tags: ['!dev'],
+};
+
 const meta: Meta<typeof Icon> = {
   title: 'display/Icon',
-  component: Icon,
+  component: () => {
+    return (
+      <Stack flexDirection="row">
+        <Icon name="user" />
+        <Icon name="fire" />
+        <Icon name="anchor" />
+        <Icon name="chat" />
+        <Icon name="constructor" />
+        <Icon name="apps" />
+      </Stack>
+    );
+  },
   parameters: {
+    layout: 'centered',
     docs: {
       description: 'Orientações e sugestões para usar ícones.',
+      ref: Playground,
       alert: (
         <Alert
           color="warning"

@@ -5,12 +5,13 @@ import Icon from '@/display/Icon';
 import Button from '@/actions/Button/Button';
 import Stack from '@/layout/Stack';
 import Typography from '@/display/Typography';
+import Alert from '@/feedback/Alert';
 
 import Drawer from './Drawer';
+import DrawerHeader from './DrawerHeader';
+import DrawerFooter from './DrawerFooter';
 import DrawerContent from './DrawerContent';
 import useDrawer from './useDrawer';
-import DrawerFooter from './DrawerFooter';
-import DrawerHeader from './DrawerHeader';
 
 function Content() {
   return (
@@ -201,6 +202,18 @@ export const Header: StoryObj<typeof Drawer> = {
               <Content />
             </DrawerContent>
           }
+          footer={
+            <DrawerFooter>
+              <Stack flexDirection="row" justifyContent="flex-end">
+                <Button variant="outlined" onClick={toggle}>
+                  Outlined
+                </Button>
+                <Button variant="contained" onClick={toggle}>
+                  Contained
+                </Button>
+              </Stack>
+            </DrawerFooter>
+          }
         />
       </div>
     );
@@ -215,9 +228,7 @@ const meta: Meta<typeof Drawer> = {
   title: 'navigation/Drawer',
   component: Drawer,
   parameters: {
-    layout: 'centered',
     docs: {
-      ref: Playground,
       description:
         'Drawer é um painel deslizante que exibe conteúdo adicional sobre a interface, ' +
         'ideal para menus laterais, filtros e formulários contextuais.',
@@ -228,6 +239,16 @@ const meta: Meta<typeof Drawer> = {
           color="info"
         />
       ),
+      alert: (
+        <Alert
+          color="info"
+          icon={<Icon name="info-circle" />}
+        >
+          <p style={{ margin: 0, color: 'currentColor' }}>
+            Consulte as stories para ter mais informações sobre o uso do <strong>Drawer</strong>.
+          </p>
+        </Alert>
+      )
     },
   },
   args: {
