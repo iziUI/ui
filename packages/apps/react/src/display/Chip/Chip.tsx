@@ -19,7 +19,7 @@ export interface ChipProps extends Omit<HTMLAttributes<HTMLElement>, 'children'>
   icon?: React.JSX.Element;
   onDelete?: () => void;
 };
-const Chip = forwardRef<HTMLElement, ChipProps>(({
+const Chip = forwardRef<HTMLDivElement, ChipProps>(({
   label,
   icon,
   size = 'medium',
@@ -27,7 +27,7 @@ const Chip = forwardRef<HTMLElement, ChipProps>(({
   variant = 'contained',
   onDelete,
   ...props
-}: ChipProps) => {
+}: ChipProps, ref) => {
   const clss = joinClass(
     `${prefix}-chip`,
     `${prefix}-chip--${color}`,
@@ -40,7 +40,7 @@ const Chip = forwardRef<HTMLElement, ChipProps>(({
 
   const renderIcon = (icon: React.JSX.Element) => {
     return cloneElement<IconProps>(icon, {
-      size: 'small',
+      size: 14,
       className: joinClass(
         icon.props.className,
         `${prefix}-chip__icon`,
@@ -55,7 +55,7 @@ const Chip = forwardRef<HTMLElement, ChipProps>(({
   };
 
   return (
-    <div {...props} className={clss} style={{ ...props.style }}>
+    <div {...props} ref={ref} className={clss} style={{ ...props.style }}>
       {icon && renderIcon(icon)}
       <span>{label}</span>
       {props.onClick && <Ripple />}
