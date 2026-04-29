@@ -1,0 +1,67 @@
+.#{$prefix}-menu {
+  position: absolute;
+  word-break: break-all;
+  white-space: pre-wrap;
+  display: flex;
+  flex-direction: column;
+  z-index: 4;
+
+  &__overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    cursor: auto;
+  }
+
+  &__card {
+    box-shadow: $box-shadow-small;
+
+    &__content {
+      overflow: auto;
+      padding: 8px 0px;
+    }
+  }
+
+  &--open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &--close {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  &__item {
+    border: none;
+    padding: 8px 16px;
+    position: relative;
+    white-space: nowrap;
+    background-color: transparent;
+    color: var(--text-primary);
+    transition: all $animation;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &:hover {
+      background-color: var(--divider);
+    }
+
+    @each $color in $colors {
+      &--#{$color} {
+        color: var(--#{$color});
+
+        &:hover {
+          background-color: var(--#{$color}-opacity);
+        }
+      }
+    }
+  }
+}
