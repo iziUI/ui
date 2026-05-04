@@ -4,6 +4,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import Card from './Card';
 import CardContent from './CardContent';
+import Chip from '../Chip';
+import Icon from '../Icon';
 
 const style: CSSProperties = { minWidth: 300 };
 
@@ -46,7 +48,7 @@ export const Playground: StoryObj<typeof Card> = {
 };
 
 const meta: Meta<typeof Card> = {
-  title: 'components/Card',
+  title: 'display/Card',
   component: () => (
     <Card style={style}>
       <CardContent>
@@ -60,6 +62,13 @@ const meta: Meta<typeof Card> = {
       ref: Playground,
       description:
         'Cards contain content and actions about a single subject.',
+      tag: (
+        <Chip
+          label="Display"
+          icon={<Icon name="monitor" />}
+          color="primary"
+        />
+      )
     },
   },
   args: {
