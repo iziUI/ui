@@ -34,13 +34,16 @@ export default function Doc() {
         {docs.ref && <Canvas of={docs.ref} />}
       </Stack>
 
-      <Stack className="doc-import">
-        <h3>Import</h3>
-        <Source code={code} language="tsx" />
-      </Stack>
+      {
+        !docs.noImport &&
+        <Stack className="doc-import">
+          <h3>Import</h3>
+          <Source code={code} language="tsx" />
+        </Stack>
+      }
 
       {
-        docs.ref && (
+        docs.ref && !docs.noProps && (
           <Stack className="doc-props">
             <h3>Props</h3>
             <Controls of={docs.ref} />

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Stack from '../../src/layout/Stack';
 import Icon from '../../src/display/Icon';
 import Typography from '../../src/display/Typography';
@@ -12,9 +10,9 @@ interface CardInfoProps {
   onClick: () => void;
 }
 
-export default function CardInfo({ icon, title, description }: CardInfoProps) {
+export default function CardInfo({ icon, title, description, onClick }: CardInfoProps) {
   return (
-    <Card style={{ height: '100%' }} onClick={console.log}>
+    <Card style={{ height: '100%' }} onClick={onClick}>
       <Stack
         flexDirection="column"
         justifyContent="flex-end"
