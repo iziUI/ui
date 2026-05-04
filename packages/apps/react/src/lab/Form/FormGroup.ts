@@ -94,8 +94,6 @@ export default class FormGroup<T extends Record<string, unknown>> {
       const validatorError = fn(this);
 
       this.controls[key].error = controlError || validatorError || '';
-
-      console.log();
     });
 
     this.isValid = !this.errors.length;
