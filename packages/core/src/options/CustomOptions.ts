@@ -1,5 +1,3 @@
-import type { Properties } from 'csstype';
-
 import type { PaletteBuilded } from '../theme';
 
 export type CustomOptions = Partial<
@@ -25,11 +23,4 @@ type ColorOptions = {
 export type Sx<T> = T & {
   sx?: CustomOptions;
   fullWidth?: boolean;
-  gap?: number;
-  display?: Properties['display'];
-  flexDirection?: Properties['flexDirection'];
-  justifyContent?: Properties['justifyContent'];
-  alignItems?: Properties['alignItems'];
-  alignSelf?: Properties['alignSelf'];
-  flexWrap?: Properties['flexWrap'];
 } 
