@@ -5,6 +5,8 @@ import { mappedColors } from '@iziui/core/theme';
 import Stack from '@/layout/Stack';
 
 import Typography, { variants } from './Typography';
+import Chip from '../Chip';
+import Icon from '../Icon';
 
 export const size: StoryObj<typeof Typography> = {
   render: () => {
@@ -70,6 +72,13 @@ const meta: Meta<typeof Typography> = {
     docs: {
       ref: Playground,
       description: 'Use typography to present your design and content as clearly and efficiently as possible.',
+      tag: (
+        <Chip
+          color="primary"
+          label="Display"
+          icon={<Icon name="monitor" />}
+        />
+      )
     },
   },
   args: {
