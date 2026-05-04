@@ -24,9 +24,9 @@ const meta: Meta<typeof Divider> = {
       description: 'Avatars are found throughout material design with uses in everything from tables to dialog menus.',
       tag: (
         <Chip
+          color="primary"
           label="Display"
           icon={<Icon name="monitor" />}
-          color="primary"
         />
       )
     }

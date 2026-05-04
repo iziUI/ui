@@ -6,6 +6,7 @@ import Stack from '@/layout/Stack';
 import Alert from '@/feedback/Alert';
 
 import Icon from './Icon';
+import Chip from '../Chip';
 
 const icon = 'rocket';
 
@@ -90,6 +91,13 @@ const meta: Meta<typeof Icon> = {
             Consulte a biblioteca para visualizar os nomes, variações e opções disponíveis antes de utilizar um ícone.
           </p>
         </Alert>
+      ),
+      tag: (
+        <Chip
+          color="primary"
+          label="Display"
+          icon={<Icon name="monitor" />}
+        />
       )
     },
   },
