@@ -1,6 +1,6 @@
 import { useState, type HtmlHTMLAttributes } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Chip from '@/display/Chip';
 import Icon from '@/display/Icon';
