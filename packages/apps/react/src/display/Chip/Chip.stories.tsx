@@ -135,7 +135,7 @@ const meta: Meta<typeof Chip> = {
         <Chip
           label="Display"
           icon={<Icon name="monitor" />}
-          color="error"
+          color="primary"
         />
       )
     }
