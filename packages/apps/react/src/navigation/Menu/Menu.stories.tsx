@@ -92,10 +92,10 @@ export const WithIcon: StoryObj<typeof Menu> = {
     return (
       <Stack alignItems="center">
         <Button onClick={toggle}>Toggle Menu</Button>
-        <Menu direction="center" anchorEl={el} open={open} onClose={toggle}>
-          <MenuButton label="Option 1" icon={<Icon name="user" />} />
-          <MenuButton label="Option 2" icon={<Icon name="user" />} />
-          <MenuButton label="Option 3" icon={<Icon name="user" />} />
+        <Menu width="fit-content" direction="left" anchorEl={el} open={open} onClose={toggle}>
+          <MenuButton label="My option 1" icon={<Icon name="rocket" />} />
+          <MenuButton label="My option 2" icon={<Icon name="rocket" />} />
+          <MenuButton label="My option 3" icon={<Icon name="rocket" />} />
         </Menu>
       </Stack>
     );
@@ -110,9 +110,26 @@ export const AutoClose: StoryObj<typeof Menu> = {
       <Stack alignItems="center">
         <Button onClick={toggle}>Toggle Menu</Button>
         <Menu autoClose direction="center" anchorEl={el} open={open} onClose={toggle}>
-          <MenuButton label="Option 1" icon={<Icon name="user" />} />
-          <MenuButton label="Option 2" icon={<Icon name="user" />} />
-          <MenuButton label="Option 3" icon={<Icon name="user" />} />
+          <MenuButton label="Option 1" />
+          <MenuButton label="Option 2" />
+          <MenuButton label="Option 3" />
+        </Menu>
+      </Stack>
+    );
+  }
+};
+
+export const CustomWidth: StoryObj<typeof Menu> = {
+  render: () => {
+    const [open, el, toggle] = useMenu();
+
+    return (
+      <Stack alignItems="center">
+        <Button onClick={toggle}>Toggle Menu</Button>
+        <Menu width="fit-content" direction="left" anchorEl={el} open={open} onClose={toggle}>
+          <MenuButton label="Some big text question" />
+          <MenuButton label="Some big text question" />
+          <MenuButton label="Some big text question" />
         </Menu>
       </Stack>
     );
