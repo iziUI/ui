@@ -3,14 +3,6 @@
 .#{$prefix}-input-container {
   width: 100%;
   position: relative;
-
-  &--full-width {
-    width: 100%;
-  }
-
-  &--gutter-bottom {
-    margin-bottom: 10px;
-  }
 }
 
 .#{$prefix}-input-label {
@@ -58,9 +50,9 @@
     outline: none;
     user-select: none;
     padding: $proportion-base;
-    font: inherit;
     color: var(--text-primary);
     transition: all $animation;
+    font-size: map.get($font_sizes, medium);
 
     &:-internal-autofill-selected {
       -webkit-text-fill-color: var(--divider);
@@ -94,6 +86,8 @@
   }
 
   &__icon {
+    color: var(--text-secondary);
+
     &--margin-left {
       margin-right: 8px;
       margin-left: -8px;

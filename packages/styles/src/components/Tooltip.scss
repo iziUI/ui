@@ -1,0 +1,23 @@
+@use "sass:map";
+
+.#{$prefix}-tooltip {
+  position: absolute;
+  transition: all $animation;
+  border-radius: var(--radius);
+  padding: $proportion-small;
+  font-size: map.get($font_sizes, small);
+  background: var(--text-primary);
+  color: var(--background-default);
+  box-shadow: $box-shadow-small;
+  text-align: center;
+
+  opacity: 0;
+  transform: scale(0.9);
+
+  z-index: 9999;
+
+  &--visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

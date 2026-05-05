@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .#{$prefix}-menu {
   position: absolute;
   word-break: break-all;
@@ -43,6 +45,7 @@
     background-color: transparent;
     color: var(--text-primary);
     transition: all $animation;
+    font-size: map.get($font_sizes, medium);
 
     cursor: pointer;
 
