@@ -43,12 +43,12 @@ export const _colors: StoryObj<typeof Icon> = {
   render: () => {
     return (
       <Stack flexDirection="row">
-        <Icon name={icon} color="primary.main" />
-        <Icon name={icon} color="secondary.main" />
-        <Icon name={icon} color="success.main" />
-        <Icon name={icon} color="warning.main" />
-        <Icon name={icon} color="error.main" />
-        <Icon name={icon} color="info.main" />
+        <Icon name={icon} sx={{ color: (palette) => palette.primary.main }} />
+        <Icon name={icon} sx={{ color: (palette) => palette.secondary.main }} />
+        <Icon name={icon} sx={{ color: (palette) => palette.success.main }} />
+        <Icon name={icon} sx={{ color: (palette) => palette.error.main }} />
+        <Icon name={icon} sx={{ color: (palette) => palette.info.main }} />
+        <Icon name={icon} sx={{ color: (palette) => palette.warning.main }} />
       </Stack>
     );
   }

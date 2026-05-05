@@ -18,7 +18,8 @@ export default function CardInfo({ icon, title, description, onClick }: CardInfo
         justifyContent="flex-end"
         sx={{
           p: 2,
-          background: ({ background }) => background.paper
+          background: ({ background }) => background.paper,
+          color: ({ primary }) => primary.main,
         }}
         style={{
           height: 75

@@ -59,11 +59,9 @@ function Input({
     return cloneElement(icon, {
       disabled,
       type: 'button',
-      color: 'secondary',
       size: 30,
       style: {
         ...icon.props.style,
-
       },
       className: joinClass(
         icon.props.className,

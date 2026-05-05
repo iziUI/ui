@@ -25,8 +25,6 @@ function MenuButton({ label, icon, color, ...props }: MenuButtonProps) {
 
   const renderIcon = () => {
     return icon && cloneElement<IconProps>(icon, {
-      size: 12,
-      color: color ? `${color}.main` : 'text.primary',
       style: { marginRight: 8 }
     });
   };
