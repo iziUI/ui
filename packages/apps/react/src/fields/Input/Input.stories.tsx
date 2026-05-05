@@ -22,7 +22,7 @@ export const InputTypes: StoryObj<typeof Input> = {
   }
 };
 
-export const _Icon: StoryObj<typeof Input> = {
+export const WithIcon: StoryObj<typeof Input> = {
   render: () => {
     const [visible, setVisible] = useState<'show' | 'hide'>('show');
 
@@ -97,6 +97,7 @@ const meta: Meta<typeof Input> = {
   title: 'fields/Input',
   component: Input,
   parameters: {
+    layout: 'centered',
     docs: {
       ref: Playground,
       description: 'Input permite que os usuários insiram e editem texto ou dados em formulários e interfaces.',
