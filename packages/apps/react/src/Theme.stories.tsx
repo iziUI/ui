@@ -161,6 +161,7 @@ function Colors() {
                   alignItems="center"
                   justifyContent="center"
                   sx={{
+                    boxShadow: 'sm',
                     borderRadius: 4,
                     background: (palette) => palette[color][variant],
                   }}
