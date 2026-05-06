@@ -3,6 +3,7 @@ import type { Config } from 'style-dictionary/types';
 
 import { applyFormatters } from '../formatters';
 import { applyTransformers } from '../transformers';
+import dtsFormatter from '../formatters/plugins/dtsFormatter';
 import jsFormatter from '../formatters/plugins/jsFormatter';
 import scssFormatter from '../formatters/plugins/scssFormatter';
 import scssMainFormatter from '../formatters/plugins/scssMainFormatter';
@@ -44,6 +45,11 @@ const getConfig = (): Config => {
             format: 'javascript/variables-custom',
             options: { showFileHeader: false },
           },
+          {
+            destination: 'index.d.ts',
+            format: 'typescript/declarations-custom',
+            options: { showFileHeader: false },
+          },
         ],
       }
     }
@@ -61,7 +67,7 @@ export default async function configVariables() {
 
   await applyFormatters(styleDictionary, [
     jsFormatter,
-    scssFormatter,
+    dtsFormatter,
     scssFormatter,
     scssMixinsFormatter,
     scssMainFormatter,

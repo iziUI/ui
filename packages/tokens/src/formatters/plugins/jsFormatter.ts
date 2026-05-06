@@ -17,7 +17,7 @@ function mapTokens(dictionary: Dictionary) {
       .map(segment =>
         segment
           .split('-')
-          .map((piece, index) => (index === 0 ? piece : capitalize(piece)))
+          .map((piece) => (capitalize(piece)))
           .join('')
       )
       .join('');

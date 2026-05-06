@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "strict": true,
   },
-  "include": ["src/consts/**/*"]
+  "include": ["src/consts/const.ts", "src/consts/list.ts", "src/consts/object.ts"]
 }
