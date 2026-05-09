@@ -98,7 +98,7 @@ function Drawer({
           className={overlayCls}
           onClick={onClose}
         />
-      </div >
+      </div>
     )
   );
 }

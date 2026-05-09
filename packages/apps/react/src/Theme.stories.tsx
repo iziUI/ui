@@ -47,6 +47,7 @@ function Text() {
               alignItems="center"
               justifyContent="center"
               sx={{
+                boxShadow: 'sm',
                 borderRadius: 4,
                 background: (palette) => palette.text[variant],
               }}
@@ -87,6 +88,7 @@ function Background() {
               alignItems="center"
               justifyContent="center"
               sx={{
+                boxShadow: 'sm',
                 borderRadius: 4,
                 background: (palette) => palette.background[variant],
               }}
@@ -121,6 +123,7 @@ function DividerColor() {
         alignItems="center"
         justifyContent="center"
         sx={{
+          boxShadow: 'sm',
           borderRadius: 4,
           background: (palette) => palette.divider,
         }}

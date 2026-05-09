@@ -1,6 +1,6 @@
 {
   "name": "@iziui/react",
-  "version": "0.0.3-rc",
+  "version": "0.0.4-rc",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -35,7 +35,8 @@
     "test": "jest",
     "build": "vite build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "publish": "yarn npm publish --access public"
   },
   "dependencies": {
     "glob": "^13.0.2",
