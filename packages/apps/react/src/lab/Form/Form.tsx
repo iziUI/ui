@@ -1,4 +1,4 @@
-import { createContext, HTMLAttributes } from 'react';
+import { createContext, SubmitEvent, HTMLAttributes } from 'react';
 
 import type FormGroup from './FormGroup';
 
@@ -15,9 +15,19 @@ export default function Form<T extends Record<string, unknown>>({
   children,
   ...props
 }: FormProps<T>) {
+  const submit = (event: SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    formGroup.submit();
+  };
+
   return (
     <FormContext value={formGroup}>
-      <form {...props} onSubmit={formGroup.submit} noValidate>
+      <form
+        {...props}
+        style={{ width: '100%', ...props.style }}
+        onSubmit={submit}
+        noValidate
+      >
         {children}
       </form>
       {
@@ -31,7 +41,7 @@ export default function Form<T extends Record<string, unknown>>({
             background: '#e5e5e5',
             boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
           }}>
-            {JSON.stringify(formGroup.controls, null, 2)}
+            {JSON.stringify(formGroup, null, 2)}
           </pre>
         )
       }

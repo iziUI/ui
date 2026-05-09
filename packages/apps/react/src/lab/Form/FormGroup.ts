@@ -4,9 +4,9 @@ import type FormControl from './FormControl';
 type Hydrate<T extends Record<string, unknown>> = (data: FormGroup<T>) => void;
 type SetValues<F> = Partial<F> | ((values: F) => Partial<F>);
 
-export type Validator<T extends Record<string, unknown>> = {
+export type Validator<T extends Record<string, unknown>> = Partial<{
   [K in keyof T]: (data: FormGroup<T>) => string | void;
-}
+}>
 
 export interface Handle<T extends Record<string, unknown>> {
   change?: (form: FormGroup<T>) => void;
@@ -36,7 +36,8 @@ export default class FormGroup<T extends Record<string, unknown>> {
   set isValid(validity: boolean) { this._valid = validity; }
 
   get errors() {
-    return Object.values<FormControl<T[keyof T]>>(this.controls).filter(c => c.error);
+    return Object.values<FormControl<T[keyof T]>>(this.controls)
+      .filter(c => c.error);
   }
 
   get values(): T {
@@ -76,8 +77,11 @@ export default class FormGroup<T extends Record<string, unknown>> {
   public submit() {
     if (!this.handle.submit) { return; }
 
-    this.eachControl((control) => control.dirty = true);
+    this.eachControl((control) => { control.dirty = true; });
 
+    this.validate();
+
+    this.hydrate(this);
     this.handle.submit(this);
   }
 
@@ -90,12 +94,16 @@ export default class FormGroup<T extends Record<string, unknown>> {
     if (!this.validator) { return; }
 
     Object.entries(this.validator).map(([key, fn]) => {
+      if (!fn) { return; }
+
       const controlError = this.controls[key].validate();
+
       const validatorError = fn(this);
 
       this.controls[key].error = controlError || validatorError || '';
     });
 
     this.isValid = !this.errors.length;
+    this.hydrate(this);
   }
 }

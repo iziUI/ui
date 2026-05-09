@@ -2,12 +2,10 @@ import type { ChangeEvent } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import logger from '@iziui/toolkit/logger';
-
+import Icon from '@/display/Icon';
+import Chip from '@/display/Chip';
 import Input from '@/fields/Input';
 import Button from '@/actions/Button';
-import Chip from '@/display/Chip';
-import Icon from '@/display/Icon';
 
 import Form from './Form';
 import Control from './Control';
@@ -52,11 +50,12 @@ export const _useForm: StoryObj<typeof Form> = {
   render: () => {
     const formGroup = useForm<FormData>({
       form: {
-        name: { defaultValue: 'leozinho', type: 'email' }
+        name: { defaultValue: 'John', type: 'email' }
       },
       handle: {
         submit: (form) => {
-          logger.log('>>> submit', form);
+          if (!form.isValid) { return; }
+          alert('submitted: ' + JSON.stringify(form.values, null, 2));
         },
       }
     });
@@ -75,7 +74,7 @@ export const _useForm: StoryObj<typeof Form> = {
           error={formGroup.controls.name.isInvalid}
           helperText={formGroup.controls.name.error}
         />
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </Form>
     );
   }
@@ -89,7 +88,8 @@ export const _control: StoryObj<typeof Form> = {
       },
       handle: {
         submit: (form) => {
-          logger.log('>>> submit', form.values);
+          if (!form.isValid) { return; }
+          alert('submitted: ' + JSON.stringify(form.values, null, 2));
         },
       },
     });
@@ -120,7 +120,8 @@ export const _useControl: StoryObj<typeof Form> = {
       },
       handle: {
         submit: (form) => {
-          logger.log('>>> submit', form);
+          if (!form.isValid) { return; }
+          alert('submitted: ' + JSON.stringify(form.values, null, 2));
         },
       },
     });
@@ -140,23 +141,24 @@ export const _validator: StoryObj<typeof Form> = {
       form: {
         name: {
           type: 'text',
-          defaultValue: 'teste',
+          defaultValue: 'John',
           validators: [
             (v) => !v.value && 'Nome é obrigatório',
             (v) => v.value.split(' ').length < 2 && 'Deve ter dois nomes'
           ]
-        }
+        },
       },
       handle: {
         submit: (form) => {
-          logger.log('>>> submit', form);
+          if (!form.isValid) { return; }
+          alert('submitted: ' + JSON.stringify(form.values, null, 2));
         },
       },
       validator: {
         name: ({ values }) => {
           const { name } = values;
 
-          const DEFAULT_NAME = 'leo goncalves';
+          const DEFAULT_NAME = 'John Doe';
 
           if (name !== DEFAULT_NAME) { return `O nome deve ser ${DEFAULT_NAME}`; }
         }
