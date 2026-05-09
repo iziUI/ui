@@ -28,7 +28,6 @@ export interface BounceProps extends React.HTMLAttributes<HTMLDivElement> {
   delay?: number;
   timeout?: number;
   direction?: Direction;
-  children: React.ReactNode;
   tag?: React.ElementType;
 }
 

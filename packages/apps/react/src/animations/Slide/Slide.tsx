@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react';
+import {
+  useState,
+  useEffect,
+  type ElementType,
+  type HTMLAttributes,
+} from 'react';
 
 export type Direction = 'left' | 'right' | 'top' | 'bottom';
 
-export type Style = React.HTMLAttributes<HTMLDivElement>['style'];
+export type Style = HTMLAttributes<HTMLDivElement>['style'];
 
 const styledShow = (timeout: number): Style => ({
   opacity: 1,
@@ -25,13 +30,12 @@ const styledHide = (timeout: number, direction: Direction): Style => {
   };
 };
 
-export interface SlideProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SlideProps extends HTMLAttributes<HTMLDivElement> {
   enter: boolean,
   delay?: number;
   timeout?: number;
   direction?: Direction;
-  children: React.ReactNode;
-  tag?: React.ElementType;
+  tag?: ElementType;
 }
 
 export default function Slide({

@@ -8,7 +8,6 @@ export interface FadeProps extends React.HTMLAttributes<HTMLDivElement> {
   enter: boolean;
   delay?: number;
   timeout?: number;
-  children: React.ReactNode;
 }
 
 export default function Fade({ children, enter, delay = 10, timeout = .5, ...props }: Readonly<FadeProps>) {
