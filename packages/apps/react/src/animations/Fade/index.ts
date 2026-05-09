@@ -1,1 +1,2 @@
-export { default, type FadeProps } from './Fade';
+export { default } from './Fade';
+export * from './Fade';
