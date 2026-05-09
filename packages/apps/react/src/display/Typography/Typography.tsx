@@ -1,4 +1,4 @@
-import type { PropsWithChildren, HTMLAttributes, CSSProperties } from 'react';
+import { type PropsWithChildren, type HTMLAttributes, type CSSProperties, useMemo } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
@@ -48,7 +48,7 @@ interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLParagraph
 function Typography({
   children,
   variant = 'body1',
-  color = 'text.primary',
+  color: _color,
   weight,
   textAlign,
   ...props
@@ -64,14 +64,17 @@ function Typography({
     props.className
   );
 
-  const c = convertPathToColor(color, palette);
+  const color = useMemo(() => {
+    if (!_color) { return 'currentColor'; }
+    return convertPathToColor(_color, palette);
+  }, [_color]);
 
   return (
     <CustomTag
       {...props}
       className={cls}
       style={{
-        color: c,
+        color,
         textAlign,
         ...props.style
       }}

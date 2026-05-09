@@ -1,10 +1,27 @@
 import dts from 'vite-plugin-dts';
 import fs from 'node:fs';
 import path from 'node:path';
+import ts from 'typescript';
 import { globSync } from 'glob';
 import { defineConfig, type PluginOption } from 'vite';
 
 import react from '@vitejs/plugin-react';
+
+const WORKSPACE_ROOT = path.resolve(__dirname, '../../..');
+const INTERNAL_DIR = '_internal';
+
+type InternalPkg = {
+  name: string;
+  alias: string;
+  srcDir?: string;
+  prebuiltDir?: string;
+};
+
+const INTERNAL_PACKAGES: InternalPkg[] = [
+  { name: 'core', alias: '@iziui/core', srcDir: path.join(WORKSPACE_ROOT, 'packages/core/src') },
+  { name: 'toolkit', alias: '@iziui/toolkit', srcDir: path.join(WORKSPACE_ROOT, 'packages/toolkit/src') },
+  { name: 'tokens', alias: '@iziui/tokens', prebuiltDir: path.join(WORKSPACE_ROOT, 'packages/tokens/dist') },
+];
 
 type GroupConfig = Record<string, string[]>;
 
@@ -115,6 +132,95 @@ function generateGroupedTypes(): PluginOption {
   };
 }
 
+function emitInternalDeclarations(srcDir: string, outDir: string) {
+  const files = globSync('**/*.ts', {
+    cwd: srcDir,
+    nodir: true,
+    ignore: ['**/*.spec.ts', '**/*.test.ts', '**/__tests__/**', '**/__mocks__/**'],
+  }).map((f) => path.join(srcDir, f));
+
+  const program = ts.createProgram(files, {
+    declaration: true,
+    emitDeclarationOnly: true,
+    outDir,
+    rootDir: srcDir,
+    target: ts.ScriptTarget.ES2022,
+    module: ts.ModuleKind.ESNext,
+    moduleResolution: ts.ModuleResolutionKind.Bundler,
+    esModuleInterop: true,
+    skipLibCheck: true,
+    resolveJsonModule: true,
+    strict: false,
+    noEmitOnError: false,
+    noImplicitAny: false,
+  });
+
+  program.emit();
+}
+
+function copyDir(src: string, dest: string) {
+  fs.mkdirSync(dest, { recursive: true });
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    const s = path.join(src, entry.name);
+    const d = path.join(dest, entry.name);
+    if (entry.isDirectory()) copyDir(s, d);
+    else if (entry.isFile()) fs.copyFileSync(s, d);
+  }
+}
+
+function rewriteInternalImports(typesRoot: string) {
+  const aliasToInternalDir = new Map(
+    INTERNAL_PACKAGES.map((p) => [p.alias, path.join(typesRoot, INTERNAL_DIR, p.name)] as const),
+  );
+  const aliasPattern = INTERNAL_PACKAGES.map((p) => p.alias.replace(/[/\\]/g, '\\$&')).join('|');
+  const re = new RegExp(`(['"\`])(${aliasPattern})(/[^'"\`]*)?\\1`, 'g');
+
+  const files = globSync('**/*.d.ts', { cwd: typesRoot, nodir: true });
+  for (const rel of files) {
+    const filePath = path.join(typesRoot, rel);
+    const original = fs.readFileSync(filePath, 'utf8');
+
+    const rewritten = original.replace(re, (_match, quote, alias, sub = '') => {
+      const targetDir = aliasToInternalDir.get(alias)!;
+      const target = sub ? path.join(targetDir, sub) : targetDir;
+      let relPath = path.relative(path.dirname(filePath), target).replace(/\\/g, '/');
+      if (!relPath.startsWith('.')) relPath = './' + relPath;
+      return `${quote}${relPath}${quote}`;
+    });
+
+    if (rewritten !== original) fs.writeFileSync(filePath, rewritten);
+  }
+}
+
+function inlineInternalPackages(): PluginOption {
+  return {
+    name: 'inline-internal-packages',
+    closeBundle() {
+      const typesRoot = path.resolve(process.cwd(), 'dist', TYPES_DIR);
+      const internalRoot = path.join(typesRoot, INTERNAL_DIR);
+
+      fs.mkdirSync(internalRoot, { recursive: true });
+
+      for (const pkg of INTERNAL_PACKAGES) {
+        const target = path.join(internalRoot, pkg.name);
+        if (pkg.srcDir) {
+          emitInternalDeclarations(pkg.srcDir, target);
+        } else if (pkg.prebuiltDir) {
+          if (!fs.existsSync(pkg.prebuiltDir)) {
+            throw new Error(
+              `[inline-internal-packages] Missing prebuilt types for ${pkg.alias} at ${pkg.prebuiltDir}. ` +
+              'Build @iziui/tokens before @iziui/react.',
+            );
+          }
+          copyDir(pkg.prebuiltDir, target);
+        }
+      }
+
+      rewriteInternalImports(typesRoot);
+    },
+  };
+}
+
 function bundleSingleCss(): PluginOption {
   return {
     name: 'bundle-single-css',
@@ -153,6 +259,7 @@ export default defineConfig({
       insertTypesEntry: false,
     }),
     generateGroupedTypes(),
+    inlineInternalPackages(),
     bundleSingleCss(),
   ],
   resolve: {

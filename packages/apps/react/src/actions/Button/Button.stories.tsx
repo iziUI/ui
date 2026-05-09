@@ -86,6 +86,18 @@ export const _Loading: StoryObj<typeof Button> = {
   },
 };
 
+export const FullWidth: StoryObj<typeof Button> = {
+  render: () => {
+    return (
+      <div style={{ width: 500 }}>
+        <Button fullWidth>
+          fullWidth
+        </Button>
+      </div>
+    );
+  },
+};
+
 export const Playground: StoryObj<typeof Button> = {
   tags: ['!dev'],
 };
