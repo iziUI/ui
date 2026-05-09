@@ -1,6 +1,6 @@
 {
   "name": "@iziui/react",
-  "version": "0.0.4-rc",
+  "version": "0.0.51-rc",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,6 +21,21 @@
       "types": "./dist/components/*/index.d.ts",
       "import": "./dist/components/*/index.js",
       "require": "./dist/components/*/index.cjs"
+    },
+    "./animations/*": {
+      "types": "./dist/animations/*/index.d.ts",
+      "import": "./dist/animations/*/index.js",
+      "require": "./dist/animations/*/index.cjs"
+    },
+    "./hooks/*": {
+      "types": "./dist/hooks/*/index.d.ts",
+      "import": "./dist/hooks/*/index.js",
+      "require": "./dist/hooks/*/index.cjs"
+    },
+    "./lab/*": {
+      "types": "./dist/lab/*/index.d.ts",
+      "import": "./dist/lab/*/index.js",
+      "require": "./dist/lab/*/index.cjs"
     },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
