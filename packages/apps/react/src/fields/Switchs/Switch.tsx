@@ -20,6 +20,7 @@ export interface SwitchProps extends InputHTMLAttributes<HTMLInputElement> {
   color?: Colors;
   auto?: boolean;
 }
+
 function Switch({ label, error, helperText, color = 'primary', ...props }: SwitchProps) {
   const [checked, setChecked] = useState(Boolean(props.checked));
 
