@@ -9,7 +9,6 @@
       color: var(--#{$color}-dark);
 
       overflow: hidden;
-      box-shadow: none;
       backdrop-filter: blur(4px);
       background-color: var(--#{$color}-opacity);
     }

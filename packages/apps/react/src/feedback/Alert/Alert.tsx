@@ -63,6 +63,7 @@ function Alert({
       flexDirection="row"
       alignItems="center"
       justifyContent="center"
+      {...props}
       className={className}
     >
       <Stack
