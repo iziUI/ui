@@ -5,9 +5,9 @@ import {
   type HTMLAttributes,
 } from 'react';
 
-export type Direction = 'left' | 'right' | 'top' | 'bottom';
+import type { Direction } from '../types';
 
-export type Style = HTMLAttributes<HTMLDivElement>['style'];
+type Style = HTMLAttributes<HTMLDivElement>['style'];
 
 const styledShow = (timeout: number): Style => ({
   opacity: 1,

@@ -5,7 +5,7 @@ import {
   type HTMLAttributes,
 } from 'react';
 
-export type Style = HTMLAttributes<HTMLDivElement>['style'];
+type Style = HTMLAttributes<HTMLDivElement>['style'];
 
 const easing = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 

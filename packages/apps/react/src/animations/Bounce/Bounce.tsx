@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-export type Direction = 'left' | 'right' | 'top' | 'bottom';
+import type { Direction } from '../types';
 
-export type Style = React.HTMLAttributes<HTMLDivElement>['style'];
+type Style = React.HTMLAttributes<HTMLDivElement>['style'];
 
 const styledShow = (timeout: number): Style => ({
   transform: 'translate(0, 0)',

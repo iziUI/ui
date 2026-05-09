@@ -1,6 +1,6 @@
 {
   "name": "@iziui/react",
-  "version": "0.0.51-rc",
+  "version": "0.0.52-rc",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

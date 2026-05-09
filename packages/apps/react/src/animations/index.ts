@@ -1,4 +1,5 @@
-export { default as Bounce, BounceProps } from './Bounce';
-export { default as Fade, FadeProps } from './Fade';
-export { default as Slide, SlideProps, Direction } from './Slide';
-export { default as Zoom, ZoomProps } from './Zoom';
+export { default as Bounce, type BounceProps } from './Bounce';
+export { default as Fade, type FadeProps } from './Fade';
+export { default as Slide, type SlideProps } from './Slide';
+export { default as Zoom, type ZoomProps } from './Zoom';
+export type { Direction } from './types';
