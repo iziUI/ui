@@ -1,7 +1,6 @@
 import React from 'react';
 
 import type { StoryFn, Decorator, Preview } from '@storybook/react';
-import { themes } from '@storybook/theming';
 import { DocsContainer } from '@storybook/blocks';
 
 import { createTheme } from '@iziui/core/theme';

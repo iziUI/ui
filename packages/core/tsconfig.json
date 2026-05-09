@@ -1,15 +1,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "declaration": true,
-    "downlevelIteration": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "declarationMap": true,
     "resolveJsonModule": true,
     "lib": [
-      "es2018",
+      "esnext",
       "dom"
     ]
   },
