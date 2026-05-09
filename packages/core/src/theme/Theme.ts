@@ -21,7 +21,6 @@ export interface Color {
 }
 
 export interface Palette {
-    mode: Mode;
     info: string;
     error: string;
     warning: string;
@@ -45,8 +44,7 @@ export type Spacing = number;
 export type Shape = { radius: number; }
 export type Typography = { family: string; url?: string; }
 
-export interface PaletteBuilded extends Pick<Palette, 'mode' | 'text' | 'background' | 'divider'> {
-    mode: Mode;
+export interface PaletteBuilded extends Pick<Palette, 'text' | 'background' | 'divider'> {
     grey: Color;
     info: Color;
     error: Color;
@@ -57,6 +55,7 @@ export interface PaletteBuilded extends Pick<Palette, 'mode' | 'text' | 'backgro
 }
 
 export interface Theme {
+    mode: Mode;
     shape: Shape;
     palette: Palette;
     spacing: Spacing;

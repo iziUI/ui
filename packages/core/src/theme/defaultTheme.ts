@@ -4,8 +4,8 @@ export const defaultSpacing: Theme['spacing'] = 8;
 export const defaultShape: Theme['shape'] = { radius: 8 };
 
 export const themeDefaultLight: Theme = {
+  mode: 'light',
   palette: {
-    mode: 'light',
     info: '#72E4FC',
     error: '#FF5377',
     warning: '#FF9457',
@@ -34,8 +34,8 @@ export const themeDefaultLight: Theme = {
 };
 
 export const themeDefaultDark: Theme = {
+  mode: 'dark',
   palette: {
-    mode: 'dark',
     info: '#72E4FC',
     error: '#FF5377',
     warning: '#FF9457',

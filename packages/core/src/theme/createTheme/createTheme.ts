@@ -15,7 +15,7 @@ const SUPPORT_KEYS = [
 type SupportKey = (typeof SUPPORT_KEYS)[number];
 
 export function createTheme(theme?: ThemeOptions): ThemeBuilded {
-  const mode = theme?.palette?.mode ?? 'light';
+  const mode = theme?.mode ?? 'light';
   const ref = mode === 'dark' ? themeDefaultDark : themeDefaultLight;
 
   const paletteFromUser = theme?.palette ?? {};
@@ -29,8 +29,8 @@ export function createTheme(theme?: ThemeOptions): ThemeBuilded {
   ) as Record<SupportKey, ThemeBuilded['palette'][SupportKey]>;
 
   return {
+    mode,
     palette: {
-      mode,
       text: paletteFromUser.text ?? paletteFromRef.text,
       background: paletteFromUser.background ?? paletteFromRef.background,
       divider: paletteFromUser.divider ?? paletteFromRef.divider,
