@@ -25,6 +25,7 @@ export default function createComponent<P>(WrappedComponent: ComponentType<P>) {
       <WrappedComponent
         {...(props as P)}
         style={{
+          boxSizing: 'border-box',
           ...props['style'],
           ...options,
           ...(fullWidth ? { width: '100%' } : {}),
