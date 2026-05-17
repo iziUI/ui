@@ -1,6 +1,6 @@
 {
   "name": "@iziui/react",
-  "version": "0.0.62-rc",
+  "version": "0.0.83-rc",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -42,7 +42,13 @@
       "import": "./dist/theme/index.js",
       "require": "./dist/theme/index.cjs"
     },
-    "./style.css": "./dist/style.css"
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.js",
+      "require": "./dist/core/index.cjs"
+    },
+    "./style.css": "./dist/style.css",
+    "./scss/*": "./dist/scss/*"
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",
