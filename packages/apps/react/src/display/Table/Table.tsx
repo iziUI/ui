@@ -19,7 +19,7 @@ function Table({ children, ...props }: TableProps) {
   );
 
   return (
-    <Card style={{ overflow: 'auto' }}>
+    <Card fullWidth style={{ overflow: 'auto' }}>
       <table className={cls} {...props}>
         {children}
       </table>

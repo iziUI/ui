@@ -58,8 +58,9 @@ function Input({
   const renderIcon = (icon: ReactElement<ButtonIconProps>, direction: 'left' | 'right') => {
     return cloneElement(icon, {
       disabled,
+      size: icon.props.size || 30,
       type: 'button',
-      size: 30,
+      color: 'grey',
       style: {
         ...icon.props.style,
       },

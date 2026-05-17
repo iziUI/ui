@@ -33,7 +33,7 @@ function DrawerHeader({ children, onClose, ...props }: DrawerHeaderProps) {
         onClose && (
           <ButtonIcon
             onClick={onClose}
-            color="primary"
+            color="grey"
             aria-label="Fechar"
             data-testid="drawer-close-button"
           >

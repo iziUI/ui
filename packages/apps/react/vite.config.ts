@@ -34,7 +34,19 @@ const componentGroups: GroupConfig = {
 
 const flatGroups: GroupConfig = {
   theme: ['core', 'theme'],
+  core: ['@iziui/core/utils'],
 };
+
+const INTERNAL_PKG_PREFIX = '@iziui/';
+
+function isInternalPkgSpecifier(srcGroup: string) {
+  return srcGroup.startsWith(INTERNAL_PKG_PREFIX);
+}
+
+function internalPkgToTypesPath(srcGroup: string) {
+  const sub = srcGroup.slice(INTERNAL_PKG_PREFIX.length);
+  return `${INTERNAL_DIR}/${sub}`;
+}
 
 const TYPES_DIR = '.types';
 const TMP_ENTRY_DIR = path.resolve(process.cwd(), 'node_modules/.cache/iziui-react');
@@ -61,6 +73,9 @@ function ensureFlatEntry(distGroup: string, srcGroups: string[]) {
   const content =
     srcGroups
       .map((srcGroup) => {
+        if (isInternalPkgSpecifier(srcGroup)) {
+          return `export * from '${srcGroup}';`;
+        }
         const abs = path.resolve(process.cwd(), 'src', srcGroup).replace(/\\/g, '/');
         return `export * from '${abs}';`;
       })
@@ -123,7 +138,12 @@ function generateGroupedTypes(): PluginOption {
 
         const reexports =
           srcGroups
-            .map((srcGroup) => `export * from '../${TYPES_DIR}/${srcGroup}';`)
+            .map((srcGroup) => {
+              const target = isInternalPkgSpecifier(srcGroup)
+                ? internalPkgToTypesPath(srcGroup)
+                : srcGroup;
+              return `export * from '../${TYPES_DIR}/${target}';`;
+            })
             .join('\n') + '\n';
 
         fs.writeFileSync(path.join(distDir, 'index.d.ts'), reexports);
@@ -221,6 +241,22 @@ function inlineInternalPackages(): PluginOption {
   };
 }
 
+function copyTokensScss(): PluginOption {
+  return {
+    name: 'copy-tokens-scss',
+    closeBundle() {
+      const tokensPkg = INTERNAL_PACKAGES.find((p) => p.name === 'tokens');
+      const src = tokensPkg?.prebuiltDir && path.join(tokensPkg.prebuiltDir, 'web/scss');
+      if (!src || !fs.existsSync(src)) {
+        throw new Error(
+          `[copy-tokens-scss] Missing tokens SCSS at ${src}. Build @iziui/tokens before @iziui/react.`,
+        );
+      }
+      copyDir(src, path.resolve(process.cwd(), 'dist/scss'));
+    },
+  };
+}
+
 function bundleSingleCss(): PluginOption {
   return {
     name: 'bundle-single-css',
@@ -260,6 +296,7 @@ export default defineConfig({
     }),
     generateGroupedTypes(),
     inlineInternalPackages(),
+    copyTokensScss(),
     bundleSingleCss(),
   ],
   resolve: {

@@ -87,8 +87,8 @@ function Modal({ children, title, subtitle, isOpen, onClose, ...props }: ModalPr
           <Card className={className}>
             <CardContent onClick={(e) => e.stopPropagation()}>
               <Stack
+                alignItems="center"
                 flexDirection="row"
-                alignItems="flex-start"
                 justifyContent="space-between"
                 style={{ flexWrap: 'nowrap' }}
               >
@@ -96,8 +96,8 @@ function Modal({ children, title, subtitle, isOpen, onClose, ...props }: ModalPr
                   {title}
                   {subtitle}
                 </div>
-                <ButtonIcon color="primary" onClick={onClose}>
-                  <Icon name="times" color="text.secondary" />
+                <ButtonIcon color="grey" onClick={onClose}>
+                  <Icon name="times" />
                 </ButtonIcon>
               </Stack>
               <div

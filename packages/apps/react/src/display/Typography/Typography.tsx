@@ -39,16 +39,17 @@ const MAP: { [x: string]: React.ElementType } = {
   body2: 'p',
 };
 
-interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLParagraphElement>> {
+export interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLParagraphElement>> {
   variant?: Variant;
   color?: MappedColors;
   textAlign?: CSSProperties['textAlign'];
   weight?: 'bold' | 'normal' | 'light';
 }
+
 function Typography({
   children,
   variant = 'body1',
-  color: _color,
+  color: _color = 'text.primary',
   weight,
   textAlign,
   ...props
@@ -67,7 +68,7 @@ function Typography({
   const color = useMemo(() => {
     if (!_color) { return 'currentColor'; }
     return convertPathToColor(_color, palette);
-  }, [_color]);
+  }, [_color, palette]);
 
   return (
     <CustomTag

@@ -45,6 +45,9 @@ export const WithIcon: StoryObj<typeof Input> = {
             <Icon name="search" />
           </ButtonIcon>
         } />
+        <Input type="text" startIcon={
+          <Icon name="fire" size={20} />
+        } />
       </Stack>
     );
   }

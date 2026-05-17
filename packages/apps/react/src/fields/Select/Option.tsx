@@ -3,16 +3,19 @@ import { ButtonHTMLAttributes, cloneElement, ReactElement } from 'react';
 import { prefix } from '@iziui/tokens/web/js';
 
 import { joinClass } from '@iziui/core/utils';
+import type { Colors } from '@iziui/core/theme';
 
 export interface OptionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   value: any;
   children: string;
+  color?: Colors;
   startIcon?: React.JSX.Element | boolean;
 }
-export default function Option({ children, startIcon, disabled, ...props }: OptionProps) {
+export default function Option({ children, color, startIcon, disabled, ...props }: OptionProps) {
   const className = joinClass(
     `${prefix}-select__option`,
     disabled && `${prefix}-select__option--disabled`,
+    color && `${prefix}-select__option--${color}`,
     props.className
   );
 

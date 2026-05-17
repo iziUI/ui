@@ -94,18 +94,12 @@
     padding: 0.5rem 1rem;
     border: none;
     width: 100%;
-    background-color: var(--background-default);
     transition: all $animation;
-    color: var(--text-primary);
     text-align: left;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    color: var(--text-secondary);
-
-    &:hover {
-      background-color: var(--background-paper);
-    }
+    background-color: transparent;
 
     &--selected {
       background-color: var(--primary-opacity);
@@ -115,6 +109,16 @@
       cursor: not-allowed;
       background-color: var(--divider) !important;
       color: var(--text-disabled) !important;
+    }
+
+    @each $color in $colors {
+      &--#{$color} {
+        color: var(--#{$color});
+
+        &:hover {
+          background-color: var(--#{$color}-opacity);
+        }
+      }
     }
 
     &__icon {

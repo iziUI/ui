@@ -93,9 +93,9 @@ export const WithIcon: StoryObj<typeof Menu> = {
       <Stack alignItems="center">
         <Button onClick={toggle}>Toggle Menu</Button>
         <Menu width="fit-content" direction="left" anchorEl={el} open={open} onClose={toggle}>
-          <MenuButton label="My option 1" icon={<Icon name="rocket" />} />
+          <MenuButton label="My option 1" icon={<Icon name="fire" />} />
           <MenuButton label="My option 2" icon={<Icon name="rocket" />} />
-          <MenuButton label="My option 3" icon={<Icon name="rocket" />} />
+          <MenuButton label="My option 3" icon={<Icon name="globe" />} />
         </Menu>
       </Stack>
     );

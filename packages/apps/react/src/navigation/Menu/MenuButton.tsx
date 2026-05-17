@@ -16,7 +16,7 @@ export interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   icon?: React.JSX.Element;
 }
 
-function MenuButton({ label, icon, color, ...props }: MenuButtonProps) {
+function MenuButton({ label, icon, color = 'grey', ...props }: MenuButtonProps) {
   const className = joinClass(
     `${prefix}-menu__item`,
     color && `${prefix}-menu__item--${color}`,
@@ -25,6 +25,7 @@ function MenuButton({ label, icon, color, ...props }: MenuButtonProps) {
 
   const renderIcon = () => {
     return icon && cloneElement<IconProps>(icon, {
+      size: 18,
       style: { marginRight: 8 }
     });
   };

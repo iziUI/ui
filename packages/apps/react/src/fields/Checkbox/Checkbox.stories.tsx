@@ -11,13 +11,14 @@ import Checkbox, { CheckboxProps } from './Checkbox';
 export const Colors: StoryObj<typeof Checkbox> = {
   render: () => {
     return (
-      <Stack>
+      <Stack gap={4}>
         <Checkbox name="fake" color="primary" checked label="Primary" />
         <Checkbox name="fake" color="secondary" checked label="Secondary" />
         <Checkbox name="fake" color="error" checked label="Error" />
         <Checkbox name="fake" color="info" checked label="Info" />
         <Checkbox name="fake" color="success" checked label="Success" />
         <Checkbox name="fake" color="warning" checked label="Warning" />
+        <Checkbox name="fake" color="grey" checked label="Grey" />
       </Stack>
     );
   }

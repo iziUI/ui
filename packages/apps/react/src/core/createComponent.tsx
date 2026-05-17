@@ -1,6 +1,6 @@
 import type { ComponentType, FC } from 'react';
 
-import type { Sx } from '@iziui/core/options';
+import type { Sx } from '@iziui/core/system';
 import type { Plugin } from '@iziui/core/plugin';
 import createOptions from '@iziui/core/options';
 import * as plugins from '@iziui/core/plugin';

@@ -5,6 +5,7 @@ import { colors } from '@iziui/tokens/web/js';
 import Icon from '@/display/Icon';
 import Stack from '@/layout/Stack';
 
+import Divider from '../Divider';
 import Chip from './Chip';
 
 export const variants: StoryObj<typeof Chip> = {
@@ -29,8 +30,9 @@ export const _colors: StoryObj<typeof Chip> = {
           <Chip label="error" color="error" variant="contained" />
           <Chip label="warning" color="warning" variant="contained" />
           <Chip label="info" color="info" variant="contained" />
+          <Chip label="grey" color="grey" variant="contained" />
         </Stack>
-        {/* <Divider /> */}
+        <Divider />
         <Stack flexDirection="row">
           <Chip label="primary" color="primary" variant="outlined" />
           <Chip label="secondary" color="secondary" variant="outlined" />
@@ -38,6 +40,7 @@ export const _colors: StoryObj<typeof Chip> = {
           <Chip label="error" color="error" variant="outlined" />
           <Chip label="warning" color="warning" variant="outlined" />
           <Chip label="info" color="info" variant="outlined" />
+          <Chip label="grey" color="grey" variant="outlined" />
         </Stack>
       </Stack>
     );
