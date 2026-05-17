@@ -2,7 +2,7 @@ import type { Path } from '@iziui/toolkit/interface';
 
 import { createMappedColors } from './createMappedColors';
 
-export const colors = ['primary', 'secondary', 'error', 'warning', 'success', 'info'] as const;
+export const colors = ['primary', 'secondary', 'error', 'warning', 'success', 'info', 'grey'] as const;
 export const mappedColors = createMappedColors(colors);
 
 export type Mode = 'light' | 'dark'

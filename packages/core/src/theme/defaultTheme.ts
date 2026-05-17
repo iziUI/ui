@@ -12,7 +12,7 @@ export const themeDefaultLight: Theme = {
     success: '#36E79B',
     primary: '#6C37F4',
     secondary: '#FB7185', //C026D3 // F97316 // FB7185 // F59E0B
-    grey: '#F4F4F4',
+    grey: '#545f6f',
     text: {
       primary: 'rgb(31, 41, 55)',
       secondary: 'rgb(75, 85, 99)',
@@ -40,7 +40,7 @@ export const themeDefaultDark: Theme = {
     error: '#FF5377',
     warning: '#FF9457',
     success: '#36E79B',
-    primary: '#6C37F4',
+    primary: '#8b5dff',
     secondary: '#EBFF5E',
     grey: '#2A2A2A',
     text: {
@@ -52,7 +52,7 @@ export const themeDefaultDark: Theme = {
       paper: '#0D0225',
       default: '#30294E',
     },
-    divider: 'rgba(255, 255, 255, 0.12)'
+    divider: 'rgba(242, 242, 242, 0.12)'
   },
   spacing: defaultSpacing,
   shape: defaultShape,

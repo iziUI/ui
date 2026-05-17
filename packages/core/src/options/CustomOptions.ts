@@ -26,8 +26,3 @@ type ColorOptions = {
 type BehaviorOptions = {
   boxShadow: Size;
 }
-
-export type Sx<T> = T & {
-  sx?: CustomOptions;
-  fullWidth?: boolean;
-} 
