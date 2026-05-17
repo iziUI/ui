@@ -4,12 +4,12 @@ import type FormGroup from './FormGroup';
 
 export const FormContext = createContext<FormGroup<any> | null>(null);
 
-interface FormProps<T extends Record<string, unknown>> extends HTMLAttributes<HTMLFormElement> {
+interface FormProps<T extends Record<string, any>> extends HTMLAttributes<HTMLFormElement> {
   formGroup: FormGroup<T>;
   debug?: boolean;
 }
 
-export default function Form<T extends Record<string, unknown>>({
+export default function Form<T extends Record<string, any>>({
   formGroup,
   debug = false,
   children,
@@ -33,6 +33,7 @@ export default function Form<T extends Record<string, unknown>>({
       {
         debug && (
           <pre style={{
+            width: '100%',
             maxHeight: 350,
             padding: 15,
             borderRadius: 4,

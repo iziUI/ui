@@ -6,13 +6,13 @@ import type { Constructor } from './FormControl';
 import type { Handle, Validator } from './FormGroup';
 import type { AbstractControl } from './AbstractControl';
 
-type UseForm<T extends Record<string, unknown>> = {
+type UseForm<T extends Record<string, any>> = {
   form: { [K in keyof T]: Constructor<T[K]> };
   handle: Handle<T>;
   validator?: Validator<T>;
 }
 
-function makingControls<T extends Record<string, unknown>>(form: { [K in keyof T]: Constructor<T[K]> }) {
+function makingControls<T extends Record<string, any>>(form: { [K in keyof T]: Constructor<T[K]> }) {
   return Object.entries(form)
     .reduce((acc, data) => {
       const key = data[0] as keyof T;
@@ -24,7 +24,7 @@ function makingControls<T extends Record<string, unknown>>(form: { [K in keyof T
     }, {} as AbstractControl<T>);
 }
 
-export default function useForm<T extends Record<string, unknown>>({
+export default function useForm<T extends Record<any, any>>({
   form,
   handle,
   validator

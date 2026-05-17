@@ -1,7 +1,7 @@
 import useFormGroup from './useFormGroup';
 
 export default function useControl<
-  T extends Record<string, unknown>,
+  T extends Record<string, any>,
   K extends keyof T = keyof T,
 >(controlName: K) {
   const formGroup = useFormGroup<T>();

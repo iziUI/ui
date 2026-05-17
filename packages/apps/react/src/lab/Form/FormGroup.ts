@@ -1,19 +1,19 @@
 import type { AbstractControl } from './AbstractControl';
 import type FormControl from './FormControl';
 
-type Hydrate<T extends Record<string, unknown>> = (data: FormGroup<T>) => void;
+type Hydrate<T extends Record<string, any>> = (data: FormGroup<T>) => void;
 type SetValues<F> = Partial<F> | ((values: F) => Partial<F>);
 
-export type Validator<T extends Record<string, unknown>> = Partial<{
+export type Validator<T extends Record<string, any>> = Partial<{
   [K in keyof T]: (data: FormGroup<T>) => string | void;
 }>
 
-export interface Handle<T extends Record<string, unknown>> {
+export interface Handle<T extends Record<string, any>> {
   change?: (form: FormGroup<T>) => void;
   submit?: (form: FormGroup<T>) => void;
 }
 
-export default class FormGroup<T extends Record<string, unknown>> {
+export default class FormGroup<T extends Record<string, any>> {
   private _valid = false;
   private _hydrate!: Hydrate<T>;
 
@@ -91,16 +91,14 @@ export default class FormGroup<T extends Record<string, unknown>> {
   }
 
   public validate() {
-    if (!this.validator) { return; }
+    Object.entries(this.controls).map(([key, control]) => {
+      let error = control.validate();
 
-    Object.entries(this.validator).map(([key, fn]) => {
-      if (!fn) { return; }
+      if (this.validator && this.validator[key]) {
+        error = this.validator[key](this) || '';
+      }
 
-      const controlError = this.controls[key].validate();
-
-      const validatorError = fn(this);
-
-      this.controls[key].error = controlError || validatorError || '';
+      control.error = error;
     });
 
     this.isValid = !this.errors.length;

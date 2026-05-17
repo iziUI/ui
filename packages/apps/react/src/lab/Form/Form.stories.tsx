@@ -12,8 +12,9 @@ import Control from './Control';
 import useForm from './useForm';
 import useControl from './useControl';
 
-type FormData = {
+interface FormData {
   name: string;
+  surname: string;
 }
 
 const meta: Meta<typeof Form> = {
@@ -50,7 +51,8 @@ export const _useForm: StoryObj<typeof Form> = {
   render: () => {
     const formGroup = useForm<FormData>({
       form: {
-        name: { defaultValue: 'John', type: 'email' }
+        name: { defaultValue: 'John', type: 'email' },
+        surname: { defaultValue: 'John', type: 'email' }
       },
       handle: {
         submit: (form) => {
@@ -84,7 +86,8 @@ export const _control: StoryObj<typeof Form> = {
   render: () => {
     const formGroup = useForm<FormData>({
       form: {
-        name: { defaultValue: '', type: 'text' }
+        name: { defaultValue: '', type: 'text' },
+        surname: { defaultValue: 'John', type: 'email' }
       },
       handle: {
         submit: (form) => {
@@ -116,7 +119,8 @@ export const _useControl: StoryObj<typeof Form> = {
   render: () => {
     const formGroup = useForm<FormData>({
       form: {
-        name: { defaultValue: 'teste', type: 'text' }
+        name: { defaultValue: 'teste', type: 'text' },
+        surname: { defaultValue: 'John', type: 'email' }
       },
       handle: {
         submit: (form) => {
@@ -147,6 +151,7 @@ export const _validator: StoryObj<typeof Form> = {
             (v) => v.value.split(' ').length < 2 && 'Deve ter dois nomes'
           ]
         },
+        surname: { defaultValue: '', type: 'email' }
       },
       handle: {
         submit: (form) => {
@@ -155,12 +160,12 @@ export const _validator: StoryObj<typeof Form> = {
         },
       },
       validator: {
-        name: ({ values }) => {
-          const { name } = values;
+        surname: ({ values }) => {
+          const { name, surname } = values;
 
-          const DEFAULT_NAME = 'John Doe';
+          console.log('AQUi', { name, surname });
 
-          if (name !== DEFAULT_NAME) { return `O nome deve ser ${DEFAULT_NAME}`; }
+          if (name !== surname) { return 'devem ser iguais'; }
         }
       }
     });
@@ -169,6 +174,16 @@ export const _validator: StoryObj<typeof Form> = {
       <Form formGroup={formGroup} debug>
         <Control
           controlName="name"
+          field={(control) => (
+            <Input
+              value={control.value}
+              error={control.isInvalid}
+              helperText={control.error}
+            />
+          )}
+        />
+        <Control
+          controlName="surname"
           field={(control) => (
             <Input
               value={control.value}
