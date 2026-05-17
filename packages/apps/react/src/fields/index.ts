@@ -4,3 +4,4 @@ export * from './ColorPicker';
 export * from './Input';
 export * from './InputFile';
 export * from './Select';
+export * from './Switch';
