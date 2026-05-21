@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type HTMLAttributes, type CSSProperties, useMemo } from 'react';
+import { type PropsWithChildren, type HTMLAttributes, type CSSProperties } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
@@ -65,17 +65,14 @@ function Typography({
     props.className
   );
 
-  const color = useMemo(() => {
-    if (!_color) { return 'currentColor'; }
-    return convertPathToColor(_color, palette);
-  }, [_color, palette]);
+  const color = convertPathToColor(_color, palette);
 
   return (
     <CustomTag
       {...props}
       className={cls}
       style={{
-        color,
+        ...(color ? { color } : {}),
         textAlign,
         ...props.style
       }}

@@ -34,7 +34,7 @@ export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   onRemove: (id: string) => void;
 };
 
-function Toast({ id, color, message, icon, delay, onRemove, ...props }: ToastProps) {
+function Toast({ id, color, message, icon, delay = 2500, onRemove, ...props }: ToastProps) {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { theme: { mode } } = useTheme();

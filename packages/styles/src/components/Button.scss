@@ -33,7 +33,7 @@
         color: var(--text-secondary);
         cursor: not-allowed;
 
-        .ui-button__icon {
+        .#{$prefix}-button__icon {
           color: var(--text-secondary) !important;
         }
       }

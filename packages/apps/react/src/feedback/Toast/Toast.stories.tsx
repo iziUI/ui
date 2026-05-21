@@ -22,7 +22,7 @@ function Child() {
       color: 'primary',
       message: `${count + 1} - Lorem Ipsum is simply dummy text of the printing and typesetting`,
       icon: <Icon name="fire" />,
-      delay: 2000,
+
     });
   };
 

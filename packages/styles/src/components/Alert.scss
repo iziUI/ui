@@ -6,11 +6,26 @@
   @each $color in $colors {
     &--#{$color} {
       box-shadow: $box-shadow-small;
-      color: var(--#{$color}-dark);
 
       overflow: hidden;
       backdrop-filter: blur(4px);
       background-color: var(--#{$color}-opacity);
+    }
+  }
+
+  &--light {
+    @each $color in $colors {
+      &.#{$prefix}-alert--#{$color} {
+        color: var(--#{$color}-dark);
+      }
+    }
+  }
+
+  &--dark {
+    @each $color in $colors {
+      &.#{$prefix}-alert--#{$color} {
+        color: var(--#{$color}-light);
+      }
     }
   }
 

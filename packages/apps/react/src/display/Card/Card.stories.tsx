@@ -6,6 +6,7 @@ import Card from './Card';
 import CardContent from './CardContent';
 import Chip from '../Chip';
 import Icon from '../Icon';
+import Typography from '../Typography';
 
 const style: CSSProperties = { minWidth: 300 };
 
@@ -13,7 +14,7 @@ export const WithOutContent: StoryObj<typeof Card> = {
   render: () => {
     return (
       <Card style={style}>
-        <span>Some content here</span>
+        <Typography>Some content here</Typography>
       </Card>
     );
   }
@@ -24,7 +25,7 @@ export const WithContent: StoryObj<typeof Card> = {
     return (
       <Card style={style}>
         <CardContent>
-          <span>Some content here</span>
+          <Typography>Some content here</Typography>
         </CardContent>
       </Card>
     );
@@ -36,7 +37,7 @@ export const Clickable: StoryObj<typeof Card> = {
     return (
       <Card style={style} onClick={() => alert('hello!')}>
         <CardContent>
-          <span>Click me!</span>
+          <Typography>Click me!</Typography>
         </CardContent>
       </Card>
     );
@@ -52,7 +53,7 @@ const meta: Meta<typeof Card> = {
   component: () => (
     <Card style={style}>
       <CardContent>
-        Some text here
+        <Typography>Some text here</Typography>
       </CardContent>
     </Card>
   ),

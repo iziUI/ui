@@ -106,8 +106,12 @@
 .docs-story,
 .docs-story>div:first-child,
 .sb-show-main {
-  background-color: #F0F0F0 !important;
+  background-color: var(--background-default) !important;
   box-shadow: none !important;
+}
+
+.sb-show-main.dark {
+  /* custom class when mode is changed */
 }
 
 /* Remove sombras de todos elementos de docs - EXCETO inputs/form controls */

@@ -1,6 +1,8 @@
-import type { ChangeEvent } from 'react';
+import { useEffect, useState, type ChangeEvent } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
+
+import { wait } from '@iziui/toolkit/promise';
 
 import Icon from '@/display/Icon';
 import Chip from '@/display/Chip';
@@ -60,7 +62,7 @@ export const _useForm: StoryObj<typeof Form> = {
           alert('submitted: ' + JSON.stringify(form.values, null, 2));
         },
       }
-    });
+    }, []);
 
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
       const name = e.target.value;
@@ -95,7 +97,7 @@ export const _control: StoryObj<typeof Form> = {
           alert('submitted: ' + JSON.stringify(form.values, null, 2));
         },
       },
-    });
+    }, []);
 
     return (
       <Form formGroup={formGroup} debug>
@@ -128,7 +130,7 @@ export const _useControl: StoryObj<typeof Form> = {
           alert('submitted: ' + JSON.stringify(form.values, null, 2));
         },
       },
-    });
+    }, []);
 
     return (
       <Form formGroup={formGroup} debug>
@@ -141,11 +143,13 @@ export const _useControl: StoryObj<typeof Form> = {
 
 export const _validator: StoryObj<typeof Form> = {
   render: () => {
+    const [name, setName] = useState('');
+
     const formGroup = useForm<FormData>({
       form: {
         name: {
           type: 'text',
-          defaultValue: 'John',
+          defaultValue: name,
           validators: [
             (v) => !v.value && 'Nome é obrigatório',
             (v) => v.value.split(' ').length < 2 && 'Deve ter dois nomes'
@@ -168,7 +172,11 @@ export const _validator: StoryObj<typeof Form> = {
           if (name !== surname) { return 'devem ser iguais'; }
         }
       }
-    });
+    }, [name]);
+
+    useEffect(() => {
+      wait(() => { setName('LEOZIN'); }, 1000);
+    }, []);
 
     return (
       <Form formGroup={formGroup} debug>

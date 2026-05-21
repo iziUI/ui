@@ -1,4 +1,10 @@
 .#{$prefix}-icon {
   transition: all $animation;
   color: currentColor;
+
+  @each $color in $colors {
+    &--#{$color} {
+      color: var(--#{$color});
+    }
+  }
 }

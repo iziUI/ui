@@ -61,7 +61,7 @@ export const Controlled: StoryObj<typeof Switch> = {
           logger.debug({ form });
         }
       }
-    });
+    }, []);
 
     return (
       <Form formGroup={formGroup}>

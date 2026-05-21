@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import FormGroup from './FormGroup';
 import FormControl from './FormControl';
@@ -28,7 +28,7 @@ export default function useForm<T extends Record<any, any>>({
   form,
   handle,
   validator
-}: UseForm<T>) {
+}: UseForm<T>, deps: readonly unknown[]) {
   const [formGroup, setFormGroup] = useState<FormGroup<T>>(
     new FormGroup(
       makingControls(form),
@@ -36,6 +36,10 @@ export default function useForm<T extends Record<any, any>>({
       validator
     )
   );
+
+  useEffect(() => {
+    setFormGroup(new FormGroup(makingControls(form), handle, validator));
+  }, [...deps]);
 
   const hydrate = (form: FormGroup<T>) => {
     setFormGroup(prev => {

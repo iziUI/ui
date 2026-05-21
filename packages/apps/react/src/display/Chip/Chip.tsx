@@ -7,6 +7,7 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 
 import type { IconProps } from '@/display/Icon';
 import Ripple from '@/actions/Ripple';
+import { useTheme } from '@/theme';
 import createComponent from '@/core/createComponent';
 
 import '@iziui/styles/components/Chip.scss';
@@ -28,8 +29,11 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(({
   onDelete,
   ...props
 }: ChipProps, ref) => {
+  const { theme: { mode } } = useTheme();
+
   const clss = joinClass(
     `${prefix}-chip`,
+    `${prefix}-chip--${mode}`,
     `${prefix}-chip--${color}`,
     `${prefix}-chip--${color}--${variant}`,
     `${prefix}-chip--${size}`,

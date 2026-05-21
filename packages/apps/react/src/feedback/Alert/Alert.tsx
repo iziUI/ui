@@ -5,6 +5,7 @@ import { prefix } from '@iziui/tokens/web/js';
 import type { Colors } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils/joinClass';
 
+import { useTheme } from '@/theme';
 import Stack from '@/layout/Stack';
 import Typography from '@/display/Typography';
 import ButtonIcon from '@/actions/ButtonIcon';
@@ -27,8 +28,11 @@ function Alert({
   onClose,
   ...props
 }: AlertProps) {
+  const { theme: { mode } } = useTheme();
+
   const className = joinClass(
     `${prefix}-alert`,
+    `${prefix}-alert--${mode}`,
     `${prefix}-alert--${color}`,
     props.className
   );

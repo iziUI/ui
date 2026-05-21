@@ -4,10 +4,8 @@ import { prefix } from '@iziui/tokens/web/js';
 
 import type { Colors } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils/joinClass';
-import { convertPathToColor } from '@iziui/core/utils/convertPathToColor';
 
 import type { IconProps } from '@/display/Icon';
-import { useTheme } from '@/theme';
 import Ripple from '@/actions/Ripple';
 import createComponent from '@/core/createComponent';
 
@@ -19,8 +17,6 @@ export interface ButtonIconProps extends PropsWithChildren<ButtonHTMLAttributes<
   children: ReactElement<IconProps>;
 };
 function ButtonIcon({ children, size = 40, color = 'primary', ...props }: ButtonIconProps) {
-  const { theme: { palette } } = useTheme();
-
   const [width, height] = [size, size];
 
   const classess = joinClass(
@@ -28,8 +24,6 @@ function ButtonIcon({ children, size = 40, color = 'primary', ...props }: Button
     color && `${prefix}-button-icon--${color}`,
     props.className
   );
-
-  const c = convertPathToColor(color, palette);
 
   const renderIcon = (icon: ReactElement<IconProps>) => {
     return cloneElement(icon, {
@@ -43,7 +37,7 @@ function ButtonIcon({ children, size = 40, color = 'primary', ...props }: Button
     <button
       {...props}
       className={classess}
-      style={{ color: c, ...props.style, width, height }}
+      style={{ ...props.style, width, height }}
     >
       {renderIcon(children)}
       <Ripple />

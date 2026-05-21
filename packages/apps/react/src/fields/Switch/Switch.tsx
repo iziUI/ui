@@ -54,7 +54,7 @@ function Switch({ label, error, helperText, color = 'primary', ...props }: Switc
   };
 
   return (
-    <Stack gap={2}>
+    <Stack gap={2} style={{ width: 'fit-content' }}>
       <label htmlFor={id} className={classNameLabel}>
         {label}
       </label>
