@@ -31,3 +31,7 @@ export function capitalize(str: string) {
   if (!str) { return ''; }
   return str[0].toUpperCase() + str.slice(1);
 }
+
+export function toKebabCase(value: string) {
+  return value.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
+}

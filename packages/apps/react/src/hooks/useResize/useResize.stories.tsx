@@ -19,16 +19,16 @@ export const Template: StoryObj<typeof useResize> = {
       onMd: () => { makeIt('md'); },
       onLg: () => { makeIt('lg'); },
       onXl: () => { makeIt('xl'); },
-    }, [count]);
+    }, []);
 
     const makeIt = (s: string) => {
       setScreen(s);
-      setCount(count + 1);
+      setCount(prev => prev + 1);
     };
 
     return (
       <div>
-        <h1>{screen}</h1>
+        <h1>{screen}{count}</h1>
       </div>
     );
   }
