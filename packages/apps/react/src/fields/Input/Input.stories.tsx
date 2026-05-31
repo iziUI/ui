@@ -7,7 +7,7 @@ import Chip from '@/display/Chip';
 import Stack from '@/layout/Stack';
 import ButtonIcon from '@/actions/ButtonIcon';
 
-import Input, { type InputType } from './Input';
+import Input from './Input';
 
 export const InputTypes: StoryObj<typeof Input> = {
   render: () => {
@@ -17,6 +17,9 @@ export const InputTypes: StoryObj<typeof Input> = {
         <Input placeholder="Password" type="password" />
         <Input placeholder="Number" type="number" />
         <Input placeholder="Date" type="date" value="2014-02-09" />
+        <Input placeholder="Date tile" type="datetime-local" />
+        <Input placeholder="Tel" type="tel" />
+        <Input placeholder="Time" type="time" />
       </Stack>
     );
   }
@@ -35,7 +38,7 @@ export const WithIcon: StoryObj<typeof Input> = {
 
     return (
       <Stack flexDirection="column">
-        <Input type={data.type as InputType} endIcon={
+        <Input type={data.type} endIcon={
           <ButtonIcon onClick={() => setVisible(prev => prev === 'hide' ? 'show' : 'hide')}>
             <Icon name={data.icon} />
           </ButtonIcon>

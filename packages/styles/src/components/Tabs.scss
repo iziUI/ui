@@ -1,0 +1,70 @@
+.#{$prefix}-tabs {
+  display: flex;
+  position: relative;
+  align-items: center;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &__button {
+    width: 100%;
+    min-width: 120px;
+    border: none;
+    text-transform: uppercase;
+    background-color: transparent;
+
+    height: 48px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--divider);
+
+    cursor: pointer;
+    transition: all 0.3s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @each $color in $colors {
+      &--active-#{$color} {
+        color: var(--#{$color});
+      }
+    }
+
+    &--disabled {
+      color: var(--text-disabled);
+      cursor: not-allowed;
+    }
+
+    &__icon {
+      opacity: 1;
+      margin-right: 8px;
+      transition: all $animation;
+    }
+  }
+
+  &__marker {
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    transition: all 0.4s;
+
+    height: 2px;
+
+    @each $color in $colors {
+      &--#{$color} {
+        background-color: var(--#{$color});
+      }
+    }
+
+    &__icon {
+      margin-right: 8px;
+    }
+  }
+}

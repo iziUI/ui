@@ -9,13 +9,10 @@ import createComponent from '@/core';
 
 import '@iziui/styles/components/Input.scss';
 
-export type InputType = 'text' | 'password' | 'number' | 'date' | 'month' | 'tel';
-
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
   label?: string;
   helperText?: string;
-  type?: InputType;
   width?: CSSProperties['width'];
   endIcon?: React.JSX.Element | boolean;
   startIcon?: React.JSX.Element | boolean;

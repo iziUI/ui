@@ -13,7 +13,7 @@ import type { Colors } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils/joinClass';
 
 import Icon from '@/display/Icon';
-import { Menu, useMenu } from '@/navigation/Menu';
+import { Menu, type MenuProps, useMenu } from '@/navigation/Menu';
 
 import type { OptionProps } from './Option';
 import createComponent from '../../core/createComponent';
@@ -26,6 +26,7 @@ export interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   label?: string;
   helperText?: string;
   color?: Colors;
+  position?: MenuProps['position'];
   startIcon?: React.JSX.Element | boolean;
   children: React.JSX.Element | React.JSX.Element[];
 }
@@ -33,6 +34,7 @@ export interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
 function Select({
   error,
   color = 'grey',
+  position = 'bottom',
   label,
   helperText,
   startIcon,
@@ -118,6 +120,7 @@ function Select({
       </button>
       <Menu
         autoClose
+        position={position}
         direction="center"
         open={open}
         anchorEl={el}

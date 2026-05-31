@@ -1,4 +1,4 @@
-import { cloneElement, type HtmlHTMLAttributes } from 'react';
+import { type HtmlHTMLAttributes } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
@@ -10,7 +10,7 @@ import Stack from '@/layout/Stack';
 import Typography from '@/display/Typography';
 import ButtonIcon from '@/actions/ButtonIcon';
 import createComponent from '@/core/createComponent';
-import Icon, { type IconProps } from '@/display/Icon';
+import Icon from '@/display/Icon';
 
 import '@iziui/styles/components/Alert.scss';
 
@@ -54,12 +54,6 @@ function Alert({
     return children;
   };
 
-  const renderIcon = (icon: React.JSX.Element) => {
-    return cloneElement<IconProps>(icon, {
-      color: `${color}.dark`
-    });
-  };
-
   return (
     <Stack
       fullWidth
@@ -77,7 +71,7 @@ function Alert({
         alignItems="center"
         className={`${prefix}-alert__content`}
       >
-        {icon && renderIcon(icon)}
+        {icon}
         {renderMessage()}
       </Stack>
       {

@@ -1,6 +1,7 @@
 @use "sass:map";
 
 .#{$prefix}-select {
+  position: relative;
   padding: 0;
   width: 100%;
   border: none;

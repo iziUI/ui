@@ -19,7 +19,7 @@ export const Template: StoryObj<typeof useResize> = {
       onMd: () => { makeIt('md'); },
       onLg: () => { makeIt('lg'); },
       onXl: () => { makeIt('xl'); },
-    }, []);
+    });
 
     const makeIt = (s: string) => {
       setScreen(s);

@@ -41,7 +41,6 @@ function Button({
 
   const renderIcon = (icon: React.JSX.Element, direction: 'left' | 'right') => {
     return cloneElement<IconProps>(icon, {
-      color: `${color}.contrast`,
       className: joinClass(icon.props.className, `${prefix}-button__icon`, `${prefix}-button__icon--${direction}`)
     });
   };
