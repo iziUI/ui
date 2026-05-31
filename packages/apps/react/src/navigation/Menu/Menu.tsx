@@ -25,6 +25,7 @@ import createComponent from '../../core/createComponent';
 import '@iziui/styles/components/Menu.scss';
 
 type Direction = 'left' | 'right' | 'center';
+type Position = 'top' | 'bottom';
 type AnimationClass = 'open' | 'close';
 type State = 'visible' | 'invisible';
 type Coordinates = { top?: number; right?: number; bottom?: number; left?: number; };
@@ -35,6 +36,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   autoClose?: boolean;
   maxHeight?: CSSProperties['maxHeight'];
   direction?: Direction;
+  position?: Position;
   anchorEl: HTMLElement | null;
   width?: CSSProperties['width'];
   children: React.JSX.Element | React.JSX.Element[];
@@ -47,7 +49,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
   children,
   anchorEl,
   direction = 'left',
-  maxHeight,
+  position = 'bottom',
+  maxHeight = 150,
   autoClose,
   onClose,
   ...props
@@ -65,6 +68,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
   const classes = joinClass(
     `${prefix}-menu`,
     `${prefix}-menu--${config?.animation}`,
+    `${prefix}-menu--${position}`,
     props.className
   );
 
@@ -81,19 +85,21 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
     setTimeout(() => {
       let coordinates: Coordinates = {};
 
-      const { offsetWidth, offsetHeight, offsetLeft, offsetTop } = anchorEl;
+      const { width: anchorWidth, height: anchorHeight, left, top: anchorTop } = anchorEl.getBoundingClientRect();
 
-      setConfig(prev => ({ ...prev, width: offsetWidth }));
-
-      const top = offsetTop + offsetHeight + (GAP / 2);
+      setConfig(prev => ({ ...prev, width: anchorWidth }));
 
       const el = document.getElementById(id) as HTMLElement;
 
-      if (direction === 'center') { coordinates = { top, right: offsetWidth }; }
+      const top = position === 'bottom'
+        ? anchorTop + anchorHeight + (GAP / 2)
+        : anchorTop - el.offsetHeight - (GAP / 2);
 
-      if (direction === 'left') { coordinates = { top, left: offsetLeft }; }
+      if (direction === 'center') { coordinates = { top, right: anchorWidth }; }
 
-      if (direction === 'right') { coordinates = { top, left: offsetLeft - (el.offsetWidth - offsetWidth) }; }
+      if (direction === 'left') { coordinates = { top, left }; }
+
+      if (direction === 'right') { coordinates = { top, left: left - (el.offsetWidth - anchorWidth) }; }
 
       setCoordinate(coordinates);
     }, 0);
@@ -101,6 +107,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
 
   const handleOpen = () => {
     setConfig(prev => ({ ...prev, state: 'visible' }));
+
+    changePosition();
 
     setTimeout(() => { setConfig(prev => ({ ...prev, animation: 'open' })); }, 10);
   };
@@ -154,7 +162,11 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
               <CardContent
                 className={`${prefix}-menu__card__content`}
                 sx={{ py: 1 }}
-                style={{ display: 'flex', flexDirection: 'column', maxHeight }}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  maxHeight
+                }}
               >
                 {renderChildren()}
               </CardContent>

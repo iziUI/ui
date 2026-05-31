@@ -1,7 +1,7 @@
 @use "sass:map";
 
 .#{$prefix}-menu {
-  position: absolute;
+  position: fixed;
   word-break: break-all;
   white-space: pre-wrap;
   display: flex;
@@ -33,8 +33,15 @@
   }
 
   &--close {
-    transform: translateY(-10px);
     opacity: 0;
+  }
+
+  &--bottom.#{$prefix}-menu--close {
+    transform: translateY(-10px);
+  }
+
+  &--top.#{$prefix}-menu--close {
+    transform: translateY(10px);
   }
 
   &__item {
