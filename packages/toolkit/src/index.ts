@@ -1,4 +1,5 @@
 export * from './debounce';
+export * from './file';
 export * from './interface';
 export * from './logger';
 export * from './mask';
