@@ -1,0 +1,109 @@
+@use "sass:map";
+
+.#{$prefix}-autocomplete {
+  position: relative;
+  padding: 0;
+  width: 100%;
+  border: none;
+  border-radius: var(--radius);
+  border: 1px solid var(--divider);
+  background-color: var(--background-default);
+  font-size: map.get($font_sizes, medium);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  &:focus-within {
+    outline: 2px solid var(--primary);
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    background: var(--divider);
+    color: var(--text-disabled);
+  }
+
+  &--error {
+    border-color: var(--error);
+  }
+
+  input {
+    cursor: pointer;
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    user-select: none;
+    padding: $proportion-base;
+    color: var(--text-primary);
+    transition: all $animation;
+    font-size: map.get($font_sizes, medium);
+
+    &:-internal-autofill-selected {
+      -webkit-text-fill-color: var(--divider);
+    }
+
+    &::placeholder {
+      color: var(--text-secondary);
+      opacity: 1;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: var(--text-disabled);
+    }
+  }
+
+  &-container {
+    width: 100%;
+    position: relative;
+  }
+
+  &-label {
+    font-size: map.get($font_sizes, small);
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 5px;
+
+    &--error {
+      color: var(--error);
+    }
+  }
+
+  &__reset-button {
+    margin-right: 6px;
+
+  }
+
+  &__icon {
+    &--left {
+      margin-left: 10.8px;
+      margin-right: -5px;
+    }
+
+    &--disabled {
+      background: var(--text-disabled);
+    }
+  }
+
+  &__helper-text {
+    opacity: 0;
+    margin: 6px 0 0;
+    transition: all $animation;
+    font-size: map.get($font_sizes, small);
+    transform: translateY(-10px);
+
+    &--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &--error {
+      color: var(--error);
+    }
+  }
+}

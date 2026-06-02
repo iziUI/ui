@@ -22,7 +22,6 @@ import '@iziui/styles/components/Select.scss';
 
 export interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'color'> {
   error?: boolean;
-  autoClose?: boolean;
   label?: string;
   helperText?: string;
   color?: Colors;

@@ -167,8 +167,6 @@ export const _validator: StoryObj<typeof Form> = {
         surname: ({ values }) => {
           const { name, surname } = values;
 
-          console.log('AQUi', { name, surname });
-
           if (name !== surname) { return 'devem ser iguais'; }
         }
       }

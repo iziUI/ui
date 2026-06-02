@@ -39,7 +39,6 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   position?: Position;
   anchorEl: HTMLElement | null;
   width?: CSSProperties['width'];
-  children: React.JSX.Element | React.JSX.Element[];
   onClose: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 

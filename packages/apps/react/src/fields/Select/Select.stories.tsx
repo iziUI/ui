@@ -113,26 +113,6 @@ export const DisabledOption: StoryObj<typeof Select> = {
   }
 };
 
-export const autoclose: StoryObj<typeof Select> = {
-  render: () => {
-    const [selected, setSelected] = useState<string>();
-
-    return (
-      <Select
-        autoClose
-        placeholder="Select value"
-        label={`Selected: ${selected}`}
-        value={selected}
-        onChange={(e) => setSelected(e.target.value)}
-      >
-        <Option value="1">Option 1</Option>
-        <Option value="2">Option 2</Option>
-        <Option value="3">Option 3</Option>
-      </Select>
-    );
-  }
-};
-
 export const withIcon: StoryObj<typeof Select> = {
   render: () => {
     const [selected, setSelected] = useState<string>();
