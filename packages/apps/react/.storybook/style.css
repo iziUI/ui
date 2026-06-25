@@ -106,7 +106,7 @@
 .docs-story,
 .docs-story>div:first-child,
 .sb-show-main {
-  background-color: var(--background-default) !important;
+  background-color: var(--background-paper) !important;
   box-shadow: none !important;
 }
 

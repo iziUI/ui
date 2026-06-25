@@ -109,9 +109,9 @@ const meta: Meta<typeof Input> = {
       description: 'Input permite que os usuários insiram e editem texto ou dados em formulários e interfaces.',
       tag: (
         <Chip
-          label="Layout"
+          label="Fields"
           color="info"
-          icon={<Icon name="keyboard" />}
+          icon={<Icon name="check-square" />}
         />
       ),
     }

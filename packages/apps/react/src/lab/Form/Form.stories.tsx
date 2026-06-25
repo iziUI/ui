@@ -8,6 +8,7 @@ import Icon from '@/display/Icon';
 import Chip from '@/display/Chip';
 import Input from '@/fields/Input';
 import Button from '@/actions/Button';
+import Stack from '@/layout/Stack';
 
 import Form from './Form';
 import Control from './Control';
@@ -178,27 +179,29 @@ export const _validator: StoryObj<typeof Form> = {
 
     return (
       <Form formGroup={formGroup} debug>
-        <Control
-          controlName="name"
-          field={(control) => (
-            <Input
-              value={control.value}
-              error={control.isInvalid}
-              helperText={control.error}
-            />
-          )}
-        />
-        <Control
-          controlName="surname"
-          field={(control) => (
-            <Input
-              value={control.value}
-              error={control.isInvalid}
-              helperText={control.error}
-            />
-          )}
-        />
-        <Button>Submit</Button>
+        <Stack>
+          <Control
+            controlName="name"
+            field={(control) => (
+              <Input
+                value={control.value}
+                error={control.isInvalid}
+                helperText={control.error}
+              />
+            )}
+          />
+          <Control
+            controlName="surname"
+            field={(control) => (
+              <Input
+                value={control.value}
+                error={control.isInvalid}
+                helperText={control.error}
+              />
+            )}
+          />
+          <Button>Submit</Button>
+        </Stack>
       </Form>
     );
   }

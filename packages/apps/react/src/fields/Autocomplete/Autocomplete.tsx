@@ -109,7 +109,6 @@ function Autocomplete<T>({
 
   const helperTextClss = joinClass(
     `${prefix}-autocomplete__helper-text`,
-    helperText && `${prefix}-autocomplete__helper-text--visible`,
     error && `${prefix}-autocomplete__helper-text--error`
   );
 
@@ -132,6 +131,7 @@ function Autocomplete<T>({
     return cloneElement(icon, {
       className: joinClass(
         icon.props.className,
+        `${prefix}-autocomplete__icon`,
         `${prefix}-autocomplete__icon--left`
       ),
       type: 'button',
@@ -163,6 +163,7 @@ function Autocomplete<T>({
       const child = renderOption(o);
       const selected = o === value;
       const active = index === activeIndex;
+
       return cloneElement(child, {
         id: `${id}-option-${index}`,
         role: 'option',
@@ -289,7 +290,11 @@ function Autocomplete<T>({
         {!loading && _renderOptions()}
         {!loading && !visibleOptions.length && emptyContent}
       </Menu>
-      <span className={helperTextClss}>{helperText}</span>
+      {
+        helperTextClss && (
+          <span className={helperTextClss}>{helperText}</span>
+        )
+      }
     </div>
   );
 }

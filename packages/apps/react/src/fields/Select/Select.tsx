@@ -32,7 +32,6 @@ export interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
 
 function Select({
   error,
-  color = 'grey',
   position = 'bottom',
   label,
   helperText,
@@ -69,7 +68,6 @@ function Select({
 
   const helperTextClss = joinClass(
     `${prefix}-select__helper-text`,
-    helperText && `${prefix}-select__helper-text--visible`,
     error && `${prefix}-select__helper-text--error`
   );
 
@@ -80,7 +78,6 @@ function Select({
         `${prefix}-select__icon--left`
       ),
       type: 'button',
-      style: { color },
       onClick: (e) => {
         e.stopPropagation();
         if (icon.props.onClick && !disabled) { icon.props.onClick(e); };
@@ -91,7 +88,6 @@ function Select({
   const renderOption = () => {
     return arrayChildren.map((child) => {
       return cloneElement(child, {
-        color,
         className: joinClass(
           child.props.className,
           child.props.value === props.value && `${prefix}-select__option--selected`,
@@ -127,7 +123,11 @@ function Select({
       >
         {renderOption()}
       </Menu>
-      <span className={helperTextClss}>{helperText}</span>
+      {
+        helperTextClss && (
+          <span className={helperTextClss}>{helperText}</span>
+        )
+      }
     </div>
   );
 }

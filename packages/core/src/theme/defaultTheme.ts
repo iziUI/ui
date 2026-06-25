@@ -42,14 +42,14 @@ export const themeDefaultDark: Theme = {
     success: '#36E79B',
     primary: '#8b5dff',
     secondary: '#EBFF5E',
-    grey: '#2A2A2A',
+    grey: '#afafaf',
     text: {
       primary: 'rgba(255, 255, 255, 0.87)',
       secondary: 'rgba(255, 255, 255, 0.6)',
       disabled: 'rgba(255, 255, 255, 0.38)'
     },
     background: {
-      paper: '#0D0225',
+      paper: '#302744',
       default: '#30294E',
     },
     divider: 'rgba(242, 242, 242, 0.12)'

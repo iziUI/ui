@@ -3,19 +3,19 @@ import {
   type MouseEvent,
   type ReactElement,
   type CSSProperties,
-  type InputHTMLAttributes,
+  type TextareaHTMLAttributes,
 } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
 import { joinClass } from '@iziui/core/utils/joinClass';
 
-import type { ButtonIconProps } from '@/actions/ButtonIcon';
 import createComponent from '@/core';
+import type { ButtonIconProps } from '@/actions/ButtonIcon';
 
-import '@iziui/styles/components/Input.scss';
+import '@iziui/styles/components/Textarea.scss';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: boolean;
   label?: string;
   helperText?: string;
@@ -24,36 +24,36 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   startIcon?: React.JSX.Element | boolean;
 }
 
-function Input({
+function Textarea({
   error,
   label,
   helperText,
   endIcon,
   startIcon,
-  type = 'text',
   disabled,
   width = '100%',
   ...props
-}: InputProps) {
+}: TextareaProps) {
   const containerClss = joinClass(
-    `${prefix}-input-container`,
+    `${prefix}-textarea-container`,
   );
 
   const labelClss = joinClass(
-    `${prefix}-input-label`,
-    error && `${prefix}-input-label--error`,
+    `${prefix}-textarea-label`,
+    error && `${prefix}-textarea-label--error`,
   );
 
   const classes = joinClass(
-    `${prefix}-input`,
-    disabled && `${prefix}-input--disabled`,
-    error && `${prefix}-input--error`,
+    `${prefix}-textarea`,
+    disabled && `${prefix}-textarea--disabled`,
+    error && `${prefix}-textarea--error`,
     props.className
   );
 
   const helperTextClss = joinClass(
-    `${prefix}-input__helper-text`,
-    error && `${prefix}-input__helper-text--error`
+    `${prefix}-textarea__helper-text`,
+    helperText && `${prefix}-textarea__helper-text--visible`,
+    error && `${prefix}-textarea__helper-text--error`
   );
 
   const renderIcon = (icon: ReactElement<ButtonIconProps>, direction: 'left' | 'right') => {
@@ -62,12 +62,13 @@ function Input({
       size: icon.props.size || 30,
       type: 'button',
       style: {
+        ...(disabled ? { background: 'transparent' } : {}),
         ...icon.props.style,
       },
       className: joinClass(
         icon.props.className,
-        `${prefix}-input__icon`,
-        `${prefix}-input__icon--margin-${direction}`
+        `${prefix}-textarea__icon`,
+        `${prefix}-textarea__icon--margin-${direction}`
       ),
       onClick: (e: MouseEvent<any, globalThis.MouseEvent>) => {
         e.stopPropagation();
@@ -81,16 +82,12 @@ function Input({
       {label && <label className={labelClss}>{label} {props.required && '*'}</label>}
       <div className={classes}>
         {startIcon && renderIcon(startIcon as React.JSX.Element, 'right')}
-        <input {...props} type={type} disabled={disabled} />
+        <textarea {...props} disabled={disabled} />
         {endIcon && renderIcon(endIcon as React.JSX.Element, 'left')}
       </div>
-      {
-        helperText && (
-          <p className={helperTextClss}>{helperText}</p>
-        )
-      }
+      <p className={helperTextClss}>{helperText}</p>
     </div>
   );
 }
 
-export default createComponent(Input);
+export default createComponent(Textarea);

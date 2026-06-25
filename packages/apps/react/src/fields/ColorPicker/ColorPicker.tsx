@@ -72,7 +72,6 @@ function ColorPicker({
 
   const helperTextClss = joinClass(
     `${prefix}-color-picker__helper-text`,
-    helperText && `${prefix}-color-picker__helper-text--visible`,
     error && `${prefix}-color-picker__helper-text--error`,
   );
 
@@ -100,7 +99,11 @@ function ColorPicker({
           {value}
         </div>
       </button>
-      <span className={helperTextClss}>{helperText}</span>
+      {
+        helperTextClss && (
+          <span className={helperTextClss}>{helperText}</span>
+        )
+      }
       <Menu
         direction="left"
         autoClose={autoClose}

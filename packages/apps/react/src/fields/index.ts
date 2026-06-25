@@ -5,3 +5,4 @@ export * from './Input';
 export * from './InputFile';
 export * from './Select';
 export * from './Switch';
+export * from './Textarea';
