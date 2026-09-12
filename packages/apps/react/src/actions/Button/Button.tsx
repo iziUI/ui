@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type ButtonHTMLAttributes, cloneElement } from 'react';
+import { type ButtonHTMLAttributes, cloneElement } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
@@ -13,7 +13,7 @@ import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/Button.scss';
 
-export interface ButtonProps extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: Size;
   color?: Colors;
   endIcon?: React.JSX.Element;

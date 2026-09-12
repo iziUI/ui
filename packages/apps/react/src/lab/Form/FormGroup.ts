@@ -44,7 +44,11 @@ export default class FormGroup<T extends Record<string, any>> {
     const values: Record<string, any> = {};
 
     this.eachControl((control, key) => ({ [key as string]: control.value }))
-      .forEach(control => { for (const prop in control) { values[prop] = control[prop]; } });
+      .forEach(control => {
+        for (const prop in control) {
+          values[prop] = control[prop];
+        }
+      });
 
     return values as T;
   }
@@ -63,8 +67,6 @@ export default class FormGroup<T extends Record<string, any>> {
 
     this.validate();
 
-    this.hydrate(this);
-
     if (!this.handle.change) { return; }
 
     this.handle.change(this);
@@ -81,7 +83,6 @@ export default class FormGroup<T extends Record<string, any>> {
 
     this.validate();
 
-    this.hydrate(this);
     this.handle.submit(this);
   }
 

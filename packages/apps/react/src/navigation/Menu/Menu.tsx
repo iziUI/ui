@@ -78,6 +78,15 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   useEffect(() => { open ? handleOpen() : handleClose(); }, [open]);
 
+  useEffect(() => {
+    if (!open) {
+      document.body.style.overflow = 'auto';
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+  }, [open]);
+
   const changePosition = () => {
     if (!anchorEl) { return; }
 

@@ -21,6 +21,7 @@ export const themeDefaultLight: Theme = {
     background: {
       paper: '#F9F8F9',
       default: '#FFF',
+      muted: '#F9F8F9'
     },
     divider: 'rgba(0, 0, 0, 0.12)'
   },
@@ -51,6 +52,7 @@ export const themeDefaultDark: Theme = {
     background: {
       paper: '#302744',
       default: '#30294E',
+      muted: '#1A1A1A'
     },
     divider: 'rgba(242, 242, 242, 0.12)'
   },

@@ -37,6 +37,7 @@
 
       &--contained {
         background-color: var(--#{$color}-opacity);
+        border: 1px solid var(--#{$color}-opacity);
       }
     }
   }

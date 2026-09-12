@@ -7,8 +7,9 @@ import { wait } from '@iziui/toolkit/promise';
 import Icon from '@/display/Icon';
 import Chip from '@/display/Chip';
 import Input from '@/fields/Input';
-import Button from '@/actions/Button';
 import Stack from '@/layout/Stack';
+import Button from '@/actions/Button';
+import { Select, Option } from '@/fields/Select';
 
 import Form from './Form';
 import Control from './Control';
@@ -18,6 +19,7 @@ import useControl from './useControl';
 interface FormData {
   name: string;
   surname: string;
+  category?: 'document' | 'passport';
 }
 
 const meta: Meta<typeof Form> = {
@@ -43,9 +45,9 @@ function InputUseControl() {
   return (
     <Input
       onInput={(e: any) => update(e.target.value)}
-      value={control.value}
-      error={control.isInvalid}
-      helperText={control.error}
+      value={control?.value}
+      error={control?.isInvalid}
+      helperText={control?.error}
     />
   );
 }
@@ -89,8 +91,9 @@ export const _control: StoryObj<typeof Form> = {
   render: () => {
     const formGroup = useForm<FormData>({
       form: {
-        name: { defaultValue: '', type: 'text' },
-        surname: { defaultValue: 'John', type: 'email' }
+        name: { defaultValue: '', type: 'text', },
+        surname: { defaultValue: 'John', type: 'email' },
+        category: { defaultValue: 'document', type: 'text' },
       },
       handle: {
         submit: (form) => {
@@ -98,21 +101,50 @@ export const _control: StoryObj<typeof Form> = {
           alert('submitted: ' + JSON.stringify(form.values, null, 2));
         },
       },
+      validator: {
+        name: ({ values }) => {
+          const { name } = values;
+
+          if (!name) { return 'Este é um campo obrigatório'; }
+
+          return;
+        }
+      }
     }, []);
 
     return (
       <Form formGroup={formGroup} debug>
-        <Control
-          controlName="name"
-          field={(control) => (
-            <Input
-              value={control.value}
-              error={control.isInvalid}
-              helperText={control.error}
-            />
-          )}
-        />
-        <Button>Submit</Button>
+        <Stack>
+          <Control
+            controlName="name"
+            field={(control) => (
+              <Input
+                value={control.value}
+                error={control.isInvalid}
+                helperText={control.error}
+              />
+            )}
+          />
+          <Control
+            action="change"
+            controlName="category"
+            field={(control) => (
+              <Select
+                placeholder="Selecione o assunto"
+                label="Assunto"
+                value={control.value}
+              >
+                <Option value="document">
+                  Documento
+                </Option>
+                <Option value="passport">
+                  Passaport
+                </Option>
+              </Select>
+            )}
+          />
+          <Button>Submit</Button>
+        </Stack>
       </Form>
     );
   }

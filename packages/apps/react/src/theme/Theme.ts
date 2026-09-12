@@ -1,1 +1,6 @@
-export type { Theme } from '@iziui/core/theme';
+export type {
+  Mode,
+  Theme,
+  Colors,
+  Palette,
+} from '@iziui/core/theme';

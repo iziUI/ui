@@ -6,7 +6,7 @@
   border-radius: var(--radius);
   transition: all $animation;
   overflow: hidden;
-  min-height: 37px;
+  min-height: 40px;
   text-transform: uppercase;
 
   cursor: pointer;
@@ -18,9 +18,9 @@
   }
 
   &--large {
-    font-size: 0.9375rem;
+    font-size: 1rem;
     padding: 8px 22px;
-    min-height: 41px;
+    min-height: 50px;
   }
 
   @each $color in $colors {

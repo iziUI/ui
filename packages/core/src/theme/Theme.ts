@@ -34,6 +34,7 @@ export interface Palette {
         disabled: string;
     };
     background: {
+        muted: string;
         paper: string;
         default: string;
     };

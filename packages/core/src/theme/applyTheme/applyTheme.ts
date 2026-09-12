@@ -44,6 +44,7 @@ export function applyTheme(theme: ThemeBuilded) {
 
   // BACKGROUND
   document.documentElement.style.setProperty('--background-paper', palette.background?.paper);
+  document.documentElement.style.setProperty('--background-muted', palette.background?.muted);
   document.documentElement.style.setProperty('--background-default', palette.background?.default);
 
   // DIVIDER
