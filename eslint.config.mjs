@@ -45,6 +45,7 @@ export default [
             'module',
             '/^@storybook/',
             '/^@hello-pangea/',
+            '/^@testing-library/',
             '/^@iziui/tokens/',
             '/^@iziui/styles/',
             '/^@iziui/core/',

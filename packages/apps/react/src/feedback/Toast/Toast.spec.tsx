@@ -9,7 +9,9 @@ jest.mock('@/core/createComponent', () => ({
 
 describe('Toast', () => {
   it('renders successfully', () => {
-    const { container } = render(<Toast />);
+    const { container } = render(
+      <Toast color="success" message="message here" onRemove={() => ''} />
+    );
     expect(container.querySelector('.iziui-toast')).toBeInTheDocument();
   });
 });

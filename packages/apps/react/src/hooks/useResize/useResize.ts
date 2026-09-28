@@ -15,7 +15,7 @@ export const DeviceBreakpoints = {
 
 type Device = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export interface Callback {
+export interface UseResizeOptions {
   onXs?: () => void;
   onSm?: () => void;
   onMd?: () => void;
@@ -31,7 +31,7 @@ const MEDIAS: Record<Device, string> = {
   xl: DeviceBreakpoints.MIN_XL,
 };
 
-export default function useResize({ onXs, onSm, onMd, onLg, onXl }: Callback) {
+export default function useResize({ onXs, onSm, onMd, onLg, onXl }: UseResizeOptions) {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 

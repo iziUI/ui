@@ -17,10 +17,10 @@ import { useTheme } from '@/theme';
 import '@iziui/styles/components/Tooltip.scss';
 
 type TooltipCoordinate = { top: number; left: number; };
-type Direction = 'top' | 'right' | 'bottom' | 'left';
+export type TooltipDirection = 'top' | 'right' | 'bottom' | 'left';
 
 export interface TooltipProps extends HTMLAttributes<HTMLElement> {
-  direction?: Direction;
+  direction?: TooltipDirection;
   width?: CSSProperties['width'];
   children: React.JSX.Element;
   label: string | React.JSX.Element;

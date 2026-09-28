@@ -6,4 +6,4 @@ export { default as Checkbox, type CheckboxProps } from './Checkbox';
 export { default as Textarea, type TextareaProps } from './Textarea';
 export { default as InputFile, type InputFileProps } from './InputFile';
 export { default as ColorPicker, type ColorPickerProps } from './ColorPicker';
-export { default as CheckboxGroup, type CheckboxGroupProps } from './CheckboxGroup';
+export { default as CheckboxGroup, type CheckboxGroupItem, type CheckboxGroupProps } from './CheckboxGroup';

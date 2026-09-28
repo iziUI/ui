@@ -24,8 +24,8 @@ import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/Menu.scss';
 
-type Direction = 'left' | 'right' | 'center';
-type Position = 'top' | 'bottom';
+export type MenuDirection = 'left' | 'right' | 'center';
+export type MenuPosition = 'top' | 'bottom';
 type AnimationClass = 'open' | 'close';
 type State = 'visible' | 'invisible';
 type Coordinates = { top?: number; right?: number; bottom?: number; left?: number; };
@@ -35,8 +35,8 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;
   autoClose?: boolean;
   maxHeight?: CSSProperties['maxHeight'];
-  direction?: Direction;
-  position?: Position;
+  direction?: MenuDirection;
+  position?: MenuPosition;
   anchorEl: HTMLElement | null;
   width?: CSSProperties['width'];
   onClose: (e?: React.MouseEvent<HTMLButtonElement>) => void;

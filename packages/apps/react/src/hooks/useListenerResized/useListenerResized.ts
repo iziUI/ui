@@ -1,6 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, type DependencyList } from 'react';
 
-export default function useListenerResized(callback: (w: Window & typeof globalThis) => void, deps: any[]) {
+export default function useListenerResized(
+  callback: (w: Window & typeof globalThis) => void,
+  deps: DependencyList,
+) {
   const handleResize = () => { callback(window); };
 
   useEffect(() => {

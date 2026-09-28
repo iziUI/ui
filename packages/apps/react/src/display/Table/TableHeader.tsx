@@ -4,7 +4,9 @@ import { prefix } from '@iziui/tokens/web/js';
 
 import { joinClass } from '@iziui/core/utils/joinClass';
 
-function TableHeader({ children }: PropsWithChildren) {
+export type TableHeaderProps = PropsWithChildren;
+
+function TableHeader({ children }: TableHeaderProps) {
   const className = joinClass(
     `${prefix}-table__header`,
   );

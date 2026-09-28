@@ -11,15 +11,19 @@ import type { CheckboxProps } from '../Checkbox';
 
 import '@iziui/styles/components/CheckboxGroup.scss';
 
-type CheckboxData = { id: string; value: any; checked: boolean };
+export interface CheckboxGroupItem<T = any> {
+  id: string;
+  value: T;
+  checked: boolean;
+}
 
 let ID_REFERENCE = 0;
 
-export interface CheckboxGroupProps {
+export interface CheckboxGroupProps<T = any> {
   className?: string;
   children: React.ReactNode;
   values?: string[];
-  onChange?: (data: CheckboxData[]) => void;
+  onChange?: (data: CheckboxGroupItem<T>[]) => void;
 }
 
 function CheckboxGroup({ children, values, onChange, className }: CheckboxGroupProps) {
@@ -31,7 +35,7 @@ function CheckboxGroup({ children, values, onChange, className }: CheckboxGroupP
     className,
   );
 
-  const [checkboxes, setCheckboxes] = useState<CheckboxData[]>(arrayChildren.map((item) => ({
+  const [checkboxes, setCheckboxes] = useState<CheckboxGroupItem[]>(arrayChildren.map((item) => ({
     id: item.props.name,
     value: item.props.value,
     checked: values ? values.some((val) => val === item.props.name) : false,

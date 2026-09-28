@@ -8,10 +8,10 @@ import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/Skeleton.scss';
 
-type Variants = 'rounded' | 'rectangular' | 'circular';
+export type SkeletonVariant = 'rounded' | 'rectangular' | 'circular';
 
 export interface SkeletonProps {
-  variant?: Variants;
+  variant?: SkeletonVariant;
   width: CSSProperties['width'];
   height: CSSProperties['height'];
 }

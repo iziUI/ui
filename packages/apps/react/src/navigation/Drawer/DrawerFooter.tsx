@@ -6,7 +6,7 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 
 import createComponent from '../../core/createComponent';
 
-type DrawerFooterProps = PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>>
+export type DrawerFooterProps = PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>>;
 
 function DrawerFooter({ children, ...props }: DrawerFooterProps) {
   const cls = joinClass(

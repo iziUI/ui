@@ -5,6 +5,7 @@ import {
   type ReactElement,
   type InputHTMLAttributes,
   type ButtonHTMLAttributes,
+  type MouseEventHandler,
 } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
@@ -20,7 +21,7 @@ import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/Select.scss';
 
-export interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'color'> {
+export interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'color' | 'onChange'> {
   error?: boolean;
   label?: string;
   helperText?: string;
@@ -28,6 +29,7 @@ export interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   position?: MenuProps['position'];
   startIcon?: React.JSX.Element | boolean;
   children: React.JSX.Element | React.JSX.Element[];
+  onChange?: MouseEventHandler<HTMLButtonElement>;
 }
 
 function Select({
@@ -71,7 +73,7 @@ function Select({
     error && `${prefix}-select__helper-text--error`
   );
 
-  const renderIcon = (icon: ReactElement<ButtonHTMLAttributes<any>>) => {
+  const renderIcon = (icon: ReactElement<ButtonHTMLAttributes<HTMLButtonElement>>) => {
     return cloneElement(icon, {
       className: joinClass(
         icon.props.className,
@@ -93,7 +95,7 @@ function Select({
           child.props.value === props.value && `${prefix}-select__option--selected`,
         ),
         onClick: (e) => {
-          if (!child.props.disabled && onChange) { onChange(e as any); }
+          if (!child.props.disabled && onChange) { onChange(e); }
         }
       });
     });

@@ -15,12 +15,14 @@ export interface ToastContextConfig {
   add: (toast: PickedToast) => void;
 }
 
+export type ToastProviderProps = PropsWithChildren;
+
 export const ToastContext = createContext<ToastContextConfig>({
   toasts: [],
   add: () => { }
 });
 
-export default function ToastProvider({ children }: PropsWithChildren) {
+export default function ToastProvider({ children }: ToastProviderProps) {
   const [toasts, setToasts] = useState<Array<PickedToast>>([]);
 
   const context: ToastContextConfig = useMemo(() => ({

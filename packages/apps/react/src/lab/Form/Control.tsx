@@ -3,7 +3,7 @@ import { ChangeEvent, cloneElement, InputEvent, InputHTMLAttributes, ReactElemen
 import useControl from './useControl';
 import type { AbstractControl } from './AbstractControl';
 
-interface ControlProps<
+export interface ControlProps<
   T extends Record<string, any>,
   K extends keyof T,
 > {

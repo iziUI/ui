@@ -15,7 +15,7 @@ export const ThemeContext = createContext<ThemeContextConfig>({
   updateTheme: () => { },
 });
 
-type ThemeProviderProps = PropsWithChildren<{ theme: ThemeBuilded; }>
+export type ThemeProviderProps = PropsWithChildren<{ theme: ThemeBuilded; }>;
 export default function ThemeProvider({ theme, children }: ThemeProviderProps) {
   const [_theme, setTheme] = useState<ThemeBuilded>(theme);
 

@@ -67,6 +67,11 @@ function listComponentEntries(srcGroup: string) {
   });
 }
 
+function hasDefaultExport(file: string) {
+  const source = fs.readFileSync(file, 'utf8');
+  return /export\s+default\b|export\s*\{\s*default\s*(?:,|\})/.test(source);
+}
+
 function ensureFlatEntry(distGroup: string, srcGroups: string[]) {
   fs.mkdirSync(TMP_ENTRY_DIR, { recursive: true });
   const entryPath = path.join(TMP_ENTRY_DIR, `${distGroup}.ts`);
@@ -122,11 +127,14 @@ function generateGroupedTypes(): PluginOption {
             const componentName = path.basename(path.dirname(file));
             const distDir = path.join(distRoot, distGroup, componentName);
             const typesPath = `../../${TYPES_DIR}/${srcGroup}/${componentName}`;
+            const defaultExport = hasDefaultExport(file)
+              ? `export { default } from '${typesPath}';\n`
+              : '';
 
             fs.mkdirSync(distDir, { recursive: true });
             fs.writeFileSync(
               path.join(distDir, 'index.d.ts'),
-              `export { default } from '${typesPath}';\nexport * from '${typesPath}';\n`,
+              `${defaultExport}export * from '${typesPath}';\n`,
             );
           }
         }

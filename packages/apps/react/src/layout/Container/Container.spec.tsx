@@ -7,28 +7,29 @@ jest.mock('@/core/createComponent', () => ({
   default: (Comp: any) => Comp,
 }));
 
+jest.mock('@/hooks/useResize', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
 describe('Container', () => {
-  it('should render children', () => {
+  it('renders children in its configured semantic element', () => {
     render(
-      <Container data-testid="container">
-        Conteúdo renderizado
+      <Container tag="main" aria-label="Page content">
+        Rendered content
       </Container>
     );
 
-    const el = screen.getByTestId('container');
-    expect(el).toBeInTheDocument();
-    expect(el).toHaveTextContent('Conteúdo renderizado');
+    expect(screen.getByRole('main', { name: 'Page content' })).toHaveTextContent('Rendered content');
   });
 
-  it('should apply base class and additional className', () => {
+  it('preserves caller-provided layout constraints', () => {
     render(
-      <Container data-testid="container" className="custom-class">
-        X
+      <Container tag="section" aria-label="Results" style={{ maxWidth: '48rem' }}>
+        Results
       </Container>
     );
 
-    const el = screen.getByTestId('container');
-    expect(el).toHaveClass('iziui-container');
-    expect(el).toHaveClass('custom-class');
+    expect(screen.getByRole('region', { name: 'Results' })).toHaveStyle({ maxWidth: '48rem' });
   });
 });

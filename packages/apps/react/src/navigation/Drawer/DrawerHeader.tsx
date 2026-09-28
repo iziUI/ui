@@ -10,7 +10,7 @@ import Icon from '@/display/Icon';
 
 import createComponent from '../../core/createComponent';
 
-interface DrawerHeaderProps extends HtmlHTMLAttributes<HTMLDivElement> {
+export interface DrawerHeaderProps extends HtmlHTMLAttributes<HTMLDivElement> {
   onClose: () => void;
 }
 

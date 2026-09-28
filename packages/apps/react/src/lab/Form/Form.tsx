@@ -4,7 +4,7 @@ import type FormGroup from './FormGroup';
 
 export const FormContext = createContext<FormGroup<any> | null>(null);
 
-interface FormProps<T extends Record<string, any>> extends HTMLAttributes<HTMLFormElement> {
+export interface FormProps<T extends Record<string, any>> extends HTMLAttributes<HTMLFormElement> {
   formGroup: FormGroup<T>;
   debug?: boolean;
 }

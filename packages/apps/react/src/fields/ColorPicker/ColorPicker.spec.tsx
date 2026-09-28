@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import ColorPicker from './ColorPicker';
 
@@ -8,24 +8,38 @@ jest.mock('@/core/createComponent', () => ({
 }));
 
 describe('ColorPicker', () => {
-  it('renders successfully', () => {
-    render(<ColorPicker />);
-    expect(screen.getByRole('generic')).toBeInTheDocument();
+  afterEach(() => {
+    document.body.style.overflow = '';
   });
 
-  it('renders the label when provided', () => {
-    render(<ColorPicker label="Choose color" />);
-    expect(screen.getByText('Choose color')).toBeInTheDocument();
+  it('shows its label and selected color', () => {
+    render(
+      <ColorPicker
+        label="Pick a color"
+        value="#ffffff"
+        onChange={jest.fn()}
+      />
+    );
+
+    expect(screen.getByText('Pick a color')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '#ffffff' })).toBeInTheDocument();
   });
 
-  it('renders helperText when provided', () => {
-    render(<ColorPicker helperText="Required field" />);
-    expect(screen.getByText('Required field')).toBeInTheDocument();
-  });
+  it('forwards native color input events after opening the picker', () => {
+    const onInput = jest.fn();
 
-  it('is disabled when disabled prop is true', () => {
-    render(<ColorPicker />);
-    const input = screen.getByDisplayValue('');
-    expect(input).toHaveAttribute('type', 'color');
+    render(
+      <ColorPicker
+        label="Pick a color"
+        value="#ffffff"
+        onChange={jest.fn()}
+        onInput={onInput}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: '#ffffff' }));
+    fireEvent.input(screen.getByDisplayValue('#ffffff'), { target: { value: '#000000' } });
+
+    expect(onInput).toHaveBeenCalledTimes(1);
   });
 });

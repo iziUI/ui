@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import Textarea from './Textarea';
 
@@ -8,18 +8,22 @@ jest.mock('@/core/createComponent', () => ({
 }));
 
 describe('Textarea', () => {
-  it('should render successfully', () => {
-    render(<Textarea data-testid="textarea" />);
+  it('accepts text and reports changes', () => {
+    const onChange = jest.fn();
 
-    const el = screen.getByTestId('textarea');
-    expect(el).toBeInTheDocument();
+    render(<Textarea label="Message" placeholder="Write a message" onChange={onChange} />);
+
+    const textarea = screen.getByRole('textbox');
+    fireEvent.change(textarea, { target: { value: 'Hello world' } });
+
+    expect(screen.getByText('Message')).toBeInTheDocument();
+    expect(textarea).toHaveValue('Hello world');
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
-  it('should apply base class and additional className', () => {
-    render(<Textarea data-testid="textarea" className="custom-class" />);
+  it('prevents input when disabled', () => {
+    render(<Textarea disabled placeholder="Write a message" />);
 
-    const el = screen.getByTestId('textarea');
-    expect(el).toHaveClass('iziui-textarea');
-    expect(el).toHaveClass('custom-class');
+    expect(screen.getByRole('textbox')).toBeDisabled();
   });
 });

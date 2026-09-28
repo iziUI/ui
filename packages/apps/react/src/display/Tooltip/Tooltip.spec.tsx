@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import Tooltip from './Tooltip';
 
@@ -10,32 +8,18 @@ jest.mock('@/core/createComponent', () => ({
 }));
 
 describe('Tooltip', () => {
-  it('should render successfully', () => {
-    render(<Tooltip data-testid="tooltip" />);
-    expect(screen.getByTestId('tooltip')).toBeInTheDocument();
-  });
-
-  it('should apply base class', () => {
-    render(<Tooltip data-testid="tooltip" />);
-    expect(screen.getByTestId('tooltip')).toHaveClass('iziui-tooltip');
-  });
-
-  it('should apply additional className', () => {
-    render(<Tooltip data-testid="tooltip" className="custom" />);
-    expect(screen.getByTestId('tooltip')).toHaveClass('custom');
-  });
-
-  it('should render content text', () => {
-    render(<Tooltip data-testid="tooltip" content="Tooltip text" />);
-    expect(screen.getByText('Tooltip text')).toBeInTheDocument();
-  });
-
-  it('should render children', () => {
+  it('shows its label when users hover its child', () => {
     render(
-      <Tooltip data-testid="tooltip">
-        <span>trigger</span>
+      <Tooltip label="Helpful description">
+        <button type="button">More information</button>
       </Tooltip>
     );
-    expect(screen.getByText('trigger')).toBeInTheDocument();
+
+    const tooltip = screen.getByText('Helpful description');
+    expect(tooltip).not.toBeVisible();
+
+    fireEvent.mouseEnter(screen.getByRole('button', { name: 'More information' }));
+
+    expect(tooltip).toBeVisible();
   });
 });

@@ -10,13 +10,13 @@ import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/Drawer.scss';
 
-type Direction = 'right' | 'left' | 'bottom';
+export type DrawerDirection = 'right' | 'left' | 'bottom';
 type AnimationClass = 'show' | 'hide';
 type Config = { animation: AnimationClass; visible: boolean };
 
 export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;
-  direction?: Direction;
+  direction?: DrawerDirection;
   body: React.JSX.Element;
   header?: React.JSX.Element;
   footer?: React.JSX.Element;

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import Menu from './Menu';
 
@@ -8,29 +8,42 @@ jest.mock('@/core/createComponent', () => ({
 }));
 
 describe('Menu', () => {
-  it('should render successfully', () => {
-    render(<Menu data-testid="menu" />);
-    expect(screen.getByTestId('menu')).toBeInTheDocument();
+  afterEach(() => {
+    jest.useRealTimers();
+    document.body.style.overflow = '';
   });
 
-  it('should apply base class', () => {
-    render(<Menu data-testid="menu" />);
-    expect(screen.getByTestId('menu')).toHaveClass('iziui-menu');
-  });
+  it('renders menu actions when open', () => {
+    const anchor = document.createElement('button');
 
-  it('should merge additional className', () => {
-    render(<Menu data-testid="menu" className="custom" />);
-    const el = screen.getByTestId('menu');
-    expect(el).toHaveClass('iziui-menu');
-    expect(el).toHaveClass('custom');
-  });
-
-  it('should render children', () => {
     render(
-      <Menu>
-        <li data-testid="menu-item">Item</li>
+      <Menu open anchorEl={anchor} onClose={jest.fn()}>
+        <button type="button">Account settings</button>
       </Menu>
     );
-    expect(screen.getByTestId('menu-item')).toBeInTheDocument();
+
+    expect(screen.getByRole('button', { name: 'Account settings' })).toBeInTheDocument();
+  });
+
+  it('runs selected actions and closes automatically', () => {
+    jest.useFakeTimers();
+    const anchor = document.createElement('button');
+    const onClose = jest.fn();
+    const onSelect = jest.fn();
+
+    render(
+      <Menu open autoClose anchorEl={anchor} onClose={onClose}>
+        <button type="button" onClick={onSelect}>Sign out</button>
+      </Menu>
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Sign out' }));
+    expect(onSelect).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      jest.advanceTimersByTime(150);
+    });
+
+    expect(onClose).toHaveBeenCalledTimes(1);
   });
 });
