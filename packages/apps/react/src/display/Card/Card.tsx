@@ -9,7 +9,9 @@ import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/Card.scss';
 
-interface CardProps extends HTMLAttributes<HTMLDivElement> { onClick?: (e?: any) => void; }
+export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  onClick?: (e?: any) => void;
+}
 
 function Card({ children, onClick, ...props }: CardProps) {
   const cls = joinClass(`${prefix}-card`, onClick && `${prefix}-card--clickable`, props.className);

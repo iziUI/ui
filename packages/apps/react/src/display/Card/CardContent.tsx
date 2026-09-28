@@ -6,9 +6,8 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 
 import createComponent from '../../core/createComponent';
 
-type CardContentProps = HTMLAttributes<HTMLDivElement>;
+export type CardContentProps = HTMLAttributes<HTMLDivElement>;
 function CardContent({ children, ...props }: CardContentProps) {
-
   const cls = joinClass(`${prefix}-card__content`, props.className);
 
   return (

@@ -14,14 +14,22 @@ import '@iziui/styles/components/ButtonIcon.scss';
 export interface ButtonIconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: Colors;
   size?: number;
+  variant?: 'contained' | 'outlined' | 'text';
   children: ReactElement<IconProps>;
 };
-function ButtonIcon({ children, size = 40, color = 'primary', ...props }: ButtonIconProps) {
+function ButtonIcon({
+  children,
+  size = 40,
+  color = 'primary',
+  variant = 'outlined',
+  ...props
+}: ButtonIconProps) {
   const [width, height] = [size, size];
 
   const classess = joinClass(
     `${prefix}-button-icon`,
-    color && `${prefix}-button-icon--${color}`,
+    `${prefix}-button-icon--${color}`,
+    `${prefix}-button-icon--${color}--${variant}`,
     props.className
   );
 

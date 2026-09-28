@@ -16,6 +16,7 @@ export function GridItem({
   gridColumnStart,
   gridRowStart,
   alignSelf,
+  justifyItems,
   xl = 1,
   lg,
   md,
@@ -32,7 +33,7 @@ export function GridItem({
   };
 
   const className = joinClass(
-    'cds-grid__item',
+    `${prefix}-grid__item`,
     Object.entries(SIZES)
       .map(([size, value]) => {
         return `${prefix}-grid__item--${size}-${value}`;
@@ -49,6 +50,7 @@ export function GridItem({
         gridColumnStart,
         gridRowStart,
         alignSelf,
+        justifyItems,
         ...props.style
       }}
     >

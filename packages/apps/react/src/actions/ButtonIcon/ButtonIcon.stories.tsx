@@ -18,6 +18,24 @@ export const Disabled: StoryObj<typeof ButtonIcon> = {
   }
 };
 
+export const Variants: StoryObj<typeof ButtonIcon> = {
+  render: () => {
+    return (
+      <Stack flexDirection="row">
+        <ButtonIcon variant="contained">
+          <Icon name="star" />
+        </ButtonIcon>
+        <ButtonIcon variant="outlined">
+          <Icon name="star" />
+        </ButtonIcon>
+        <ButtonIcon variant="text">
+          <Icon name="star" />
+        </ButtonIcon>
+      </Stack>
+    );
+  },
+};
+
 export const Colors: StoryObj<typeof ButtonIcon> = {
   render: () => {
     return (
@@ -65,6 +83,7 @@ const meta: Meta<typeof ButtonIcon> = {
     children: <Icon name="heart" />,
     size: 40,
     disabled: false,
+    variant: 'outlined',
   },
   argTypes: {
     size: {
@@ -93,6 +112,16 @@ const meta: Meta<typeof ButtonIcon> = {
         'A cor do componente. Suporta cores de tema padrão e personalizadas.',
       table: {
         defaultValue: { summary: 'primary' },
+      },
+    },
+    variant: {
+      control: 'select',
+      type: 'string',
+      options: ['contained', 'outlined', 'text'],
+      description: 'The variant to be used.',
+      table: {
+        type: { summary: 'contained | outlined | text' },
+        defaultValue: { summary: 'contained' },
       },
     },
     children: {

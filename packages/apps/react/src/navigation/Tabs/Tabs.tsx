@@ -102,6 +102,7 @@ function Tabs({
         <div key={_id} ref={ref => setRef(index, ref)} style={{ width: '100%' }}>
           {
             cloneElement(child, {
+              color,
               id: _id,
               tabIndex: index + 1,
               'aria-checked': isActive,

@@ -1,0 +1,12 @@
+.#{$prefix}-progress {
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+  transition: all $animation;
+
+  &__bar {
+    position: absolute;
+    height: 8px;
+    transition: all $animation;
+  }
+}

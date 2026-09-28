@@ -16,4 +16,5 @@ export type GridItemBaseProps = GridBaseProps & {
   gridColumnStart?: IntRange<1, 13>;
   gridRowStart?: IntRange<1, 13>;
   alignSelf?: CSSProperties['alignSelf'];
+  justifyItems?: CSSProperties['justifyItems'];
 };
