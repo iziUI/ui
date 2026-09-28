@@ -66,4 +66,4 @@ clean-modules:
 	$(call delete_dependencies,styles)
 	$(call delete_dependencies,core)
 	$(call delete_dependencies,apps/react)
-	@printf "${SUCCESS_TEXT}>>>> dependencies deleted successfully ${RESET_TEXT}\n";
+	@printf "${SUCCESS_TEXT} dependencies deleted successfully ${RESET_TEXT}\n";

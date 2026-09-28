@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to agent when working with code in this repository.
 
 ## Project Overview
 
@@ -18,29 +18,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 --- 
 ## Setup
 
-### Environment rules
-
-- Before running any `yarn` command, you MUST load environment variables from `.env`.
-- The variable `NPM_TOKEN` must always be defined from `.env` before running yarn commands.
-- If `.env` exists, export variables using:
-
-```bash
-export $(grep -v '^#' .env | xargs)
-```
-
-- If NPM_TOKEN is missing, STOP and warn the user.
-- Never run yarn without NPM_TOKEN properly set.
-
-For more information, check .claude/skills/setup/SKILL.MD
-
-### NPM_TOKEN
-
-If any command fails due to a missing or invalid `NPM_TOKEN`, ask the user to add the token to the project `.env` file so Claude can read it from there.
-
-Expected format:
-
-```bash
-NPM_TOKEN=<your-token-here>
+<!-- TODO: ADD setup command -->
 
 ## Commands
 
@@ -55,7 +33,7 @@ yarn test       # Run Jest in all packages
 ```bash
 make setup                        # Clean install all dependencies
 make clean-modules                # Delete all node_modules and lock files
-make run <package> <command>      # e.g. make run @iziui/react build
+make run <package> <command>      # e.g. make run react build
 ```
 
 ### Package-specific (cd into the package first, or use `yarn workspace`)
