@@ -3,7 +3,7 @@ import Stack from '@/layout/Stack';
 
 import createComponent from '../../core/createComponent';
 
-interface ModalFooterProps { children: React.ReactNode; }
+export interface ModalFooterProps { children: React.ReactNode; }
 
 function ModalFooter({ children }: ModalFooterProps) {
   return (

@@ -6,10 +6,11 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 
 import createComponent from '../../core/createComponent';
 
-interface TableCellProps extends TdHTMLAttributes<HTMLTableDataCellElement> {
+export interface TableCellProps extends TdHTMLAttributes<HTMLTableDataCellElement> {
   align?: 'left' | 'center' | 'right';
   children: React.JSX.Element | string | number | null;
 }
+
 function TableCell({ align = 'left', children, ...props }: TableCellProps) {
   const className = joinClass(
     `${prefix}-table__cell`,

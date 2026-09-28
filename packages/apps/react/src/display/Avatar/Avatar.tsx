@@ -15,7 +15,7 @@ import Typography from '../Typography';
 
 import '@iziui/styles/components/Avatar.scss';
 
-interface AvatarProps extends HTMLAttributes<HTMLElement> {
+export interface AvatarProps extends HTMLAttributes<HTMLElement> {
   alt?: string;
   src?: string;
   name?: string;
@@ -24,6 +24,7 @@ interface AvatarProps extends HTMLAttributes<HTMLElement> {
   variant?: 'rounded' | 'circular';
   icon?: React.JSX.Element;
 }
+
 function Avatar({
   src,
   alt,

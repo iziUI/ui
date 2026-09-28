@@ -1,8 +1,9 @@
-export * from './Checkbox';
-export * from './CheckboxGroup';
-export * from './ColorPicker';
-export * from './Input';
-export * from './InputFile';
+export * from './Autocomplete';
 export * from './Select';
-export * from './Switch';
-export * from './Textarea';
+export { default as Input, type InputProps } from './Input';
+export { default as Switch, type SwitchProps } from './Switch';
+export { default as Checkbox, type CheckboxProps } from './Checkbox';
+export { default as Textarea, type TextareaProps } from './Textarea';
+export { default as InputFile, type InputFileProps } from './InputFile';
+export { default as ColorPicker, type ColorPickerProps } from './ColorPicker';
+export { default as CheckboxGroup, type CheckboxGroupProps } from './CheckboxGroup';

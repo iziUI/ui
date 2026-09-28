@@ -4,7 +4,7 @@ import { prefix } from '@iziui/tokens/web/js';
 
 import { joinClass } from '@iziui/core/utils/joinClass';
 
-interface TableBodyProps extends TableHTMLAttributes<HTMLTableSectionElement> {
+export interface TableBodyProps extends TableHTMLAttributes<HTMLTableSectionElement> {
   children: React.ReactNode;
 }
 

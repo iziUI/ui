@@ -1,8 +1,8 @@
-export * from './Avatar';
 export * from './Card';
-export * from './Chip';
-export * from './Divider';
-export * from './Icon';
 export * from './Table';
-export * from './Tooltip';
-export * from './Typography';
+export { default as Avatar, type AvatarProps } from './Avatar';
+export { default as Chip, type ChipProps } from './Chip';
+export { default as Divider, type DividerProps } from './Divider';
+export { default as Icon, type IconProps } from './Icon';
+export { default as Tooltip, type TooltipProps } from './Tooltip';
+export { default as Typography, type TypographyProps, type Variant, variants } from './Typography';

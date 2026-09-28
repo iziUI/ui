@@ -21,6 +21,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: React.JSX.Element | boolean;
   variant?: 'contained' | 'outlined' | 'text';
 };
+
 function Button({
   size = 'medium',
   color = 'primary',
