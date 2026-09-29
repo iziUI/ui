@@ -120,6 +120,10 @@ Vite builds with `preserveModules` — the output mirrors source structure. Outp
 - Tests use Jest and React Testing Library.
 - Prefer testing behavior over implementation details.
 
+## Coding patterns
+
+- Control flow: `docs/patterns/early-return.md`
+
 ---
 
 ## Memory
