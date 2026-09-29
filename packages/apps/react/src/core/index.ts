@@ -1,1 +1,1 @@
-export { default } from './createComponent';
+export { default, default as createComponent } from './createComponent';

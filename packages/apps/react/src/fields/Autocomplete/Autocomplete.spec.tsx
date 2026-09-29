@@ -1,5 +1,4 @@
-import { render, screen } from '@testing-library/react';
-
+import { render, screen } from '@/test/render';
 import { Icon } from '@/display';
 
 import Autocomplete from './Autocomplete';
@@ -24,11 +23,6 @@ const OPTIONS: Option[] = [
   { firstName: 'Stanley', lastName: 'Hudson', age: 52, },
   { firstName: 'Michael', lastName: 'Jordan', age: 64, },
 ];
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 describe('Autocomplete', () => {
   it('renders successfully', () => {

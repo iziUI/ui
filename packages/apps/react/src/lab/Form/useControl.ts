@@ -1,7 +1,8 @@
 import useFormGroup from './useFormGroup';
+import type { FormValues } from './AbstractControl';
 
 export default function useControl<
-  T extends Record<string, any>,
+  T extends object = FormValues,
   K extends keyof T = keyof T,
 >(controlName: K) {
   const formGroup = useFormGroup<T>();

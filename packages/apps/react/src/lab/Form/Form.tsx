@@ -2,14 +2,14 @@ import { createContext, SubmitEvent, HTMLAttributes } from 'react';
 
 import type FormGroup from './FormGroup';
 
-export const FormContext = createContext<FormGroup<any> | null>(null);
+export const FormContext = createContext<FormGroup<object> | null>(null);
 
-export interface FormProps<T extends Record<string, any>> extends HTMLAttributes<HTMLFormElement> {
+export interface FormProps<T extends object> extends HTMLAttributes<HTMLFormElement> {
   formGroup: FormGroup<T>;
   debug?: boolean;
 }
 
-export default function Form<T extends Record<string, any>>({
+export default function Form<T extends object>({
   formGroup,
   debug = false,
   children,
@@ -21,7 +21,7 @@ export default function Form<T extends Record<string, any>>({
   };
 
   return (
-    <FormContext value={formGroup}>
+    <FormContext value={formGroup as unknown as FormGroup<object>}>
       <form
         {...props}
         style={{ width: '100%', ...props.style }}

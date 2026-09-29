@@ -16,10 +16,13 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 import Icon from '@/display/Icon';
 import { Menu, type MenuProps, useMenu } from '@/navigation/Menu';
 
-import type { OptionProps } from './Option';
+import type { OptionProps, OptionValue } from './Option';
 import createComponent from '../../core/createComponent';
 
 import '@iziui/styles/components/Select.scss';
+
+export type SelectValue = OptionValue;
+export type SelectChangeHandler = MouseEventHandler<HTMLButtonElement>;
 
 export interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'color' | 'onChange'> {
   error?: boolean;
@@ -29,7 +32,8 @@ export interface SelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   position?: MenuProps['position'];
   startIcon?: React.JSX.Element | boolean;
   children: React.JSX.Element | React.JSX.Element[];
-  onChange?: MouseEventHandler<HTMLButtonElement>;
+  onChange?: SelectChangeHandler;
+  onValueChange?: (value: SelectValue) => void;
 }
 
 function Select({
@@ -41,6 +45,7 @@ function Select({
   children,
   disabled,
   onChange,
+  onValueChange,
   ...props
 }: SelectProps) {
   const arrayChildren = Children.toArray(children) as ReactElement<OptionProps>[];
@@ -95,7 +100,11 @@ function Select({
           child.props.value === props.value && `${prefix}-select__option--selected`,
         ),
         onClick: (e) => {
-          if (!child.props.disabled && onChange) { onChange(e); }
+          if (child.props.disabled) { return; }
+
+          onChange?.(e);
+
+          onValueChange?.(child.props.value);
         }
       });
     });

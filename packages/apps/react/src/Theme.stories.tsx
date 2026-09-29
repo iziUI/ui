@@ -27,7 +27,7 @@ function Section({ title, children }: PropsWithChildren<{
 }
 
 function Text() {
-  const variants = ['primary', 'secondary', 'disabled'];
+  const variants = ['primary', 'secondary', 'disabled'] as const;
 
   const { theme: { palette } } = useTheme();
 
@@ -69,7 +69,7 @@ function Text() {
 }
 
 function Background() {
-  const variants = ['default', 'paper'];
+  const variants = ['default', 'paper'] as const;
 
   const { theme: { palette } } = useTheme();
 
@@ -142,7 +142,7 @@ function DividerColor() {
 }
 
 function Colors() {
-  const colors = ['primary', 'secondary', 'success', 'error', 'warning', 'info'];
+  const colors = ['primary', 'secondary', 'success', 'error', 'warning', 'info'] as const;
 
   const { theme: { palette } } = useTheme();
 
@@ -152,7 +152,7 @@ function Colors() {
         <Typography style={{ textTransform: 'capitalize' }}>{color}</Typography>
         <Stack flexDirection="row">
           {
-            ['dark', 'main', 'light', 'opacity'].map(variant => (
+            (['dark', 'main', 'light', 'opacity'] as const).map(variant => (
               <Tooltip
                 fullWidth
                 key={variant}

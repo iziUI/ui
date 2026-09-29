@@ -5,20 +5,22 @@ import { prefix } from '@iziui/tokens/web/js';
 import { joinClass } from '@iziui/core/utils';
 import type { Colors } from '@iziui/core/theme';
 
-export interface OptionProps<T = string | number> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'value'> {
-  value: T;
+export type OptionValue = string | number;
+
+export interface OptionProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'value'> {
+  value: OptionValue;
   children: string;
   color?: Colors;
   startIcon?: React.JSX.Element | boolean;
 }
-export default function Option<T = string | number>({
+export default function Option({
   children,
   color,
   startIcon,
   disabled,
   value,
   ...props
-}: OptionProps<T>) {
+}: OptionProps) {
   const className = joinClass(
     `${prefix}-select__option`,
     disabled && `${prefix}-select__option--disabled`,
@@ -41,7 +43,7 @@ export default function Option<T = string | number>({
       type="button"
       {...props}
       className={className}
-      value={typeof value === 'string' || typeof value === 'number' ? value : undefined}
+      value={value}
     >
       {startIcon && renderIcon(startIcon as React.JSX.Element)}
       {children}

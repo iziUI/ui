@@ -1,11 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@/test/render';
 
 import Container from './Container';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 jest.mock('@/hooks/useResize', () => ({
   __esModule: true,

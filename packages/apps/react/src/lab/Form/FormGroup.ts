@@ -1,19 +1,19 @@
 import type { AbstractControl } from './AbstractControl';
 import type FormControl from './FormControl';
 
-type Hydrate<T extends Record<string, any>> = (data: FormGroup<T>) => void;
+type Hydrate<T extends object> = (data: FormGroup<T>) => void;
 type SetValues<F> = Partial<F> | ((values: F) => Partial<F>);
 
-export type Validator<T extends Record<string, any>> = Partial<{
+export type Validator<T extends object> = Partial<{
   [K in keyof T]: (data: FormGroup<T>) => string | void;
 }>
 
-export interface Handle<T extends Record<string, any>> {
+export interface Handle<T extends object> {
   change?: (form: FormGroup<T>) => void;
   submit?: (form: FormGroup<T>) => void;
 }
 
-export default class FormGroup<T extends Record<string, any>> {
+export default class FormGroup<T extends object> {
   private _valid = false;
   private _hydrate!: Hydrate<T>;
 
@@ -30,25 +30,29 @@ export default class FormGroup<T extends Record<string, any>> {
  *              Para atualizar valores externamente, use {@link setValues}.
 */
   get hydrate() { return this._hydrate; }
-  set hydrate(fn: (values: FormGroup<T>) => any) { this._hydrate = fn; }
+  set hydrate(fn: (values: FormGroup<T>) => void) { this._hydrate = fn; }
 
   get isValid(): boolean { return this._valid; }
   set isValid(validity: boolean) { this._valid = validity; }
 
   get errors() {
-    return Object.values<FormControl<T[keyof T]>>(this.controls)
-      .filter(c => c.error);
+    const errors: Array<FormControl<T[keyof T]>> = [];
+
+    this.eachControl((control) => {
+      if (!control.error) { return; }
+
+      errors.push(control);
+    });
+
+    return errors;
   }
 
   get values(): T {
-    const values: Record<string, any> = {};
+    const values = {} as Partial<T>;
 
-    this.eachControl((control, key) => ({ [key as string]: control.value }))
-      .forEach(control => {
-        for (const prop in control) {
-          values[prop] = control[prop];
-        }
-      });
+    this.eachControl((control, key) => {
+      values[key] = control.value;
+    });
 
     return values as T;
   }
@@ -61,8 +65,8 @@ export default class FormGroup<T extends Record<string, any>> {
         ? arg(this.values)
         : arg;
 
-    for (const key of Object.keys(partial)) {
-      this.controls[key].value = partial[key] as T[keyof T];
+    for (const key of Object.keys(partial) as Array<keyof T>) {
+      this.controls[key].value = partial[key] as T[typeof key];
     }
 
     this.validate();
@@ -72,8 +76,10 @@ export default class FormGroup<T extends Record<string, any>> {
     this.handle.change(this);
   }
 
-  private eachControl(fn: <K extends keyof T>(control: FormControl<T[K]>, key?: K) => any) {
-    return Object.keys(this.controls).map(k => fn(this.controls[k], k));
+  private eachControl(fn: (control: FormControl<T[keyof T]>, key: keyof T) => void) {
+    for (const key of Object.keys(this.controls) as Array<keyof T>) {
+      fn(this.controls[key], key);
+    }
   }
 
   public submit() {
@@ -92,7 +98,8 @@ export default class FormGroup<T extends Record<string, any>> {
   }
 
   public validate() {
-    Object.entries(this.controls).map(([key, control]) => {
+    for (const key of Object.keys(this.controls) as Array<keyof T>) {
+      const control = this.controls[key];
       let error = control.validate();
 
       if (this.validator && this.validator[key]) {
@@ -100,7 +107,7 @@ export default class FormGroup<T extends Record<string, any>> {
       }
 
       control.error = error;
-    });
+    }
 
     this.isValid = !this.errors.length;
     this.hydrate(this);

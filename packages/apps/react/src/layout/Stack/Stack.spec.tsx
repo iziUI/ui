@@ -1,14 +1,8 @@
 import React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@/test/render';
 
 import Stack from './Stack';
-
-// Mock do wrapper createComponent para não depender de implementação interna
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 describe('Stack', () => {
   it('should render children', () => {

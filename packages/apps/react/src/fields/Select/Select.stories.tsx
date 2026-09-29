@@ -17,7 +17,7 @@ export const normal: StoryObj<typeof Select> = {
         placeholder="Selecione um valor"
         value={selected}
         label={`Selected: ${selected}`}
-        onChange={(e) => setSelected(e.currentTarget.value)}
+        onValueChange={(value) => setSelected(String(value))}
       >
         <Option value="1">Option 1</Option>
         <Option value="2">Option 2</Option>
@@ -37,7 +37,7 @@ export const helperText: StoryObj<typeof Select> = {
         helperText="Some text here"
         value={selected}
         label={`Selected: ${selected}`}
-        onChange={(e) => setSelected(e.currentTarget.value)}
+        onValueChange={(value) => setSelected(String(value))}
       >
         <Option value="1">Option 1</Option>
         <Option value="2">Option 2</Option>
@@ -58,7 +58,7 @@ export const validation: StoryObj<typeof Select> = {
         helperText="Some text here"
         value={selected}
         label={`Selected: ${selected}`}
-        onChange={(e) => setSelected(e.currentTarget.value)}
+        onValueChange={(value) => setSelected(String(value))}
       >
         <Option value="1">Option 1</Option>
         <Option value="2">Option 2</Option>
@@ -78,7 +78,7 @@ export const Disabled: StoryObj<typeof Select> = {
         placeholder="Selecione um valor"
         label={`Selected: ${selected}`}
         value={selected}
-        onChange={(e) => setSelected(e.currentTarget.value)}
+        onValueChange={(value) => setSelected(String(value))}
         startIcon={
           <Icon name="fire" />
         }
@@ -100,7 +100,7 @@ export const DisabledOption: StoryObj<typeof Select> = {
         placeholder="Selecione um valor"
         label={`Selected: ${selected}`}
         value={selected}
-        onChange={(e) => setSelected(e.currentTarget.value)}
+        onValueChange={(value) => setSelected(String(value))}
         startIcon={
           <Icon name="fire" />
         }
@@ -125,7 +125,7 @@ export const withIcon: StoryObj<typeof Select> = {
         startIcon={
           <Icon name="fire" />
         }
-        onChange={(e) => setSelected(e.currentTarget.value)}
+        onValueChange={(value) => setSelected(String(value))}
       >
         <Option value="1">Option 1</Option>
         <Option value="2">Option 2</Option>
@@ -147,7 +147,7 @@ export const optionWithIcon: StoryObj<typeof Select> = {
         startIcon={
           <Icon name="mobile-android" />
         }
-        onChange={(e) => setSelected(e.currentTarget.value)}
+        onValueChange={(value) => setSelected(String(value))}
       >
         <Option value="apple"
           startIcon={

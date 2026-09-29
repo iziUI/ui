@@ -12,14 +12,14 @@ import Button from '@/actions/Button';
 import { Select, Option } from '@/fields/Select';
 
 import Form from './Form';
-import Control from './Control';
 import useForm from './useForm';
 import useControl from './useControl';
+import { createControl } from './Control';
 
 interface FormData {
   name: string;
   surname: string;
-  category?: 'document' | 'passport';
+  category: 'document' | 'passport';
 }
 
 const meta: Meta<typeof Form> = {
@@ -57,7 +57,8 @@ export const _useForm: StoryObj<typeof Form> = {
     const formGroup = useForm<FormData>({
       form: {
         name: { defaultValue: 'John', type: 'email' },
-        surname: { defaultValue: 'John', type: 'email' }
+        surname: { defaultValue: 'John', type: 'email' },
+        category: { defaultValue: 'document', type: 'text' },
       },
       handle: {
         submit: (form) => {
@@ -112,10 +113,12 @@ export const _control: StoryObj<typeof Form> = {
       }
     }, []);
 
+    const DataControl = createControl<FormData>();
+
     return (
       <Form formGroup={formGroup} debug>
         <Stack>
-          <Control
+          <DataControl
             controlName="name"
             field={(control) => (
               <Input
@@ -125,7 +128,7 @@ export const _control: StoryObj<typeof Form> = {
               />
             )}
           />
-          <Control
+          <DataControl
             action="change"
             controlName="category"
             field={(control) => (
@@ -155,7 +158,8 @@ export const _useControl: StoryObj<typeof Form> = {
     const formGroup = useForm<FormData>({
       form: {
         name: { defaultValue: 'teste', type: 'text' },
-        surname: { defaultValue: 'John', type: 'email' }
+        surname: { defaultValue: 'John', type: 'email' },
+        category: { defaultValue: 'document', type: 'text' },
       },
       handle: {
         submit: (form) => {
@@ -188,7 +192,8 @@ export const _validator: StoryObj<typeof Form> = {
             (v) => v.value.split(' ').length < 2 && 'Deve ter dois nomes'
           ]
         },
-        surname: { defaultValue: '', type: 'email' }
+        surname: { defaultValue: '', type: 'email' },
+        category: { defaultValue: 'document', type: 'text' },
       },
       handle: {
         submit: (form) => {
@@ -205,6 +210,8 @@ export const _validator: StoryObj<typeof Form> = {
       }
     }, [name]);
 
+    const DataControl = createControl<FormData>();
+
     useEffect(() => {
       wait(() => { setName('LEOZIN'); }, 1000);
     }, []);
@@ -212,7 +219,7 @@ export const _validator: StoryObj<typeof Form> = {
     return (
       <Form formGroup={formGroup} debug>
         <Stack>
-          <Control
+          <DataControl
             controlName="name"
             field={(control) => (
               <Input
@@ -222,7 +229,7 @@ export const _validator: StoryObj<typeof Form> = {
               />
             )}
           />
-          <Control
+          <DataControl
             controlName="surname"
             field={(control) => (
               <Input

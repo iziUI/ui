@@ -1,12 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@/test/render';
 
 import Option from './Option';
 import Select from './Select';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 describe('Select', () => {
   it('displays the text for its selected option', () => {
@@ -22,9 +17,10 @@ describe('Select', () => {
 
   it('reports enabled option selection', () => {
     const onChange = jest.fn((event) => event.currentTarget.value);
+    const onValueChange = jest.fn();
 
     render(
-      <Select value="monthly" onChange={onChange}>
+      <Select value="monthly" onChange={onChange} onValueChange={onValueChange}>
         <Option value="monthly">Monthly</Option>
         <Option value="yearly">Yearly</Option>
       </Select>
@@ -35,6 +31,7 @@ describe('Select', () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveReturnedWith('yearly');
+    expect(onValueChange).toHaveBeenCalledWith('yearly');
   });
 
   it('disables its form control when disabled', () => {

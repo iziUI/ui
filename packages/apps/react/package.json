@@ -2,7 +2,7 @@
   "name": "@iziui/react",
   "version": "0.0.109-rc",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "author": "leonardo.goncalves <leogoncalves.contato@gmail.com>",
   "publishConfig": {
@@ -14,37 +14,82 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./actions": {
+      "types": "./dist/actions/index.d.ts",
+      "import": "./dist/actions/index.mjs",
+      "require": "./dist/actions/index.cjs"
+    },
+    "./display": {
+      "types": "./dist/display/index.d.ts",
+      "import": "./dist/display/index.mjs",
+      "require": "./dist/display/index.cjs"
+    },
+    "./feedback": {
+      "types": "./dist/feedback/index.d.ts",
+      "import": "./dist/feedback/index.mjs",
+      "require": "./dist/feedback/index.cjs"
+    },
+    "./fields": {
+      "types": "./dist/fields/index.d.ts",
+      "import": "./dist/fields/index.mjs",
+      "require": "./dist/fields/index.cjs"
+    },
+    "./layout": {
+      "types": "./dist/layout/index.d.ts",
+      "import": "./dist/layout/index.mjs",
+      "require": "./dist/layout/index.cjs"
+    },
+    "./navigation": {
+      "types": "./dist/navigation/index.d.ts",
+      "import": "./dist/navigation/index.mjs",
+      "require": "./dist/navigation/index.cjs"
+    },
+    "./animations": {
+      "types": "./dist/animations/index.d.ts",
+      "import": "./dist/animations/index.mjs",
+      "require": "./dist/animations/index.cjs"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.mjs",
+      "require": "./dist/hooks/index.cjs"
+    },
+    "./lab": {
+      "types": "./dist/lab/index.d.ts",
+      "import": "./dist/lab/index.mjs",
+      "require": "./dist/lab/index.cjs"
     },
     "./*": {
       "types": "./dist/components/*/index.d.ts",
-      "import": "./dist/components/*/index.js",
+      "import": "./dist/components/*/index.mjs",
       "require": "./dist/components/*/index.cjs"
     },
     "./animations/*": {
       "types": "./dist/animations/*/index.d.ts",
-      "import": "./dist/animations/*/index.js",
+      "import": "./dist/animations/*/index.mjs",
       "require": "./dist/animations/*/index.cjs"
     },
     "./hooks/*": {
       "types": "./dist/hooks/*/index.d.ts",
-      "import": "./dist/hooks/*/index.js",
+      "import": "./dist/hooks/*/index.mjs",
       "require": "./dist/hooks/*/index.cjs"
     },
     "./lab/*": {
       "types": "./dist/lab/*/index.d.ts",
-      "import": "./dist/lab/*/index.js",
+      "import": "./dist/lab/*/index.mjs",
       "require": "./dist/lab/*/index.cjs"
     },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
-      "import": "./dist/theme/index.js",
+      "import": "./dist/theme/index.mjs",
       "require": "./dist/theme/index.cjs"
     },
     "./core": {
       "types": "./dist/core/index.d.ts",
-      "import": "./dist/core/index.js",
+      "import": "./dist/core/index.mjs",
       "require": "./dist/core/index.cjs"
     },
     "./style.css": "./dist/style.css",

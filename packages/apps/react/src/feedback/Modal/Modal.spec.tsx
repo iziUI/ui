@@ -1,15 +1,9 @@
-import { render } from '@testing-library/react';
-
+import { render } from '@/test/render';
 import Button from '@/actions/Button';
 import { Typography } from '@/display';
 
 import Modal from './Modal';
 import ModalFooter from './ModalFooter';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 describe('Modal', () => {
   it('renders successfully', () => {

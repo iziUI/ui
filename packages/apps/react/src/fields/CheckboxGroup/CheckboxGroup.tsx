@@ -3,6 +3,7 @@ import { ChangeEvent, Children, cloneElement, ReactElement, useCallback, useEffe
 import { prefix } from '@iziui/tokens/web/js';
 
 import { joinClass } from '@iziui/core/utils/joinClass';
+import type { Sx } from '@iziui/core/system';
 
 import Stack from '@/layout/Stack';
 
@@ -11,7 +12,7 @@ import type { CheckboxProps } from '../Checkbox';
 
 import '@iziui/styles/components/CheckboxGroup.scss';
 
-export interface CheckboxGroupItem<T = any> {
+export interface CheckboxGroupItem<T = CheckboxProps['value']> {
   id: string;
   value: T;
   checked: boolean;
@@ -19,14 +20,14 @@ export interface CheckboxGroupItem<T = any> {
 
 let ID_REFERENCE = 0;
 
-export interface CheckboxGroupProps<T = any> {
+export interface CheckboxGroupProps<T = CheckboxProps['value']> {
   className?: string;
   children: React.ReactNode;
   values?: string[];
   onChange?: (data: CheckboxGroupItem<T>[]) => void;
 }
 
-function CheckboxGroup({ children, values, onChange, className }: CheckboxGroupProps) {
+function CheckboxGroup<T = CheckboxProps['value']>({ children, values, onChange, className }: CheckboxGroupProps<T>) {
   const reference = ++ID_REFERENCE;
   const arrayChildren = Children.toArray(children) as ReactElement<CheckboxProps>[];
 
@@ -35,9 +36,9 @@ function CheckboxGroup({ children, values, onChange, className }: CheckboxGroupP
     className,
   );
 
-  const [checkboxes, setCheckboxes] = useState<CheckboxGroupItem[]>(arrayChildren.map((item) => ({
+  const [checkboxes, setCheckboxes] = useState<CheckboxGroupItem<T>[]>(arrayChildren.map((item) => ({
     id: item.props.name,
-    value: item.props.value,
+    value: item.props.value as T,
     checked: values ? values.some((val) => val === item.props.name) : false,
   })));
 
@@ -67,7 +68,7 @@ function CheckboxGroup({ children, values, onChange, className }: CheckboxGroupP
   useEffect(() => {
     setCheckboxes(arrayChildren.map((item) => ({
       id: item.props.name,
-      value: item.props.value,
+      value: item.props.value as T,
       checked: values ? values.some((val) => val === item.props.name) : false,
     })));
   }, [values]);
@@ -79,4 +80,6 @@ function CheckboxGroup({ children, values, onChange, className }: CheckboxGroupP
   );
 }
 
-export default createComponent(CheckboxGroup);
+type CheckboxGroupComponent = <T = CheckboxProps['value']>(props: Sx<CheckboxGroupProps<T>>) => React.JSX.Element;
+
+export default createComponent(CheckboxGroup) as CheckboxGroupComponent;

@@ -17,7 +17,7 @@ const rows = [
   { id: 4, name: 'pikachu', type: 'electric', level: 5 },
   { id: 5, name: 'eevee', type: 'normal', level: 5 },
   { id: 6, name: 'abra', type: 'psychic', level: 5 },
-];
+] as const;
 
 const TYPE_MAP = {
   fire: { icon: '🔥', color: '#ff6500' },

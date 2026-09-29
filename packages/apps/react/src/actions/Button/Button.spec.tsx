@@ -1,11 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@/test/render';
 
 import Button from './Button';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 jest.mock('@/actions/Ripple', () => ({
   __esModule: true,

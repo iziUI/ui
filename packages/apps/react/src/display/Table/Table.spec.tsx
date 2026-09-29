@@ -1,11 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@/test/render';
 
 import Table from './Table';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 describe('Table', () => {
   it('should render successfully', () => {
@@ -21,5 +16,13 @@ describe('Table', () => {
   it('should apply additional className', () => {
     render(<Table data-testid="table" className="custom" />);
     expect(screen.getByTestId('table')).toHaveClass('custom');
+  });
+
+  it('applies wrapper layout props without forwarding them to the DOM', () => {
+    render(<Table data-testid="table" fullWidth />);
+
+    const table = screen.getByTestId('table');
+    expect(table).toHaveStyle({ width: '100%' });
+    expect(table).not.toHaveAttribute('fullWidth');
   });
 });

@@ -1,12 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@/test/render';
 
 import Tabs from './Tabs';
 import TabButton from './TabButton';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
   configurable: true,

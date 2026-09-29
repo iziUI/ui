@@ -1,11 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@/test/render';
 
 import DrawerFooter from './DrawerFooter';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 describe('DrawerFooter', () => {
   it('should render children', () => {

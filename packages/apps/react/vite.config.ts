@@ -33,8 +33,17 @@ const componentGroups: GroupConfig = {
 };
 
 const flatGroups: GroupConfig = {
+  actions: ['actions'],
+  display: ['display'],
+  feedback: ['feedback'],
+  fields: ['fields'],
+  layout: ['layout'],
+  navigation: ['navigation'],
+  animations: ['animations'],
+  hooks: ['hooks'],
+  lab: ['lab'],
   theme: ['core', 'theme'],
-  core: ['@iziui/core/utils'],
+  core: ['@iziui/core/utils', 'core'],
 };
 
 const INTERNAL_PKG_PREFIX = '@iziui/';
@@ -56,6 +65,15 @@ const COMPONENT_GLOB_IGNORES = [
   'src/**/*.test.*',
   'src/**/*.spec.*',
   'src/**/*.stories.*',
+  'src/**/__tests__/**',
+  'src/**/__mocks__/**',
+];
+
+const DECLARATION_IGNORES = [
+  'src/**/*.test.*',
+  'src/**/*.spec.*',
+  'src/**/*.stories.*',
+  'src/test/**',
   'src/**/__tests__/**',
   'src/**/__mocks__/**',
 ];
@@ -300,6 +318,7 @@ export default defineConfig({
       tsconfigPath: './tsconfig.json',
       entryRoot: 'src',
       outDir: `dist/${TYPES_DIR}`,
+      exclude: DECLARATION_IGNORES,
       insertTypesEntry: false,
     }),
     generateGroupedTypes(),
@@ -337,8 +356,8 @@ export default defineConfig({
       output: [
         {
           format: 'es',
-          entryFileNames: '[name].js',
-          chunkFileNames: 'chunks/[name]-[hash].js',
+          entryFileNames: '[name].mjs',
+          chunkFileNames: 'chunks/[name]-[hash].mjs',
         },
         {
           format: 'cjs',

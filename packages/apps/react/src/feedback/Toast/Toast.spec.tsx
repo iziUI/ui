@@ -1,11 +1,6 @@
-import { render } from '@testing-library/react';
+import { render } from '@/test/render';
 
 import Toast from './Toast';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 describe('Toast', () => {
   it('renders successfully', () => {

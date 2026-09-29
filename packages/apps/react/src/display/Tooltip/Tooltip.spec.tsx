@@ -1,11 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@/test/render';
 
 import Tooltip from './Tooltip';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 describe('Tooltip', () => {
   it('shows its label when users hover its child', () => {

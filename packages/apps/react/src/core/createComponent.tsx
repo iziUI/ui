@@ -1,4 +1,4 @@
-import type { ComponentType, FC } from 'react';
+import type { ComponentType, CSSProperties, FC } from 'react';
 
 import type { Sx } from '@iziui/core/system';
 import type { Plugin } from '@iziui/core/plugin';
@@ -26,7 +26,7 @@ export default function createComponent<P>(WrappedComponent: ComponentType<P>) {
         {...(props as P)}
         style={{
           boxSizing: 'border-box',
-          ...props['style'],
+          ...(props as P & { style?: CSSProperties }).style,
           ...options,
           ...(fullWidth ? { width: '100%' } : {}),
         }}

@@ -1,11 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@/test/render';
 
 import DrawerHeader from './DrawerHeader';
-
-jest.mock('@/core/createComponent', () => ({
-  __esModule: true,
-  default: (Comp: any) => Comp,
-}));
 
 describe('DrawerHeader', () => {
   it('should render children', () => {
