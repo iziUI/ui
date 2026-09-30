@@ -77,6 +77,7 @@ describe('applyTheme', () => {
       background: {
         paper: '#ffffff',
         default: '#fafafa',
+        muted: '#f5f5f5',
       },
       divider: 'rgba(0, 0, 0, 0.12)',
     },
@@ -275,6 +276,10 @@ describe('applyTheme', () => {
         '--background-default',
         mockTheme.palette.background.default,
       );
+      expect(document.documentElement.style.setProperty).toHaveBeenCalledWith(
+        '--background-muted',
+        mockTheme.palette.background.muted,
+      );
     });
 
     it('should set divider color property', () => {
@@ -323,12 +328,12 @@ describe('applyTheme', () => {
       // 7 colors * 5 properties each = 35
       // 1 typography = 1
       // 3 text properties = 3
-      // 2 background properties = 2
+      // 3 background properties = 3
       // 1 divider = 1
       // 1 radius = 1
       // 1 spacing = 1
-      // Total = 44
-      expect(document.documentElement.style.setProperty).toHaveBeenCalledTimes(44);
+      // Total = 45
+      expect(document.documentElement.style.setProperty).toHaveBeenCalledTimes(45);
     });
   });
 
@@ -380,6 +385,7 @@ describe('applyTheme', () => {
           background: {
             paper: '#424242',
             default: '#303030',
+            muted: '#212121',
           },
           divider: 'rgba(255, 255, 255, 0.12)',
         },
@@ -393,6 +399,7 @@ describe('applyTheme', () => {
       );
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith('--background-paper', '#424242');
       expect(document.documentElement.style.setProperty).toHaveBeenCalledWith('--background-default', '#303030');
+      expect(document.documentElement.style.setProperty).toHaveBeenCalledWith('--background-muted', '#212121');
     });
   });
 });

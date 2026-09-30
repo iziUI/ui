@@ -112,6 +112,50 @@ export function DarkApp({ children }: PropsWithChildren) {
 
 The theme has `primary`, `secondary`, `success`, `warning`, `error`, `info`, and `grey` color families. Each family includes derived `main`, `light`, `dark`, `opacity`, and `contrast` values. Text, background, and divider values are also available through the theme.
 
+### Tokens and Runtime Theme
+
+Design tokens and themes solve different problems:
+
+| Concern | `@iziui/tokens` | React theme |
+| --- | --- | --- |
+| Scope | Static shared values | Runtime application values |
+| Access | Sass and JavaScript exports | `ThemeProvider` and `useTheme` |
+| Examples | `spacing`, `radius`, `md` | `palette.primary`, `shape.radius`, `typography.family` |
+| Updates | Rebuild package after a source change | Call `updateTheme` with a new theme |
+
+Tokens do not change when the runtime theme changes. For example, token `spacing` remains `8px`; `theme.spacing` can use another value for an application.
+
+Use `useTheme` inside a provider subtree to read the current theme or replace it:
+
+```tsx
+import { createTheme, useTheme } from '@iziui/react';
+
+export function ThemeMode() {
+  const { theme, updateTheme } = useTheme();
+
+  const enableDarkMode = () => {
+    updateTheme(createTheme({ mode: 'dark' }));
+  };
+
+  return (
+    <button type="button" onClick={enableDarkMode}>
+      Current mode: {theme.mode}
+    </button>
+  );
+}
+```
+
+`ThemeProvider` applies these CSS custom properties on the document root:
+
+| Theme value | CSS custom properties |
+| --- | --- |
+| Color families | `--primary`, `--primary-light`, `--primary-dark`, `--primary-contrast`, `--primary-opacity`; same pattern for `secondary`, `success`, `warning`, `error`, `info`, and `grey` |
+| Text | `--text-primary`, `--text-secondary`, `--text-disabled` |
+| Background | `--background-default`, `--background-paper`, `--background-muted` |
+| Other | `--divider`, `--radius`, `--spacing`, `--typography` |
+
+Use the [@iziui/tokens guide](../../tokens/README.md) for static token values and Sass mixins.
+
 ## Responsive Card Grid
 
 Use `Stack` for vertical structure and `Grid` with `GridItem` for responsive columns. Breakpoint props represent spans from 1 to 12.
@@ -175,4 +219,4 @@ Form utilities are exported from `@iziui/react/lab` and `@iziui/react/lab/Form`.
 
 ## Design Tokens
 
-The React package exposes theme APIs and compiled SCSS assets. A complete public token reference is not yet published. Do not depend on internal token build paths from application code.
+The React package exposes theme APIs and compiled SCSS assets. Read the [@iziui/tokens guide](../../tokens/README.md) for public token exports. Do not depend on internal token build paths from application code.

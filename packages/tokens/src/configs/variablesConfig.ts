@@ -5,6 +5,7 @@ import { applyFormatters } from '../formatters';
 import { applyTransformers } from '../transformers';
 import dtsFormatter from '../formatters/plugins/dtsFormatter';
 import jsFormatter from '../formatters/plugins/jsFormatter';
+import markdownReferenceFormatter from '../formatters/plugins/markdownReferenceFormatter';
 import scssFormatter from '../formatters/plugins/scssFormatter';
 import scssMainFormatter from '../formatters/plugins/scssMainFormatter';
 import scssMixinsFormatter from '../formatters/plugins/scssMixinsFormatter';
@@ -51,6 +52,16 @@ const getConfig = (): Config => {
             options: { showFileHeader: false },
           },
         ],
+      },
+      documentation: {
+        transformGroup: 'js',
+        buildPath: '',
+        files: [
+          {
+            destination: 'TOKEN_REFERENCE.md',
+            format: 'markdown/token-reference',
+          },
+        ],
       }
     }
   };
@@ -66,9 +77,10 @@ export default async function configVariables() {
   ]);
 
   await applyFormatters(styleDictionary, [
-    jsFormatter,
-    dtsFormatter,
-    scssFormatter,
+        jsFormatter,
+        dtsFormatter,
+        markdownReferenceFormatter,
+        scssFormatter,
     scssMixinsFormatter,
     scssMainFormatter,
   ]);

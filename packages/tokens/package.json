@@ -13,7 +13,8 @@
     }
   },
   "scripts": {
-    "build": "tsx src/index.ts && tsc -p tsconfig.build.json"
+    "build": "tsx src/index.ts && tsc -p tsconfig.build.json",
+    "test": "tsx --test src/formatters/plugins/markdownReferenceFormatter.spec.ts"
   },
   "devDependencies": {
     "style-dictionary": "^5.1.1",
