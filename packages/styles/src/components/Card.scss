@@ -10,6 +10,11 @@
   &--clickable {
     cursor: pointer;
 
+    &:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
     &:hover {
       box-shadow: $box-shadow-regular;
       border-color: var(--primary-light);

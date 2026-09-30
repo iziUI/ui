@@ -79,7 +79,7 @@ const meta: Meta<typeof Card> = {
     onClick: {
       control: false,
       type: 'function',
-      description: 'Transforma o card em um elemento clicavel e adiciona uma função de callback',
+      description: 'Transforma o card em botão operável por mouse, Enter e Espaço e adiciona callback.',
     }
   }
 };
