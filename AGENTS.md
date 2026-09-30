@@ -123,6 +123,14 @@ Vite builds with `preserveModules` — the output mirrors source structure. Outp
 ## Coding patterns
 
 - Control flow: `docs/patterns/early-return.md`
+- Explicit control flow: `docs/patterns/explicit-control-flow.md`
+- Formatting: `docs/patterns/formatting.md`
+
+## Tooling
+
+- Use RTK for supported terminal commands to reduce token usage.
+- Follow the instructions in `docs/tooling/rtk.md`.
+- Fall back to native commands when RTK does not support an operation.
 
 ---
 
