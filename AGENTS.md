@@ -125,6 +125,7 @@ Vite builds with `preserveModules` — the output mirrors source structure. Outp
 - Control flow: `docs/patterns/early-return.md`
 - Explicit control flow: `docs/patterns/explicit-control-flow.md`
 - Formatting: `docs/patterns/formatting.md`
+- Component styling: `docs/patterns/component-styling.md`
 
 ## Tooling
 

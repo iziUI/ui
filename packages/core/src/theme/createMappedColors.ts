@@ -23,6 +23,7 @@ export function createMappedColors(_colors: typeof colors): MappedColors[] {
     'text.disabled',
     'background.paper',
     'background.default',
+    'background.muted',
     'divider'
   ]);
 }

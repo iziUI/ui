@@ -11,7 +11,7 @@ export const themeDefaultLight: Theme = {
     warning: '#FF9457',
     success: '#36E79B',
     primary: '#6C37F4',
-    secondary: '#FB7185', //C026D3 // F97316 // FB7185 // F59E0B
+    secondary: '#402235', //C026D3 // F97316 // FB7185 // F59E0B
     grey: '#545f6f',
     text: {
       primary: 'rgb(31, 41, 55)',
@@ -21,7 +21,7 @@ export const themeDefaultLight: Theme = {
     background: {
       paper: '#F9F8F9',
       default: '#FFF',
-      muted: '#F9F8F9'
+      muted: '#ececec'
     },
     divider: 'rgba(0, 0, 0, 0.12)'
   },

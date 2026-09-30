@@ -68,11 +68,13 @@ function Alert({
         fullWidth
         gap={8}
         flexDirection="row"
-        alignItems="center"
+        alignItems="flex-start"
         className={`${prefix}-alert__content`}
       >
         {icon}
-        {renderMessage()}
+        <div>
+          {renderMessage()}
+        </div>
       </Stack>
       {
         onClose && (
