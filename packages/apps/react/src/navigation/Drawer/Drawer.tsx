@@ -1,10 +1,11 @@
-import { useEffect, useState, type HTMLAttributes } from 'react';
+import { useEffect, useState, type HTMLAttributes, type KeyboardEvent } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
 import { joinClass } from '@iziui/core/utils';
 
 import Stack from '@/layout/Stack';
+import useAccessibleDialog from '@/hooks/useAccessibleDialog';
 
 import createComponent from '../../core/createComponent';
 
@@ -30,11 +31,17 @@ function Drawer({
   footer,
   direction = 'right',
   onClose,
+  onKeyDown: onDrawerKeyDown,
   ...props
 }: DrawerProps) {
   const [config, setConfig] = useState<Config>({ visible: false, animation: 'hide' });
 
   const ANIMATION_DURATION = 300;
+  const { dialogRef, onKeyDown } = useAccessibleDialog({
+    open: config.visible,
+    onClose,
+    restoreAfterClose: !config.visible,
+  });
 
   const cls = joinClass(
     `${prefix}-drawer`,
@@ -85,9 +92,23 @@ function Drawer({
     }, ANIMATION_DURATION);
   };
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (onDrawerKeyDown) { onDrawerKeyDown(event); }
+
+    onKeyDown(event);
+  };
+
   return (
     config.visible && (
-      <div {...props} className={cls}>
+      <div
+        {...props}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        tabIndex={-1}
+        className={cls}
+        onKeyDown={handleKeyDown}
+      >
         <Stack className={contentCls}>
           {header}
           {body}

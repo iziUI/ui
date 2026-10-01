@@ -1,3 +1,5 @@
+import { userEvent } from '@storybook/test';
+
 import { act, fireEvent, render, screen } from '@/test/render';
 
 import Drawer from './Drawer';
@@ -199,6 +201,122 @@ describe('Drawer', () => {
       );
       expect(screen.getByTestId('drawer')).toBeInTheDocument();
       expect(screen.getByTestId('drawer-body')).toBeInTheDocument();
+    });
+  });
+
+  describe('accessible dialog behavior', () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      act(() => {
+        jest.runOnlyPendingTimers();
+      });
+      jest.useRealTimers();
+      document.body.innerHTML = '';
+    });
+
+    it('traps focus, closes with Escape, and restores trigger focus after closing', async () => {
+      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+      const trigger = document.createElement('button');
+      const onClose = jest.fn();
+
+      document.body.append(trigger);
+      trigger.focus();
+
+      const { rerender } = render(
+        <Drawer
+          open
+          aria-label="Account filters"
+          body={<><button type="button">First filter</button><button type="button">Last filter</button></>}
+          onClose={onClose}
+        />
+      );
+
+      const dialog = screen.getByRole('dialog', { name: 'Account filters' });
+      const firstFilter = screen.getByRole('button', { name: 'First filter' });
+      const lastFilter = screen.getByRole('button', { name: 'Last filter' });
+
+      expect(dialog).toHaveAttribute('aria-modal', 'true');
+      expect(firstFilter).toHaveFocus();
+
+      await act(async () => {
+        await user.keyboard('{Tab}{Tab}');
+      });
+      expect(firstFilter).toHaveFocus();
+
+      await act(async () => {
+        await user.keyboard('{Shift>}{Tab}{/Shift}');
+      });
+      expect(lastFilter).toHaveFocus();
+
+      fireEvent.keyDown(lastFilter, { key: 'Escape' });
+      expect(onClose).toHaveBeenCalledTimes(1);
+
+      rerender(
+        <Drawer
+          open={false}
+          aria-label="Account filters"
+          body={<><button type="button">First filter</button><button type="button">Last filter</button></>}
+          onClose={onClose}
+        />
+      );
+      act(() => {
+        jest.advanceTimersByTime(300);
+      });
+
+      expect(trigger).toHaveFocus();
+    });
+
+    it('focuses its dialog container when no focusable content exists', () => {
+      const trigger = document.createElement('button');
+
+      document.body.append(trigger);
+      trigger.focus();
+
+      render(
+        <Drawer
+          open
+          aria-label="Empty drawer"
+          body={<div>Empty content</div>}
+          onClose={jest.fn()}
+        />
+      );
+
+      expect(screen.getByRole('dialog', { name: 'Empty drawer' })).toHaveFocus();
+    });
+
+    it('does not restore focus to a trigger removed before close animation ends', () => {
+      const trigger = document.createElement('button');
+
+      document.body.append(trigger);
+      trigger.focus();
+
+      const { rerender } = render(
+        <Drawer
+          open
+          aria-label="Temporary drawer"
+          body={<div>Drawer content</div>}
+          onClose={jest.fn()}
+        />
+      );
+
+      trigger.remove();
+      rerender(
+        <Drawer
+          open={false}
+          aria-label="Temporary drawer"
+          body={<div>Drawer content</div>}
+          onClose={jest.fn()}
+        />
+      );
+
+      expect(() => {
+        act(() => {
+          jest.advanceTimersByTime(300);
+        });
+      }).not.toThrow();
     });
   });
 });

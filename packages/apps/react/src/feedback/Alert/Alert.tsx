@@ -26,6 +26,7 @@ function Alert({
   icon,
   color = 'primary',
   onClose,
+  role = 'status',
   ...props
 }: AlertProps) {
   const { theme: { mode } } = useTheme();
@@ -62,6 +63,7 @@ function Alert({
       alignItems="center"
       justifyContent="center"
       {...props}
+      role={role}
       className={className}
     >
       <Stack
@@ -81,6 +83,7 @@ function Alert({
           <div>
             <ButtonIcon
               className={classNameAction}
+              aria-label="Close alert"
               onClick={onClose}
               color={color}
               style={{ color: 'currentColor' }}

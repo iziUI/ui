@@ -4,6 +4,7 @@ import {
   useState,
   type DragEvent,
   type ChangeEvent,
+  type KeyboardEvent,
   type InputHTMLAttributes
 } from 'react';
 
@@ -51,6 +52,17 @@ function InputFile({
     () => !props.multiple && files.length > 0,
     [files, props.multiple]
   );
+  const triggerAttributes = useMemo(() => {
+    const isEmpty = state === 'empty';
+
+    return {
+      tabIndex: props.disabled ? -1 : 0,
+      ariaLabel: props['aria-label'] ?? placeholder,
+      ariaDisabled: props.disabled || undefined,
+      iconColor: isEmpty ? 'grey' : 'primary',
+      textColor: isEmpty ? 'text.secondary' : 'primary.main',
+    } as const;
+  }, [placeholder, props.disabled, props['aria-label'], state]);
 
   const classes = joinClass(
     `${prefix}-input-file`,
@@ -99,13 +111,26 @@ function InputFile({
     processFiles(Array.from(e.dataTransfer.files));
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (props.disabled || (e.key !== 'Enter' && e.key !== ' ')) { return; }
+    if (!inputRef.current) { return; }
+
+    e.preventDefault();
+    inputRef.current.click();
+  };
+
   return (
     <Stack>
       <div
         className={classes}
+        role="button"
+        tabIndex={triggerAttributes.tabIndex}
+        aria-label={triggerAttributes.ariaLabel}
+        aria-disabled={triggerAttributes.ariaDisabled}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
+        onKeyDown={handleKeyDown}
       >
         <input
           {...props}
@@ -129,11 +154,11 @@ function InputFile({
               <Slide enter direction="top" style={{ textAlign: 'center' }}>
                 <Icon
                   name="cloud-upload"
-                  color={state === 'empty' ? 'grey' : 'primary'}
+                  color={triggerAttributes.iconColor}
                   style={{ fontSize: 42 }}
                 />
                 <Typography
-                  color={state === 'empty' ? 'text.secondary' : 'primary.main'}
+                  color={triggerAttributes.textColor}
                   variant="body2"
                 >
                   {placeholder}
@@ -164,7 +189,7 @@ function InputFile({
                     name="exclamation-octagon"
                     style={{ fontSize: 42 }}
                   />
-                  <Typography color="error.main">{helperText}</Typography>
+                  <Typography role="alert" aria-live="assertive" color="error.main">{helperText}</Typography>
                 </Stack>
               </Zoom>
             )

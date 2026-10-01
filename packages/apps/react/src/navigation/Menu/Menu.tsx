@@ -7,6 +7,7 @@ import {
   type ReactElement,
   type CSSProperties,
   type HTMLAttributes,
+  type KeyboardEvent,
   cloneElement
 } from 'react';
 
@@ -52,6 +53,9 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
   maxHeight = 150,
   autoClose,
   onClose,
+  id: providedId,
+  role,
+  onKeyDown,
   ...props
 }: MenuProps, ref) {
   const [coordinate, setCoordinate] = useState<Coordinates>();
@@ -62,7 +66,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
 
   const arrayChildren = Children.toArray(children) as ReactElement<any>[];
 
-  const id = useMemo(() => uuid(), []);
+  const generatedId = useMemo(() => uuid(), []);
+  const id = providedId ?? generatedId;
 
   const classes = joinClass(
     `${prefix}-menu`,
@@ -70,6 +75,22 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
     `${prefix}-menu--${position}`,
     props.className
   );
+  const [resolvedRole, menuStyle] = useMemo(() => {
+    const display = config.state === 'visible' ? 'block' : 'none';
+
+    return [
+      role ?? 'menu',
+      {
+        width: width || config.width,
+        top: coordinate?.top,
+        left: coordinate?.left,
+        display,
+        transition: `all ${ANIMATION_DURATION}ms ease-in`,
+        zIndex: 50,
+        ...props.style,
+      },
+    ];
+  }, [config.state, config.width, coordinate, props.style, role, width]);
 
   useListenerResized(() => changePosition(), [anchorEl]);
 
@@ -130,19 +151,95 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
     }, ANIMATION_DURATION);
   };
 
+  const getEnabledButtons = () => {
+    const menu = document.getElementById(id);
+
+    return Array.from(menu?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)') ?? []);
+  };
+
+  const focusButton = (button: HTMLButtonElement) => {
+    getEnabledButtons().forEach((item) => {
+      item.tabIndex = item === button ? 0 : -1;
+    });
+    button.focus();
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (onKeyDown) { onKeyDown(event); }
+
+    if (event.defaultPrevented || !open) { return; }
+
+    const buttons = getEnabledButtons();
+    const activeIndex = buttons.indexOf(document.activeElement as HTMLButtonElement);
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      handleClose();
+      if (anchorEl) { anchorEl.focus(); }
+      return;
+    }
+
+    if (!buttons.length) { return; }
+
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Home' || event.key === 'End') {
+      event.preventDefault();
+
+      if (event.key === 'Home') {
+        focusButton(buttons[0]);
+        return;
+      }
+
+      if (event.key === 'End') {
+        focusButton(buttons.at(-1)!);
+        return;
+      }
+
+      const direction = event.key === 'ArrowDown' ? 1 : -1;
+      const nextIndex = activeIndex < 0
+        ? (direction === 1 ? 0 : buttons.length - 1)
+        : (activeIndex + direction + buttons.length) % buttons.length;
+
+      focusButton(buttons[nextIndex]);
+      return;
+    }
+
+    if (event.key === 'Enter' || event.key === ' ') {
+      const activeButton = activeIndex < 0 ? buttons[0] : buttons[activeIndex];
+
+      event.preventDefault();
+      activeButton.click();
+    }
+  };
+
+  const getMenuButtonTabIndex = (child: ReactElement<any>, index: number, firstEnabledIndex: number) => {
+    if (child.props.disabled || index !== firstEnabledIndex) { return -1; }
+
+    return 0;
+  };
+
+  const handleChildFocus = (child: ReactElement<any>, event: React.FocusEvent<HTMLButtonElement>) => {
+    if (child.props.onFocus) { child.props.onFocus(event); }
+
+    focusButton(event.currentTarget);
+  };
+
+  const handleChildClick = (child: ReactElement<any>, event: React.MouseEvent<HTMLButtonElement>) => {
+    debounce.delay(() => {
+      if (autoClose) { handleClose(); }
+
+      if (child.props.onClick) { child.props.onClick(event); }
+    }, 0);
+  };
+
   const renderChildren = () => {
+    const firstEnabledIndex = arrayChildren.findIndex((child) => !child.props.disabled);
+
     return arrayChildren.map((child, index) => {
       return cloneElement(child, {
-        'tabIndex': index + 1,
+        'tabIndex': getMenuButtonTabIndex(child, index, firstEnabledIndex),
         key: `button-${index}`,
-        onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
-          debounce.delay(() => {
-
-            if (autoClose) { handleClose(); }
-
-            if (child.props.onClick) { child.props.onClick(e); }
-          }, 0);
-        },
+        onFocus: (event: React.FocusEvent<HTMLButtonElement>) => handleChildFocus(child, event),
+        onClick: (event: React.MouseEvent<HTMLButtonElement>) => handleChildClick(child, event),
       });
     });
   };
@@ -153,15 +250,9 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
         id={id}
         ref={ref}
         {...props}
-        style={{
-          width: width || config.width,
-          top: coordinate?.top,
-          left: coordinate?.left,
-          display: config?.state === 'visible' ? 'block' : 'none',
-          transition: `all ${ANIMATION_DURATION}ms ease-in`,
-          zIndex: 50,
-          ...props.style
-        }}
+        role={resolvedRole}
+        onKeyDown={handleKeyDown}
+        style={menuStyle}
         className={classes}
       >
         {

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, cloneElement, ReactElement } from 'react';
+import { ButtonHTMLAttributes, cloneElement, ReactElement, useMemo } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
@@ -27,6 +27,10 @@ export default function Option({
     color && `${prefix}-select__option--${color}`,
     props.className
   );
+  const optionAttributes = useMemo(() => ({
+    role: props.role ?? 'option',
+    ariaDisabled: disabled || props['aria-disabled'] || undefined,
+  }), [disabled, props['aria-disabled'], props.role]);
 
   const renderIcon = (icon: ReactElement<ButtonHTMLAttributes<HTMLButtonElement>>) => {
     return cloneElement(icon, {
@@ -44,6 +48,9 @@ export default function Option({
       {...props}
       className={className}
       value={value}
+      role={optionAttributes.role}
+      aria-disabled={optionAttributes.ariaDisabled}
+      disabled={disabled}
     >
       {startIcon && renderIcon(startIcon as React.JSX.Element)}
       {children}

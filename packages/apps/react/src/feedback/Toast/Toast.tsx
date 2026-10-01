@@ -1,4 +1,4 @@
-import { useEffect, useRef, type HTMLAttributes } from 'react';
+import { useEffect, useMemo, useRef, type FocusEvent, type HTMLAttributes, type MouseEvent } from 'react';
 
 import { prefix } from '@iziui/tokens/web/js';
 
@@ -34,8 +34,22 @@ export interface ToastProps extends HTMLAttributes<HTMLDivElement> {
   onRemove: (id: string) => void;
 };
 
-function Toast({ id, color, message, icon, delay = 2500, onRemove, ...props }: ToastProps) {
+function Toast({
+  id,
+  color,
+  message,
+  icon,
+  delay = 2500,
+  onRemove,
+  onFocus,
+  onBlur,
+  onMouseEnter,
+  onMouseLeave,
+  ...props
+}: ToastProps) {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isFocusedRef = useRef(false);
+  const isHoveredRef = useRef(false);
 
   const { theme: { mode } } = useTheme();
 
@@ -43,6 +57,11 @@ function Toast({ id, color, message, icon, delay = 2500, onRemove, ...props }: T
     `${prefix}-toast`,
     props.className
   );
+  const announcementRole = useMemo(() => {
+    if (color === 'error') { return 'alert'; }
+
+    return 'status';
+  }, [color]);
 
   useEffect(() => {
     startTimer();
@@ -55,6 +74,8 @@ function Toast({ id, color, message, icon, delay = 2500, onRemove, ...props }: T
   };
 
   const startTimer = () => {
+    if (timeoutRef.current) { return; }
+
     timeoutRef.current = setTimeout(() => { handleRemove(); }, delay);
   };
 
@@ -64,8 +85,45 @@ function Toast({ id, color, message, icon, delay = 2500, onRemove, ...props }: T
     timeoutRef.current = null;
   };
 
+  const resumeTimer = () => {
+    if (isFocusedRef.current || isHoveredRef.current) { return; }
+    startTimer();
+  };
+
+  const handleFocus = (event: FocusEvent<HTMLDivElement>) => {
+    if (onFocus) { onFocus(event); }
+    if (event.currentTarget.contains(event.relatedTarget as Node)) { return; }
+
+    isFocusedRef.current = true;
+    clearTimer();
+  };
+
+  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+    if (onBlur) { onBlur(event); }
+    if (event.currentTarget.contains(event.relatedTarget as Node)) { return; }
+
+    isFocusedRef.current = false;
+    resumeTimer();
+  };
+
+  const handleMouseEnter = (event: MouseEvent<HTMLDivElement>) => {
+    if (onMouseEnter) { onMouseEnter(event); }
+
+    isHoveredRef.current = true;
+    clearTimer();
+  };
+
+  const handleMouseLeave = (event: MouseEvent<HTMLDivElement>) => {
+    if (onMouseLeave) { onMouseLeave(event); }
+
+    isHoveredRef.current = false;
+    resumeTimer();
+  };
+
   return (
     <Alert
+      {...props}
+      role={announcementRole}
       className={className}
       icon={icon}
       sx={{
@@ -73,8 +131,10 @@ function Toast({ id, color, message, icon, delay = 2500, onRemove, ...props }: T
         color: (palette) => palette[color][mode]
       }}
       onClose={handleRemove}
-      onMouseEnter={clearTimer}
-      onMouseLeave={startTimer}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {message}
     </Alert>

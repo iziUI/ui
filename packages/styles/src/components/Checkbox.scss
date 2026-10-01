@@ -29,6 +29,10 @@
         opacity: 0;
       }
 
+      input[type=checkbox]:focus-visible {
+        outline-color: var(--#{$color});
+      }
+
       &--checked {
         input[type=checkbox]:before {
           border: solid var(--#{$color}-contrast);
@@ -67,6 +71,12 @@
   }
 
   input[type=checkbox]:hover {
+    opacity: 1;
+  }
+
+  input[type=checkbox]:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
     opacity: 1;
   }
 

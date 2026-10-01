@@ -15,6 +15,8 @@ import createComponent from '@/core';
 
 import '@iziui/styles/components/Input.scss';
 
+import useFieldAccessibility from '../useFieldAccessibility';
+
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
   label?: string;
@@ -33,8 +35,19 @@ function Input({
   type = 'text',
   disabled,
   width = '100%',
+  id,
   ...props
 }: InputProps) {
+  const ariaDescribedBy = props['aria-describedby'];
+  const ariaInvalid = props['aria-invalid'];
+  const { controlId, helperTextId, describedBy, ariaInvalid: resolvedAriaInvalid } = useFieldAccessibility({
+    id,
+    helperText,
+    error,
+    ariaDescribedBy,
+    ariaInvalid,
+  });
+
   const containerClss = joinClass(
     `${prefix}-input-container`,
   );
@@ -78,15 +91,26 @@ function Input({
 
   return (
     <div className={containerClss} style={{ width }}>
-      {label && <label className={labelClss}>{label} {props.required && '*'}</label>}
+      {label && <label className={labelClss} htmlFor={controlId}>
+        {label} {props.required && '*'}
+      </label>}
       <div className={classes}>
         {startIcon && renderIcon(startIcon as React.JSX.Element, 'right')}
-        <input {...props} type={type} disabled={disabled} />
+        <input
+          {...props}
+          id={controlId}
+          aria-describedby={describedBy}
+          aria-invalid={resolvedAriaInvalid}
+          type={type}
+          disabled={disabled}
+        />
         {endIcon && renderIcon(endIcon as React.JSX.Element, 'left')}
       </div>
       {
         helperText && (
-          <p className={helperTextClss}>{helperText}</p>
+          <p id={helperTextId} className={helperTextClss}>
+            {helperText}
+          </p>
         )
       }
     </div>

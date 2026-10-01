@@ -208,6 +208,8 @@ Breakpoints are `xs` through 599px, `sm` from 600px through 899px, `md` from 900
 
 ## Accessibility Notes
 
+Read the [accessibility guide](./ACCESSIBILITY.md) for component guarantees and application responsibilities.
+
 - Use `Typography` heading variants in document order. `h1` through `h6` render their matching HTML heading elements.
 - A Card with `onClick` is exposed as a button and supports mouse click, Enter, and Space. Use it only when the whole card represents one action; do not nest other interactive controls inside it.
 - Use native `disabled` on Button when an action is unavailable.

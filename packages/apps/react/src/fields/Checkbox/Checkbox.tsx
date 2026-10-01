@@ -8,10 +8,12 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 import Stack from '@/layout/Stack';
 
 import createComponent from '../../core/createComponent';
+import useFieldAccessibility from '../useFieldAccessibility';
 
 import '@iziui/styles/components/Checkbox.scss';
 
 export interface CheckboxProps extends Omit<HTMLProps<HTMLInputElement>, 'id'> {
+  id?: string;
   name: string;
   label: string;
   helperText?: string;
@@ -28,8 +30,19 @@ function Checkbox({
   disabled,
   error,
   helperText,
+  id,
   ...props
 }: CheckboxProps) {
+  const ariaDescribedBy = props['aria-describedby'];
+  const ariaInvalid = props['aria-invalid'];
+  const { controlId, helperTextId, describedBy, ariaInvalid: resolvedAriaInvalid } = useFieldAccessibility({
+    id: id ?? name,
+    helperText,
+    error,
+    ariaDescribedBy,
+    ariaInvalid,
+  });
+
   const className = joinClass(
     `${prefix}-checkbox`,
     `${prefix}-checkbox--${color}`,
@@ -45,11 +58,13 @@ function Checkbox({
 
   return (
     <Stack gap={4}>
-      <label htmlFor={name} className={className}>
+      <label htmlFor={controlId} className={className}>
         <input
           type="checkbox"
           {...props}
-          id={name}
+          id={controlId}
+          aria-describedby={describedBy}
+          aria-invalid={resolvedAriaInvalid}
           name={name}
           checked={checked}
           disabled={disabled}
@@ -57,7 +72,7 @@ function Checkbox({
         {label}
       </label>
       {
-        <span className={helperTextClss}>{helperText}</span>
+        <span id={helperTextId} className={helperTextClss}>{helperText}</span>
       }
     </Stack>
   );

@@ -30,6 +30,8 @@ import { Menu, useMenu, type MenuProps } from '@/navigation/Menu';
 
 import '@iziui/styles/components/Autocomplete.scss';
 
+import useFieldAccessibility from '../useFieldAccessibility';
+
 export interface AutocompleteProps<T>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'> {
   label?: string;
@@ -80,6 +82,7 @@ function Autocomplete<T>({
     </Typography>
   ),
 
+  id,
   ...props
 }: AutocompleteProps<T>) {
   const [open, el, toggle] = useMenu();
@@ -89,7 +92,17 @@ function Autocomplete<T>({
 
   const searchTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
-  const id = useMemo(() => uuid(), []);
+  const menuId = useMemo(() => uuid(), []);
+  const ariaDescribedBy = props['aria-describedby'];
+  const ariaInvalid = props['aria-invalid'];
+
+  const { controlId, helperTextId, describedBy, ariaInvalid: resolvedAriaInvalid } = useFieldAccessibility({
+    id,
+    helperText,
+    error,
+    ariaDescribedBy,
+    ariaInvalid,
+  });
 
   const cls = joinClass(
     `${prefix}-autocomplete`,
@@ -148,6 +161,39 @@ function Autocomplete<T>({
     return options.filter((option) => filterOptions(option, term));
   }, [options, term, onSearch, filterOptions]);
 
+  const enabledOptionIndexes = useMemo(() => {
+    return visibleOptions.reduce<number[]>((indexes, option, index) => {
+      if (!renderOption(option).props.disabled) {
+        indexes.push(index);
+      }
+
+      return indexes;
+    }, []);
+  }, [visibleOptions, renderOption]);
+
+  const activeDescendant = useMemo(() => {
+    if (activeIndex < 0) { return; }
+
+    return `${menuId}-option-${activeIndex}`;
+  }, [activeIndex, menuId]);
+
+  const getNextActiveIndex = (currentIndex: number, direction: 1 | -1) => {
+    if (!enabledOptionIndexes.length) { return -1; }
+
+    const currentEnabledIndex = enabledOptionIndexes.indexOf(currentIndex);
+
+    if (currentEnabledIndex < 0) {
+      return direction === 1 ? enabledOptionIndexes[0] : enabledOptionIndexes.at(-1)!;
+    }
+
+    const nextEnabledIndex = Math.min(
+      Math.max(currentEnabledIndex + direction, 0),
+      enabledOptionIndexes.length - 1
+    );
+
+    return enabledOptionIndexes[nextEnabledIndex];
+  };
+
   const closeMenu = () => {
     if (!open) { return; }
     toggle();
@@ -165,7 +211,7 @@ function Autocomplete<T>({
       const active = index === activeIndex;
 
       return cloneElement(child, {
-        id: `${id}-option-${index}`,
+        id: `${menuId}-option-${index}`,
         role: 'option',
         'aria-selected': selected,
         className: joinClass(
@@ -204,15 +250,15 @@ function Autocomplete<T>({
       case 'ArrowDown':
         e.preventDefault();
         if (!open) { handleOpen(e); return; }
-        setActiveIndex((prev) => Math.min(prev + 1, visibleOptions.length - 1));
+        setActiveIndex((prev) => getNextActiveIndex(prev, 1));
         break;
       case 'ArrowUp':
         e.preventDefault();
-        setActiveIndex((prev) => Math.max(prev - 1, 0));
+        setActiveIndex((prev) => getNextActiveIndex(prev, -1));
         break;
       case 'Enter': {
         const target = visibleOptions[activeIndex];
-        if (open && target) {
+        if (open && target && enabledOptionIndexes.includes(activeIndex)) {
           e.preventDefault();
           selectOption(target);
           closeMenu();
@@ -234,7 +280,7 @@ function Autocomplete<T>({
 
   return (
     <div className={containerClss}>
-      {label && <label className={labelClss}>{label} {props.required && '*'}</label>}
+      {label && <label className={labelClss} htmlFor={controlId}>{label} {props.required && '*'}</label>}
       <div
         className={cls}
         onClick={handleOpen}
@@ -245,13 +291,16 @@ function Autocomplete<T>({
         </div>
         <input
           {...props}
+          id={controlId}
           value={term}
           type="text"
           role="combobox"
+          aria-describedby={describedBy}
+          aria-invalid={resolvedAriaInvalid}
           aria-expanded={open}
-          aria-controls={id}
+          aria-controls={menuId}
           aria-autocomplete="list"
-          aria-activedescendant={activeIndex >= 0 ? `${id}-option-${activeIndex}` : undefined}
+          aria-activedescendant={activeDescendant}
           onInput={(e: any) => handleInput(e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={disabled}
@@ -271,7 +320,7 @@ function Autocomplete<T>({
         }
       </div>
       <Menu
-        id={id}
+        id={menuId}
         role="listbox"
         autoClose
         position={position}
@@ -292,7 +341,7 @@ function Autocomplete<T>({
       </Menu>
       {
         helperTextClss && (
-          <span className={helperTextClss}>{helperText}</span>
+          <span id={helperTextId} className={helperTextClss}>{helperText}</span>
         )
       }
     </div>

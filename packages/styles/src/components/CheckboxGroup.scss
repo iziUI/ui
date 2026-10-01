@@ -4,7 +4,8 @@
       &--#{$color} {
 
         &--checked,
-        &:hover {
+        &:hover,
+        &:focus-within {
           background-color: var(--#{$color}-opacity);
         }
 

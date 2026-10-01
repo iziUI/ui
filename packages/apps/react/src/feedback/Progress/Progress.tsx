@@ -21,10 +21,16 @@ function Progress({
   ...props
 }: ProgressProps) {
   const className = joinClass(`${prefix}-progress`, props.className);
+  const ariaValue = Math.min(Math.max(percent, 0), 100);
 
   return (
     <Box
       fullWidth
+      {...props}
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={ariaValue}
       className={className}
       sx={{
         backgroundColor: (palette) => palette[color].opacity,

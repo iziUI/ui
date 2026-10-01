@@ -9,6 +9,7 @@ import Stack from '@/layout/Stack';
 
 import createComponent from '../../core/createComponent';
 import type { CheckboxProps } from '../Checkbox';
+import useFieldAccessibility from '../useFieldAccessibility';
 
 import '@iziui/styles/components/CheckboxGroup.scss';
 
@@ -21,15 +22,33 @@ export interface CheckboxGroupItem<T = CheckboxProps['value']> {
 let ID_REFERENCE = 0;
 
 export interface CheckboxGroupProps<T = CheckboxProps['value']> {
+  id?: string;
   className?: string;
   children: React.ReactNode;
+  label?: string;
+  helperText?: string;
+  error?: boolean;
   values?: string[];
   onChange?: (data: CheckboxGroupItem<T>[]) => void;
 }
 
-function CheckboxGroup<T = CheckboxProps['value']>({ children, values, onChange, className }: CheckboxGroupProps<T>) {
+function CheckboxGroup<T = CheckboxProps['value']>({
+  id,
+  children,
+  values,
+  onChange,
+  className,
+  label,
+  helperText,
+  error,
+}: CheckboxGroupProps<T>) {
   const reference = ++ID_REFERENCE;
   const arrayChildren = Children.toArray(children) as ReactElement<CheckboxProps>[];
+  const { controlId, helperTextId, describedBy, ariaInvalid } = useFieldAccessibility({
+    id,
+    helperText,
+    error,
+  });
 
   const cls = joinClass(
     `${prefix}-checkbox-group`,
@@ -74,9 +93,18 @@ function CheckboxGroup<T = CheckboxProps['value']>({ children, values, onChange,
   }, [values]);
 
   return (
-    <Stack gap={2} className={cls}>
-      {renderBoxes()}
-    </Stack>
+    <fieldset
+      id={controlId}
+      aria-describedby={describedBy}
+      aria-invalid={ariaInvalid}
+      style={{ border: 0, margin: 0, minWidth: 0, padding: 0 }}
+    >
+      {label && <legend>{label}</legend>}
+      <Stack gap={2} className={cls}>
+        {renderBoxes()}
+      </Stack>
+      {helperText && <span id={helperTextId}>{helperText}</span>}
+    </fieldset>
   );
 }
 

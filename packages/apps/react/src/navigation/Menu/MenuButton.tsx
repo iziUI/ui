@@ -17,6 +17,7 @@ export interface MenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 function MenuButton({ label, icon, color = 'grey', ...props }: MenuButtonProps) {
+  const role = props.role ?? 'menuitem';
   const className = joinClass(
     `${prefix}-menu__item`,
     color && `${prefix}-menu__item--${color}`,
@@ -31,7 +32,7 @@ function MenuButton({ label, icon, color = 'grey', ...props }: MenuButtonProps) 
   };
 
   return (
-    <button {...props} className={className}>
+    <button {...props} role={role} className={className}>
       {renderIcon()}
       {label}
       <Ripple />
