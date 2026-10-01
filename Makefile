@@ -83,7 +83,6 @@ endef
 
 clean-modules:
 	rm -Rf ./node_modules
-	rm -Rf yarn.lock
 	$(call delete_dependencies,toolkit)
 	$(call delete_dependencies,tokens)
 	$(call delete_dependencies,styles)

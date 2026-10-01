@@ -2,23 +2,57 @@
 
 This file provides guidance to agent when working with code in this repository.
 
+## Critical Rules
+
+Treat these rules as mandatory unless the rule precedence below permits an exception.
+
+- Prefer the smallest localized change that satisfies the task.
+- Change configuration files only when required by the task.
+- Add a dependency only when existing project functionality cannot satisfy the task. State the reason.
+- Preserve public API and behavior unless an explicit task requirement authorizes a breaking change.
+- Treat components as production code for a component librarytt. Maintain security and WCAG accessibility requirements for every change.
+
+## Rule Precedence
+
+Within repository instructions, apply rules in this order:
+
+1. Explicit task requirements, unless they weaken security or accessibility.
+2. Security and accessibility requirements.
+3. Public API and behavior compatibility.
+4. Architecture and package dependency boundaries.
+5. Implementation preferences, including localized changes, configuration changes, and dependencies.
+
+When a security or accessibility correction requires a breaking change, make the correction and report the public impact.
+
+## Development Workflow
+
+Before implementation:
+
+1. Inspect the affected flow and a structurally similar implementation.
+2. Read the documentation and skill that apply to the task.
+3. Propose the smallest change and identify the relevant verification.
+
+During implementation:
+
+1. Reuse existing project abstractions before adding new code.
+2. Keep changes within the agreed scope. Re-read applicable references when the scope changes.
+
+Before finishing:
+
+1. Run the smallest relevant verification.
+2. Check public API, accessibility, and package-boundary impact.
+3. Report verification that could not run and why.
+
 ## Project Overview
 
 **iziUI** is a Yarn 3 monorepo for a React component library with a layered architecture: design tokens → core utilities → React components.
 
 --- 
-
-## How to work on this project
-
-- Before changing code, understand the flow and propose a short plan.
-- Prefer small, localized changes.
-- Do not change configuration files unnecessarily.
-- Do not add new dependencies without justification.
-
---- 
 ## Setup
 
-<!-- TODO: ADD setup command -->
+```bash
+make setup      # Clean install all dependenciess
+```
 
 ## Commands
 
@@ -47,28 +81,17 @@ yarn workspace @iziui/tokens build           # Compile Style Dictionary + TypeSc
 
 ---
 
-## Important Notes
-
-- This is a **component library** - follow security best practices and accessibility
-- This is a **production betting platform** - follow security best practices
-- All changes must maintain **backward compatibility** unless explicitly specified
-- Follow **accessibility guidelines** (WCAG compliance)
-
----
-
 ## Architecture
 
-The packages form a strict dependency hierarchy:
+The verified package dependency boundaries are:
 
-```
-@iziui/tokens          ← Design tokens (Style Dictionary → SCSS + JS)
-    ↑         ↑
-@iziui/core  @iziui/toolkit    ← Foundation (themes, plugins, color utils) + Utilities (string, mask, validators)
-    ↑
-@iziui/styles          ← SCSS-only, no build step
-    ↑
-@iziui/react           ← React 19 component library (Vite build, Storybook)
-```
+- `@iziui/toolkit` has no iziUI package dependencies.
+- `@iziui/tokens` depends on `@iziui/toolkit`.
+- `@iziui/core` depends on `@iziui/tokens` and `@iziui/toolkit`.
+- `@iziui/styles` has no direct iziUI package dependencies.
+- `@iziui/react` depends on `@iziui/tokens`, `@iziui/toolkit`, `@iziui/core`, and `@iziui/styles`.
+
+Read [package dependency boundaries](docs/architecture/package-dependencies.md) before adding a cross-package import.
 
 ### Package responsibilities
 
@@ -78,22 +101,7 @@ The packages form a strict dependency hierarchy:
 | `@iziui/toolkit` | `packages/toolkit/` | Framework-agnostic utilities: string, mask, promise, validators, logger, interface types |
 | `@iziui/core` | `packages/core/` | Theme system (`createTheme`, `applyTheme`), plugin system (color, shape, spacing), color utilities |
 | `@iziui/styles` | `packages/styles/` | SCSS files for base reset + per-component styles; consumed as raw SCSS |
-| `@iziui/react` | `packages/apps/react/` | The component library; built with Vite (`preserveModules`), documented with Storybook 8 |
-
-### @iziui/react component categories
-- **Actions**: Button, ButtonIcon, Ripple
-- **Layout**: Box, Grid, Stack
-- **Display**: Avatar, Card, Chip, Divider, Icon, Typography
-- **Feedback**: Alert, Loading
-- **Fields**: Input
-- **Navigation**: Drawer
-- **Animations**: Bounce, Fade, Slide
-- **Lab** (experimental): Form
-- **Core**: `createComponent` factory
-- **Theme**: `createTheme`, `ThemeProvider`, `useTheme`
-
-### Build output (@iziui/react)
-Vite builds with `preserveModules` — the output mirrors source structure. Outputs: ESM (`.js`), CJS (`.cjs`), TypeScript definitions (`.d.ts`), and a single bundled `dist/style.css`.
+| `@iziui/react` | `packages/apps/react/` | React component library |
 
 --- 
 
@@ -120,12 +128,30 @@ Vite builds with `preserveModules` — the output mirrors source structure. Outp
 - Tests use Jest and React Testing Library.
 - Prefer testing behavior over implementation details.
 
-## Coding patterns
+## Task References
 
-- Control flow: `docs/patterns/early-return.md`
-- Explicit control flow: `docs/patterns/explicit-control-flow.md`
-- Formatting: `docs/patterns/formatting.md`
-- Component styling: `docs/patterns/component-styling.md`
+- Control flow: `docs/patterns/early-return.md` and `docs/patterns/explicit-control-flow.md`.
+- Formatting: `docs/patterns/formatting.md`.
+- React component styling: `docs/patterns/component-styling.md`.
+- Token changes: `packages/tokens/README.md`.
+- Core theme, `sx`, and utility changes: `packages/core/README.md`.
+- React component, Storybook, or public API changes: `packages/apps/react/README.md`.
+- React accessibility changes: `packages/apps/react/ACCESSIBILITY.md`.
+
+## Available Skills
+
+- `setup`: install dependencies or run package scripts.
+- `create-component`: scaffold a React component.
+- `create-tests`: add, update, or fix React component tests.
+- `fill-storybook-meta`: complete Storybook metadata from component props.
+
+## Prohibited Changes
+
+- Do not modify unrelated files.
+- Do not create a utility before searching existing utilities and component helpers.
+- Do not invert package dependencies documented in `docs/architecture/package-dependencies.md`.
+- Do not import package `src`, `dist`, `_internal`, or repository paths. Use documented package export entry points.
+- Do not use `style` or CSS custom properties when `sx` supports the required theme value.
 
 ## Tooling
 
