@@ -187,7 +187,7 @@ const meta: Meta<typeof Select> = {
     layout: 'centered',
     docs: {
       ref: Playground,
-      import: 'import { Option, Select } from \'@iziui/react/Select\'',
+      import: 'import { Option } from \'@iziui/react\';\nimport Select from \'@iziui/react/Select\';',
       description:
         'TODO: Select description',
       tag: (

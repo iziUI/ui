@@ -16,7 +16,8 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 
 import Icon from '@/display/Icon';
 import Stack from '@/layout/Stack';
-import { Menu, type MenuProps, useMenu } from '@/navigation/Menu';
+import Menu, { type MenuProps } from '@/navigation/Menu/Menu';
+import useMenu from '@/navigation/Menu/useMenu';
 
 import type { OptionProps, OptionValue } from './Option';
 import createComponent from '../../core/createComponent';

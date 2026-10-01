@@ -19,7 +19,8 @@ import { uuid } from '@iziui/toolkit/uuid';
 import { debounce } from '@iziui/toolkit/debounce';
 
 import useListenerResized from '@/hooks/useListenerResized';
-import { Card, CardContent } from '@/display/Card';
+import Card from '@/display/Card/Card';
+import CardContent from '@/display/Card/CardContent';
 
 import createComponent from '../../core/createComponent';
 

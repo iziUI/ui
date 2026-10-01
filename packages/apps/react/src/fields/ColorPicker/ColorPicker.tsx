@@ -15,7 +15,8 @@ import Box from '@/layout/Box';
 import Icon from '@/display/Icon';
 import Stack from '@/layout/Stack';
 import { useTheme } from '@/theme';
-import { Menu, useMenu } from '@/navigation/Menu';
+import Menu from '@/navigation/Menu/Menu';
+import useMenu from '@/navigation/Menu/useMenu';
 
 import COLORS from './colors';
 import createComponent from '../../core/createComponent';

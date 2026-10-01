@@ -1,5 +1,7 @@
-export * from './Autocomplete';
-export * from './Select';
+export { default as Autocomplete, type AutocompleteProps } from './Autocomplete';
+export { default as AutocompleteButton, type AutocompleteButtonProps } from './Autocomplete/AutocompleteButton';
+export { default as Select, type SelectChangeHandler, type SelectProps, type SelectValue } from './Select';
+export { default as Option, type OptionProps, type OptionValue } from './Select/Option';
 export { default as Input, type InputProps } from './Input';
 export { default as Switch, type SwitchProps } from './Switch';
 export { default as Checkbox, type CheckboxProps } from './Checkbox';

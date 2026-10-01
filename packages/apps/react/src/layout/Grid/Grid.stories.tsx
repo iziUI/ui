@@ -117,7 +117,7 @@ const meta: Meta<typeof Grid> = {
       ref: Playground,
       description:
         'Layout responsivo de 12 colunas. Use Grid para spans compartilhados e GridItem para sobrescritas individuais.',
-      import: 'import { Grid, GridItem } from \'@iziui/react/Grid\';',
+      import: 'import { GridItem } from \'@iziui/react\';\nimport Grid from \'@iziui/react/Grid\';',
       alert: <GridGuidance />,
       tag: (
         <Chip

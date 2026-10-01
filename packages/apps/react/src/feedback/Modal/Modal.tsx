@@ -9,7 +9,8 @@ import Stack from '@/layout/Stack';
 import ButtonIcon from '@/actions/ButtonIcon';
 import createComponent from '@/core/createComponent';
 import useAccessibleDialog from '@/hooks/useAccessibleDialog';
-import { Card, CardContent } from '@/display/Card';
+import Card from '@/display/Card/Card';
+import CardContent from '@/display/Card/CardContent';
 
 import '@iziui/styles/components/Modal.scss';
 

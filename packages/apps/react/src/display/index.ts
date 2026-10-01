@@ -1,5 +1,9 @@
-export * from './Card';
-export * from './Table';
+export { default as Card, type CardProps } from './Card';
+export { default as CardContent, type CardContentProps } from './CardContent';
+export { default as Table, type TableProps } from './Table';
+export { default as TableBody, type TableBodyProps } from './Table/TableBody';
+export { default as TableCell, type TableCellProps } from './Table/TableCell';
+export { default as TableHeader, type TableHeaderProps } from './Table/TableHeader';
 export { default as Avatar, type AvatarProps } from './Avatar';
 export { default as Chip, type ChipProps } from './Chip';
 export { default as Divider, type DividerProps } from './Divider';

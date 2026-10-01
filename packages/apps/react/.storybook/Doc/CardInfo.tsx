@@ -1,7 +1,8 @@
 import Stack from '../../src/layout/Stack';
 import Icon from '../../src/display/Icon';
 import Typography from '../../src/display/Typography';
-import { Card, CardContent } from '../../src/display/Card';
+import Card from '../../src/display/Card';
+import CardContent from '../../src/display/CardContent';
 
 interface CardInfoProps {
   icon: string;

@@ -71,13 +71,14 @@ Do not import from package `dist`, `_internal`, or repository source paths. Thei
 Individual component, animation, hook, and SCSS entry points are public when a smaller import boundary is required:
 
 ```tsx
-import { Card, CardContent } from '@iziui/react/Card';
+import Card from '@iziui/react/Card';
+import CardContent from '@iziui/react/CardContent';
 import Button from '@iziui/react/Button';
 import Fade from '@iziui/react/animations/Fade';
 import useResize from '@iziui/react/hooks/useResize';
 ```
 
-Individual component exports vary. `Card` exports named `Card` and `CardContent`; `Button` exports a default component. Animation and hook paths export their default implementation. Prefer root or category imports unless an individual entry point is necessary.
+Individual component, animation, and hook entry points export defaults. Use root or category imports when several related APIs are needed.
 
 Sass consumers can load generated variables and mixins with:
 

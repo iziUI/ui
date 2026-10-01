@@ -26,7 +26,8 @@ import Stack from '@/layout/Stack';
 import Loading from '@/feedback/Loading';
 import ButtonIcon from '@/actions/ButtonIcon';
 import Typography from '@/display/Typography';
-import { Menu, useMenu, type MenuProps } from '@/navigation/Menu';
+import Menu, { type MenuProps } from '@/navigation/Menu/Menu';
+import useMenu from '@/navigation/Menu/useMenu';
 
 import '@iziui/styles/components/Autocomplete.scss';
 

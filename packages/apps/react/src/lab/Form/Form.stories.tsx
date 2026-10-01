@@ -9,7 +9,8 @@ import Chip from '@/display/Chip';
 import Input from '@/fields/Input';
 import Stack from '@/layout/Stack';
 import Button from '@/actions/Button';
-import { Select, Option } from '@/fields/Select';
+import { Option } from '@/fields';
+import Select from '@/fields/Select';
 
 import Form from './Form';
 import useForm from './useForm';
@@ -28,6 +29,7 @@ const meta: Meta<typeof Form> = {
   parameters: {
     docs: {
       description: 'Componente para gerenciamento de formulários com controles, validações e submit.',
+      import: 'import Form from \'@iziui/react/lab/Form\';',
       tag: (
         <Chip
           label="Lab"

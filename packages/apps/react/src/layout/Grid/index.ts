@@ -1,3 +1,4 @@
-export * from './Grid';
-export * from './GridItem';
-export * from './interface';
+export { default } from './Grid';
+export type { GridProps } from './Grid';
+export type { GridItemProps } from './GridItem';
+export type { GridBaseProps, GridItemBaseProps, Size } from './interface';

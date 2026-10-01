@@ -36,8 +36,10 @@ import Box from './layout/Box';
 import Stack from './layout/Stack';
 import useTheme from './theme/useTheme';
 import Typography from './display/Typography';
-import { Grid, GridItem } from './layout/Grid';
-import { Card, CardContent } from './display/Card';
+import { GridItem } from './layout';
+import Grid from './layout/Grid';
+import Card from './display/Card';
+import CardContent from './display/CardContent';
 
 const shadows = [
   ['boxShadowSmall', boxShadowSmall, 'sm'],

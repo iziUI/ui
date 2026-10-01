@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import Chip from '@/display/Chip';
 import Icon from '@/display/Icon';
-import { Card, CardContent } from '@/display/Card';
+import Card from '@/display/Card';
+import CardContent from '@/display/CardContent';
 
 import Stack from './Stack';
 

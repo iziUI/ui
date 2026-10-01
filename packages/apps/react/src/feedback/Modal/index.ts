@@ -1,10 +1,6 @@
-export { default as Modal } from './Modal';
-export { default as ModalFooter } from './ModalFooter';
-export { default as useModal } from './useModal';
-
-export * from './Modal';
-export * from './ModalFooter';
-export * from './useModal';
+export { default } from './Modal';
+export type { ModalProps } from './Modal';
+export type { ModalFooterProps } from './ModalFooter';
 
 export type HelperModalProps<T = unknown> = {
   isOpen: boolean;

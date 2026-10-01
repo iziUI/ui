@@ -7,7 +7,8 @@ import logger from '@iziui/toolkit/logger';
 import Stack from '@/layout/Stack';
 import Chip from '@/display/Chip';
 import Icon from '@/display/Icon';
-import { createControl, Form, useForm } from '@/lab/Form';
+import { createControl, useForm } from '@/lab';
+import Form from '@/lab/Form';
 
 import Switch, { SwitchProps } from './Switch';
 

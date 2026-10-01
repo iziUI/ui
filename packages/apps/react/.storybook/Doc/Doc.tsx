@@ -2,7 +2,8 @@ import { Source, Title, Controls, useOf, Canvas } from '@storybook/blocks';
 
 import CardInfo from './CardInfo';
 import Stack from '../../src/layout/Stack';
-import { Grid, GridItem } from '../../src/layout/Grid';
+import Grid from '../../src/layout/Grid';
+import { GridItem } from '../../src/layout';
 
 import './Doc.scss';
 

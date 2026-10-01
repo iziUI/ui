@@ -6,7 +6,7 @@ import { joinClass } from '@iziui/core/utils/joinClass';
 
 import createComponent from '@/core/createComponent';
 
-import { Card } from '../Card';
+import Card from '../Card/Card';
 
 import '@iziui/styles/components/Table.scss';
 

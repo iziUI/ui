@@ -1,4 +1,5 @@
-export { default as Table, type TableProps } from './Table';
-export { default as TableBody, type TableBodyProps } from './TableBody';
-export { default as TableCell, type TableCellProps } from './TableCell';
-export { default as TableHeader, type TableHeaderProps } from './TableHeader';
+export { default } from './Table';
+export type { TableProps } from './Table';
+export type { TableBodyProps } from './TableBody';
+export type { TableCellProps } from './TableCell';
+export type { TableHeaderProps } from './TableHeader';

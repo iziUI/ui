@@ -1,4 +1,3 @@
-export { default as Card } from './Card';
-export { default as CardContent } from './CardContent';
-export * from './Card';
-export * from './CardContent';
+export { default } from './Card';
+export type { CardProps } from './Card';
+export type { CardContentProps } from './CardContent';
