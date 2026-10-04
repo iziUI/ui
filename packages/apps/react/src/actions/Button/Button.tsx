@@ -5,7 +5,7 @@ import { prefix } from '@iziui/tokens/web/js';
 import type { Colors, Size } from '@iziui/core/theme';
 import { joinClass } from '@iziui/core/utils';
 
-import type { LoadingProps } from '@/feedback/Loading';
+import Loading, { type LoadingProps } from '@/feedback/Loading';
 
 import type { IconProps } from '../../display/Icon';
 import Ripple from '../Ripple';
@@ -18,6 +18,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: Colors;
   endIcon?: React.JSX.Element;
   startIcon?: React.JSX.Element;
+  /**
+   * Replaces button content with a loading indicator and disables the action.
+   * Pass `true` for the standard indicator or a custom Loading element. Also provide
+   * `aria-busy` and an accessible name that identifies the busy action.
+   */
   loading?: React.JSX.Element | boolean;
   variant?: 'contained' | 'outlined' | 'text';
 };
@@ -46,12 +51,10 @@ function Button({
     });
   };
 
-  const renderLoading = (loading: React.JSX.Element | boolean) => {
-    if (!loading) { return; }
+  const renderLoading = (value: React.JSX.Element | boolean) => {
+    const loading = value === true ? <Loading aria-hidden /> : value;
 
-    if (loading && typeof loading === 'boolean') {
-      return children;
-    }
+    if (!loading) { return; }
 
     return cloneElement<LoadingProps>(loading, {
       className: joinClass(loading.props.className, `${prefix}-button__loading`, `${prefix}-button__loading--${size}`),
@@ -63,7 +66,7 @@ function Button({
     <button
       {...props}
       className={cls}
-      disabled={Boolean(loading)}
+      disabled={props.disabled || Boolean(loading)}
       onClick={(e) => !loading && props.onClick?.(e)}
     >
       {

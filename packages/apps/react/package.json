@@ -9,7 +9,11 @@
     "access": "public"
   },
   "files": [
-    "dist"
+    "dist",
+    "docs",
+    "AI.md",
+    "README.md",
+    "ACCESSIBILITY.md"
   ],
   "exports": {
     ".": {

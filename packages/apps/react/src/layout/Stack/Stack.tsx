@@ -11,6 +11,7 @@ import '@iziui/styles/components/Stack.scss';
 
 export interface StackProps extends HTMLAttributes<HTMLElement> {
   tag?: React.ElementType;
+  /** Controls direct-child spacing in CSS pixels. Prefer this over child margins. */
   gap?: number;
   flexDirection?: CSSProperties['flexDirection'];
   justifyContent?: CSSProperties['justifyContent'];

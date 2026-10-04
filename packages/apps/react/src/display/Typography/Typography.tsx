@@ -40,6 +40,11 @@ const MAP: { [x: string]: React.ElementType } = {
 };
 
 export interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLParagraphElement>> {
+  /**
+   * Selects text hierarchy and rendered HTML. Heading variants render matching headings,
+   * body variants render paragraphs, and subtitle variants render h6 elements.
+   * Choose variants in semantic heading order; the component does not enforce page hierarchy.
+   */
   variant?: Variant;
   color?: MappedColors;
   textAlign?: CSSProperties['textAlign'];

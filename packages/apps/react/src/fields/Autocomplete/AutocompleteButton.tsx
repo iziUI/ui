@@ -5,12 +5,12 @@ import { prefix } from '@iziui/tokens/web/js';
 import { joinClass } from '@iziui/core/utils';
 import type { Colors } from '@iziui/core/theme';
 
-export type AutocompleteButtonValue = string | number;
+export type AutocompleteButtonValue = string | number | Record<string, unknown>;
 
 export interface AutocompleteButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'value'> {
-  value: AutocompleteButtonValue;
   children: string;
   color?: Colors;
+  value: AutocompleteButtonValue;
   startIcon?: React.JSX.Element | boolean;
 }
 export default function Option({
@@ -18,9 +18,11 @@ export default function Option({
   color,
   startIcon,
   disabled,
-  value,
   ...props
 }: AutocompleteButtonProps) {
+  // eslint-disable-next-line
+  const { value, ...rest } = props;
+
   const className = joinClass(
     `${prefix}-autocomplete__button`,
     disabled && `${prefix}-autocomplete__button--disabled`,
@@ -45,9 +47,8 @@ export default function Option({
   return (
     <button
       type="button"
-      {...props}
+      {...rest}
       className={className}
-      value={value}
       role={optionAttributes.role}
       aria-disabled={optionAttributes.ariaDisabled}
       disabled={disabled}

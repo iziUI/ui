@@ -92,6 +92,24 @@ describe('Button', () => {
   });
 
   describe('loading state', () => {
+    it('renders an inert default indicator for boolean loading', () => {
+      const onClick = jest.fn();
+      const { container } = render(
+        <Button aria-label="Save changes" loading onClick={onClick}>
+          Save changes
+        </Button>
+      );
+
+      const button = screen.getByRole('button', { name: 'Save changes' });
+      const loading = container.querySelector('.iziui-loading');
+
+      expect(loading).toHaveAttribute('aria-hidden', 'true');
+      expect(screen.queryByText('Save changes')).not.toBeInTheDocument();
+
+      fireEvent.click(button);
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
     it('renders the loading element instead of children', () => {
       render(
         <Button loading={<span data-testid="spinner" />}>
