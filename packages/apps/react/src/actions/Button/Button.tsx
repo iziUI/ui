@@ -46,7 +46,13 @@ function Button({
     });
   };
 
-  const renderLoading = (loading: React.JSX.Element) => {
+  const renderLoading = (loading: React.JSX.Element | boolean) => {
+    if (!loading) { return; }
+
+    if (loading && typeof loading === 'boolean') {
+      return children;
+    }
+
     return cloneElement<LoadingProps>(loading, {
       className: joinClass(loading.props.className, `${prefix}-button__loading`, `${prefix}-button__loading--${size}`),
       size: '1.1rem',
@@ -57,6 +63,7 @@ function Button({
     <button
       {...props}
       className={cls}
+      disabled={Boolean(loading)}
       onClick={(e) => !loading && props.onClick?.(e)}
     >
       {

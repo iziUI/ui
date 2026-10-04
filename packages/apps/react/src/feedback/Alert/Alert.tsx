@@ -86,7 +86,11 @@ function Alert({
               aria-label="Close alert"
               onClick={onClose}
               color={color}
-              style={{ color: 'currentColor' }}
+              size={32}
+              style={{
+                color: 'currentColor',
+                border: 'none'
+              }}
             >
               <Icon name="times" />
             </ButtonIcon>

@@ -92,6 +92,49 @@
     }
   }
 
+  &__button {
+    font-size: map.get($font_sizes, medium);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: none;
+    width: 100%;
+    transition: all $animation;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: transparent;
+
+    &:hover {
+      background-color: var(--grey-opacity);
+    }
+
+    &--selected {
+      background-color: var(--primary-opacity);
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      background-color: var(--divider) !important;
+      color: var(--text-disabled) !important;
+    }
+
+    @each $color in $colors {
+      &--#{$color} {
+        color: var(--#{$color});
+
+        &:hover {
+          background-color: var(--#{$color}-opacity);
+        }
+      }
+    }
+
+    &__icon {
+      margin-right: 10px;
+    }
+  }
+
   &__helper-text {
     margin: 6px 0 0;
     color: var(--text-secondary);

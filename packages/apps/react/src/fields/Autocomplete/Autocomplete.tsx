@@ -23,6 +23,7 @@ import { uuid } from '@iziui/toolkit/uuid';
 import createComponent from '@/core';
 import Icon from '@/display/Icon';
 import Stack from '@/layout/Stack';
+import Zoom from '@/animations/Zoom';
 import Loading from '@/feedback/Loading';
 import ButtonIcon from '@/actions/ButtonIcon';
 import Typography from '@/display/Typography';
@@ -308,15 +309,18 @@ function Autocomplete<T>({
         />
         {
           term && (
-            <ButtonIcon
-              color="grey"
-              size={32}
-              onMouseDown={(e) => e.preventDefault()}
-              onClick={handleReset}
-              className={`${prefix}-autocomplete__reset-button`}
-            >
-              <Icon name="times" />
-            </ButtonIcon>
+            <Zoom enter>
+              <ButtonIcon
+                color="grey"
+                size={32}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={handleReset}
+                className={`${prefix}-autocomplete__reset-button`}
+                style={{ border: 'none' }}
+              >
+                <Icon name="times" />
+              </ButtonIcon>
+            </Zoom>
           )
         }
       </div>

@@ -77,6 +77,9 @@ export const _Loading: StoryObj<typeof Button> = {
         <Button size="small" loading={<Loading />}>
           loading text
         </Button>
+        <Button size="small" loading>
+          loading text
+        </Button>
         <Button loading={<Loading />}>loading text</Button>
         <Button size="large" loading={<Loading />}>
           loading text
